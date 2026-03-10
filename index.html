@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarie Cakes | Elegant Cakes for Every Celebration</title>
+    <meta name="description"
+        content="Handcrafted cakes for birthdays, weddings, and special occasions. Order online or via WhatsApp.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Promo Banner -->
+    <div class="promo-banner" id="promoBanner">
+        <div class="container">
+            <p>🎉 Free delivery on orders over $100! Use code: TARIELOVE <span class="promo-close" id="promoClose"><i
+                        class="fas fa-times"></i></span></p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🎂</span>
+                <span class="logo-text">Tarie Cakes</span>
+            </a>
+
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#menu" class="nav-link">Menu</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="wishlist-btn" id="wishlistBtn" title="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count" id="wishlistCount">0</span>
+                </button>
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" id="mobileClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-list">
+            <li><a href="#home" class="mobile-nav-link">Home</a></li>
+            <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
+            <li><a href="#menu" class="mobile-nav-link">Menu</a></li>
+            <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+            <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Elegant Cakes for Every Celebration</h1>
+                <p class="hero-subtitle">Handcrafted with love by Tarie</p>
+                <div class="hero-btns">
+                    <a href="#menu" class="btn btn-primary">Order Now</a>
+                    <a href="#menu" class="btn btn-outline">View Menu</a>
+                </div>
+            </div>
+            <div class="hero-images">
+                <div class="hero-cake hero-cake-1">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=500&fit=crop"
+                        alt="Wedding Cake">
+                </div>
+                <div class="hero-cake hero-cake-2">
+                    <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=400&h=500&fit=crop"
+                        alt="Birthday Cake">
+                </div>
+                <div class="hero-cake hero-cake-3">
+                    <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&h=500&fit=crop"
+                        alt="Cupcakes">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="birthday">Birthday</button>
+                <button class="filter-btn" data-category="wedding">Wedding</button>
+                <button class="filter-btn" data-category="cupcakes">Cupcakes</button>
+                <button class="filter-btn" data-category="custom">Custom</button>
+                <button class="filter-btn" data-category="seasonal">Seasonal</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Cakes</span>
+                <h2 class="section-title">Delicious Creations</h2>
+                <p class="section-desc">Browse our selection of handcrafted cakes, made with the finest ingredients</p>
+            </div>
+
+            <div class="cakes-grid" id="cakesGrid">
+                <!-- Cakes will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Easy Process</span>
+                <h2 class="section-title">How to Order</h2>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>1. Browse</h3>
+                    <p>Explore our delicious cake collection and find your perfect one</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>2. Order</h3>
+                    <p>Add to cart or order directly via WhatsApp</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>3. Enjoy</h3>
+                    <p>Receive your freshly baked cake and enjoy!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Info Section -->
+    <section class="delivery-info" id="delivery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Delivery</span>
+                <h2 class="section-title">Delivery Information</h2>
+            </div>
+
+            <div class="delivery-grid">
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Local Delivery</h3>
+                    <p>Free delivery within Harare for orders over $100</p>
+                    <span class="delivery-price">$10 for orders under $100</span>
+                </div>
+
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Delivery Times</h3>
+                    <p>Standard: 2-3 days | Express: Same day available</p>
+                    <span class="delivery-price">Order by 10am for same day</span>
+                </div>
+
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Delivery Areas</h3>
+                    <p>Harare, Chitungwiza, Ruwa, and surrounding areas</p>
+                    <span class="delivery-price">Contact us for outlying areas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Work</span>
+                <h2 class="section-title">Cake Gallery</h2>
+                <p class="section-desc">A glimpse of our beautiful creations</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=400&h=400&fit=crop"
+                        alt="Cake Gallery">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400&h=400&fit=crop"
+                        alt="Cake Gallery">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400&h=400&fit=crop"
+                        alt="Cake Gallery">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563729768-6af58466dfd9?w=400&h=400&fit=crop"
+                        alt="Cake Gallery">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400&h=400&fit=crop"
+                        alt="Cake Gallery">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1627834377411-8da5f4f09de8?w=400&h=400&fit=crop"
+                        alt="Cake Gallery">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Testimonials</span>
+                <h2 class="section-title">What Our Clients Say</h2>
+            </div>
+
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                                alt="Sarah M.">
+                        </div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The most beautiful and delicious cake I've ever had! Tarie truly is
+                            a master baker."</p>
+                        <h4 class="testimonial-name">Sarah M.</h4>
+                        <span class="testimonial-date">January 2026</span>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                alt="John D.">
+                        </div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Ordered a wedding cake for my daughter - absolutely stunning!
+                            Everyone loved it."</p>
+                        <h4 class="testimonial-name">John D.</h4>
+                        <span class="testimonial-date">December 2025</span>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
+                                alt="Emily R.">
+                        </div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"The cupcakes were perfect for my daughter's birthday party. Highly
+                            recommend!"</p>
+                        <h4 class="testimonial-name">Emily R.</h4>
+                        <span class="testimonial-date">November 2025</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-dots">
+                    <button class="dot active" data-index="0"></button>
+                    <button class="dot" data-index="1"></button>
+                    <button class="dot" data-index="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500&h=600&fit=crop"
+                        alt="About Tarie Cakes">
+                    <div class="about-image-accent"></div>
+                </div>
+                <div class="about-content">
+                    <span class="section-subtitle">Our Story</span>
+                    <h2 class="section-title">About Tarie Cakes</h2>
+                    <p>Welcome to Tarie Cakes, where every cake tells a story! We are passionate about creating
+                        stunning, delicious cakes that make your special moments unforgettable.</p>
+                    <p>Our journey began with a simple love for baking and a desire to bring joy through our creations.
+                        Today, we continue to craft each cake with the same dedication and love, using only the finest
+                        ingredients.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-heart"></i>
+                            <span>Handcrafted with Love</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-leaf"></i>
+                            <span>Premium Ingredients</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Freshly Baked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Questions</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How far in advance should I order?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We recommend ordering at least 3-5 days in advance for standard cakes. For wedding cakes and
+                            large custom orders, please allow 1-2 weeks. For urgent orders, please contact us directly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you deliver outside of Harare?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! We deliver to Chitungwiza, Ruwa, and surrounding areas. Delivery fees may vary for
+                            outlying areas. Contact us for a quote.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I customize my cake?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We offer custom flavors, fillings, sizes, and decorations. Use our Quick View
+                            feature to customize your cake before ordering.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What flavors do you offer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer chocolate, vanilla, red velvet, lemon, carrot, marble, and many more! Custom flavors
+                            are available upon request.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you cater for dietary requirements?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! We can accommodate gluten-free, dairy-free, and sugar-free options. Please mention any
+                            allergies or dietary requirements when ordering.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is your cancellation policy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Cancellations made 48 hours before the delivery date will receive a full refund. Within 48
+                            hours, a 50% fee applies. Custom orders are non-refundable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Get in Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-desc">Have a question or want to place a custom order? We'd love to hear from you!</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Harare, Zimbabwe</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+263 77XXX XXXX</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>hello@tariecakes.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>WhatsApp</h4>
+                            <p>Order directly via WhatsApp</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-icon">🎂</span>
+                        <span class="logo-text">Tarie Cakes</span>
+                    </a>
+                    <p>Handcrafted cakes for every celebration. Making your special moments sweeter since 2020.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-services">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#menu">Birthday Cakes</a></li>
+                        <li><a href="#menu">Wedding Cakes</a></li>
+                        <li><a href="#menu">Cupcakes</a></li>
+                        <li><a href="#menu">Custom Orders</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Harare, Zimbabwe</p>
+                    <p><i class="fas fa-phone"></i> +263 77XXX XXXX</p>
+                    <p><i class="fas fa-envelope"></i> hello@tariecakes.com</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tarie Cakes. All rights reserved. Made with <i class="fas fa-heart"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-overlay" id="cartOverlay"></div>
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Your Cart</h3>
+                <button class="cart-close" id="cartClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+
+            <div class="cart-empty" id="cartEmpty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <a href="#menu" class="btn btn-outline">Browse Cakes</a>
+            </div>
+
+            <div class="cart-footer" id="cartFooter">
+                <div class="cart-subtotal">
+                    <span>Subtotal:</span>
+                    <span class="subtotal-amount" id="subtotalAmount">$0</span>
+                </div>
+                <button class="btn btn-primary btn-whatsapp" id="checkoutWhatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    Checkout via WhatsApp
+                </button>
+                <button class="btn btn-outline" id="continueShopping">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-overlay" id="quickViewOverlay"></div>
+        <div class="quick-view-content">
+            <button class="quick-view-close" id="quickViewClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="quick-view-grid" id="quickViewContent">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="wishlist-modal" id="wishlistModal">
+        <div class="wishlist-overlay" id="wishlistOverlay"></div>
+        <div class="wishlist-content">
+            <div class="wishlist-header">
+                <h3>My Wishlist</h3>
+                <button class="wishlist-close" id="wishlistClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="wishlist-items" id="wishlistItems">
+                <!-- Populated by JavaScript -->
+            </div>
+            <div class="wishlist-empty" id="wishlistEmpty">
+                <i class="fas fa-heart"></i>
+                <p>Your wishlist is empty</p>
+                <a href="#menu" class="btn btn-outline">Browse Cakes</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
