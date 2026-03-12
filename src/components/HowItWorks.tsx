@@ -1,21 +1,22 @@
-import { Box, Container, Heading, Text, SimpleGrid, VStack } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, SimpleGrid, VStack, Icon } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { FiShoppingBag, FiTruck, FiStar } from 'react-icons/fi'
 
 const MotionBox = motion(Box)
 
 const steps = [
     {
-        emoji: '🎂',
+        icon: FiStar,
         title: 'Choose Your Cake',
         description: "Browse our delicious selection and pick your perfect cake for any occasion.",
     },
     {
-        emoji: '🛒',
+        icon: FiShoppingBag,
         title: 'Place Your Order',
         description: "Add to cart or order directly via WhatsApp. We'll confirm your order right away.",
     },
     {
-        emoji: '🚚',
+        icon: FiTruck,
         title: 'Delivery',
         description: "Sit back and relax! We'll deliver your fresh cake right to your doorstep.",
     },
@@ -86,9 +87,8 @@ export default function HowItWorks() {
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
-                                    fontSize="2xl"
                                 >
-                                    {step.emoji}
+                                    <Icon as={step.icon} boxSize={6} color="brand.darkText" w={6} h={6} />
                                 </Box>
                                 <Heading
                                     as="h3"
