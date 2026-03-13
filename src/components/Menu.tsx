@@ -32,15 +32,23 @@ export default function Menu() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <Text
-                            color="brand.accent"
-                            fontWeight="600"
-                            fontSize="sm"
-                            textTransform="uppercase"
-                            letterSpacing="2px"
+                        <Box
+                            display="inline-block"
+                            bg="brand.surface"
+                            px={4}
+                            py={2}
+                            borderRadius="full"
                         >
-                            Our Menu
-                        </Text>
+                            <Text
+                                color="brand.primary"
+                                fontWeight="600"
+                                fontSize="sm"
+                                textTransform="uppercase"
+                                letterSpacing="2px"
+                            >
+                                Our Menu
+                            </Text>
+                        </Box>
                     </MotionBox>
 
                     <MotionBox
@@ -67,8 +75,7 @@ export default function Menu() {
                     >
                         <Text
                             fontSize={{ base: 'md', md: 'lg' }}
-                            color="brand.darkText"
-                            opacity={0.7}
+                            color="brand.muted"
                             maxW="600px"
                         >
                             Browse our selection of handcrafted cakes, perfect for any occasion
@@ -104,10 +111,10 @@ export default function Menu() {
 
                 {filteredCakes.length === 0 && (
                     <VStack py={16} spacing={4}>
-                        <Text fontSize="xl" color="brand.darkText" opacity={0.6}>
+                        <Text fontSize="xl" color="brand.muted" fontWeight="500">
                             No cakes found in this category
                         </Text>
-                        <Text color="brand.darkText" opacity={0.5}>
+                        <Text color="brand.muted" opacity={0.6}>
                             Check back soon for new flavors!
                         </Text>
                     </VStack>

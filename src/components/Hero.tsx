@@ -1,14 +1,9 @@
-import { Box, Container, Heading, Text, Button, VStack, HStack, Image } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, Button, VStack, HStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FaArrowDown } from 'react-icons/fa'
 
 const MotionBox = motion(Box)
 
 export default function Hero() {
-    const scrollToMenu = () => {
-        document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })
-    }
-
     return (
         <Box
             id="home"
@@ -17,85 +12,85 @@ export default function Hero() {
             display="flex"
             alignItems="center"
             overflow="hidden"
-            bg="linear-gradient(135deg, #FFFAF5 0%, #FDF5E6 50%, #F5E6D3 100%)"
         >
-            {/* Background Decorations */}
+            {/* Full-width background cake image */}
             <Box
                 position="absolute"
-                top="-20%"
-                right="-10%"
-                w="600px"
-                h="600px"
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bgImage="url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&h=1080&fit=crop')"
+                bgSize="cover"
+                bgPosition="center"
+                bgRepeat="no-repeat"
+            />
+
+            {/* Dark overlay for text readability */}
+            <Box
+                position="absolute"
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bg="linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.6) 100%)"
+            />
+
+            {/* Decorative elements */}
+            <Box
+                position="absolute"
+                top="10%"
+                left="5%"
+                w="200px"
+                h="200px"
                 borderRadius="full"
-                bg="brand.primary"
-                opacity={0.1}
+                bg="#FF6B6B"
+                opacity={0.2}
                 filter="blur(80px)"
             />
             <Box
                 position="absolute"
-                bottom="-30%"
-                left="-15%"
-                w="800px"
-                h="800px"
+                bottom="20%"
+                right="10%"
+                w="300px"
+                h="300px"
                 borderRadius="full"
-                bg="brand.accent"
-                opacity={0.08}
+                bg="#4ECDC4"
+                opacity={0.15}
                 filter="blur(100px)"
             />
 
-            {/* Floating Cake Images */}
-            <MotionBox
-                position="absolute"
-                top="15%"
-                right="10%"
-                w="200px"
-                display={{ base: 'none', lg: 'block' }}
-                initial={{ y: 0 }}
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            >
-                <Image
-                    src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop"
-                    alt="Chocolate cake"
-                    borderRadius="20px"
-                    boxShadow="0 20px 60px rgba(74, 55, 40, 0.2)"
-                />
-            </MotionBox>
-
-            <MotionBox
-                position="absolute"
-                bottom="20%"
-                left="5%"
-                w="150px"
-                display={{ base: 'none', lg: 'block' }}
-                initial={{ y: 0 }}
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-            >
-                <Image
-                    src="https://images.unsplash.com/photo-1563729768-6af58466dfd9?w=200&h=200&fit=crop"
-                    alt="Wedding cake"
-                    borderRadius="16px"
-                    boxShadow="0 15px 40px rgba(74, 55, 40, 0.15)"
-                />
-            </MotionBox>
-
             <Container maxW="1200px" position="relative" zIndex={1}>
-                <VStack spacing={6} align={{ base: 'center', md: 'flex-start' }} textAlign={{ base: 'center', md: 'left' }}>
+                <VStack
+                    spacing={8}
+                    align={{ base: 'center', md: 'flex-start' }}
+                    textAlign={{ base: 'center', md: 'left' }}
+                    maxW={{ base: 'full', lg: '650px' }}
+                    py={{ base: 20, md: 0 }}
+                >
                     <MotionBox
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <Text
-                            color="brand.accent"
-                            fontWeight="600"
-                            fontSize="sm"
-                            textTransform="uppercase"
-                            letterSpacing="2px"
+                        <Box
+                            bg="rgba(255, 255, 255, 0.15)"
+                            backdropFilter="blur(10px)"
+                            px={6}
+                            py={3}
+                            borderRadius="full"
+                            border="1px solid rgba(255, 255, 255, 0.2)"
                         >
-                            Handcrafted with Love
-                        </Text>
+                            <Text
+                                color="white"
+                                fontWeight="600"
+                                fontSize="sm"
+                                textTransform="uppercase"
+                                letterSpacing="2px"
+                            >
+                                🧁 Handcrafted with Love
+                            </Text>
+                        </Box>
                     </MotionBox>
 
                     <MotionBox
@@ -105,15 +100,16 @@ export default function Hero() {
                     >
                         <Heading
                             as="h1"
-                            fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}
+                            fontSize={{ base: '4xl', md: '5xl', lg: '7xl' }}
                             fontFamily="heading"
-                            color="brand.darkText"
+                            color="white"
                             lineHeight="1.1"
                             maxW="700px"
+                            textShadow="0 2px 20px rgba(0, 0, 0, 0.3)"
                         >
-                            Elegant Cakes for{' '}
-                            <Text as="span" color="brand.accent">
-                                Every Celebration
+                            Delicious Cakes for Your{' '}
+                            <Text as="span" color="#FF6B6B">
+                                Special Moments
                             </Text>
                         </Heading>
                     </MotionBox>
@@ -124,13 +120,14 @@ export default function Hero() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                     >
                         <Text
-                            fontSize={{ base: 'md', md: 'lg' }}
-                            color="brand.darkText"
-                            opacity={0.8}
-                            maxW="500px"
+                            fontSize={{ base: 'lg', md: 'xl' }}
+                            color="whiteAlpha.900"
+                            maxW="550px"
+                            fontWeight="500"
+                            textShadow="0 1px 10px rgba(0, 0, 0, 0.3)"
                         >
-                            From birthdays to weddings, we create stunning custom cakes that
-                            make your special moments unforgettable.
+                            From elegant wedding cakes to fun birthday celebrations,
+                            we create stunning custom cakes that taste as amazing as they look.
                         </Text>
                     </MotionBox>
 
@@ -139,57 +136,91 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
                     >
-                        <HStack spacing={4} flexDir={{ base: 'column', sm: 'row' }}>
+                        <HStack spacing={4} flexDir={{ base: 'column', sm: 'row' }} w={{ base: 'full', sm: 'auto' }}>
                             <Button
                                 size="lg"
-                                bg="brand.accent"
-                                color="brand.darkText"
-                                px={8}
+                                bg="#FF6B6B"
+                                color="white"
+                                px={10}
+                                py={7}
+                                fontSize="md"
+                                fontWeight="700"
                                 _hover={{
-                                    bg: 'brand.accentHover',
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: '0 10px 40px rgba(212, 175, 55, 0.4)',
+                                    bg: '#E85555',
+                                    transform: 'translateY(-3px)',
+                                    boxShadow: '0 15px 40px rgba(255, 107, 107, 0.5)',
                                 }}
-                                transition="all 0.3s ease"
+                                style={{ transition: 'all 0.3s ease' }}
                                 as="a"
                                 href="#menu"
+                                w={{ base: 'full', sm: 'auto' }}
+                                borderRadius="16px"
                             >
-                                Order Now
+                                View Our Menu
                             </Button>
                             <Button
                                 size="lg"
-                                variant="outline"
-                                borderColor="brand.darkText"
-                                color="brand.darkText"
-                                px={8}
+                                bg="transparent"
+                                border="3px solid"
+                                borderColor="white"
+                                color="white"
+                                px={10}
+                                py={7}
+                                fontSize="md"
+                                fontWeight="700"
                                 _hover={{
-                                    bg: 'brand.darkText',
-                                    color: 'brand.lightText',
+                                    bg: 'white',
+                                    color: '#2D3436',
+                                    transform: 'translateY(-3px)',
                                 }}
+                                style={{ transition: 'all 0.3s ease' }}
                                 as="a"
-                                href="#menu"
+                                href="#contact"
+                                w={{ base: 'full', sm: 'auto' }}
+                                borderRadius="16px"
                             >
-                                View Menu
+                                Contact Us
                             </Button>
+                        </HStack>
+                    </MotionBox>
+
+                    {/* Trust indicators */}
+                    <MotionBox
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.8 }}
+                        pt={4}
+                    >
+                        <HStack
+                            spacing={10}
+                            flexDir={{ base: 'column', sm: 'row' }}
+                            bg="rgba(255, 255, 255, 0.1)"
+                            backdropFilter="blur(10px)"
+                            px={8}
+                            py={4}
+                            borderRadius="16px"
+                            border="1px solid rgba(255, 255, 255, 0.1)"
+                        >
+                            <HStack spacing={3}>
+                                <Text fontSize="2xl" fontWeight="bold" color="white">500+</Text>
+                                <Text fontSize="sm" color="whiteAlpha.800">Happy Customers</Text>
+                            </HStack>
+                            <HStack spacing={1}>
+                                <Text fontSize="xl" color="#FFD700">★</Text>
+                                <Text fontSize="xl" color="#FFD700">★</Text>
+                                <Text fontSize="xl" color="#FFD700">★</Text>
+                                <Text fontSize="xl" color="#FFD700">★</Text>
+                                <Text fontSize="xl" color="#FFD700">★</Text>
+                                <Text fontSize="sm" color="whiteAlpha.800" ml={2}>4.9/5 Rating</Text>
+                            </HStack>
+                            <HStack spacing={3}>
+                                <Text fontSize="2xl" fontWeight="bold" color="white">10+</Text>
+                                <Text fontSize="sm" color="whiteAlpha.800">Years Experience</Text>
+                            </HStack>
                         </HStack>
                     </MotionBox>
                 </VStack>
             </Container>
-
-            {/* Scroll Indicator */}
-            <MotionBox
-                position="absolute"
-                bottom="30px"
-                left="50%"
-                transform="translateX(-50%)"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, y: [0, 10, 0] }}
-                transition={{ duration: 2, delay: 1, repeat: Infinity }}
-                cursor="pointer"
-                onClick={scrollToMenu}
-            >
-                <FaArrowDown color="#4A3728" />
-            </MotionBox>
         </Box>
     )
 }

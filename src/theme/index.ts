@@ -5,18 +5,23 @@ const config: ThemeConfig = {
     useSystemColorMode: false,
 }
 
+// Modern, sophisticated color palette
 const colors = {
     brand: {
-        primary: '#E8B4B8',
-        primaryLight: '#F5D5D8',
-        primaryDark: '#D4A0A5',
-        secondary: '#FDF5E6',
-        accent: '#D4AF37',
-        accentHover: '#C9A227',
-        darkText: '#4A3728',
+        primary: '#FF6B6B',       // Coral red - vibrant and modern
+        primaryLight: '#FF8E8E',  // Light coral
+        primaryDark: '#E85555',   // Dark coral
+        secondary: '#4ECDC4',     // Teal - modern accent
+        secondaryLight: '#7EDDD6',
+        accent: '#FFE66D',        // Sunny yellow accent
+        accentHover: '#FFD93D',  // Darker yellow
+        darkText: '#2D3436',      // Modern dark gray
         lightText: '#FFFFFF',
-        background: '#FFFAF5',
+        background: '#FAFAFA',    // Off-white background
         cardBg: '#FFFFFF',
+        surface: '#F8F9FA',       // Light surface
+        muted: '#636E72',         // Muted text
+        border: '#DFE6E9',        // Light border
     },
 }
 
@@ -28,53 +33,134 @@ const fonts = {
 const components = {
     Button: {
         baseStyle: {
-            fontWeight: '500',
+            fontWeight: '600',
             borderRadius: '12px',
+            textTransform: 'none',
+            fontSize: 'md',
         },
         variants: {
             primary: {
-                bg: 'brand.accent',
-                color: 'brand.darkText',
+                bg: 'brand.primary',
+                color: 'white',
                 _hover: {
-                    bg: 'brand.accentHover',
+                    bg: 'brand.primaryDark',
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 10px 40px rgba(212, 175, 55, 0.3)',
+                    boxShadow: '0 10px 40px rgba(255, 107, 107, 0.4)',
+                },
+                _active: {
+                    bg: 'brand.primaryDark',
+                    transform: 'translateY(0)',
                 },
                 transition: 'all 0.3s ease',
             },
             secondary: {
                 bg: 'transparent',
-                color: 'brand.accent',
+                color: 'brand.primary',
                 border: '2px solid',
-                borderColor: 'brand.accent',
+                borderColor: 'brand.primary',
                 _hover: {
-                    bg: 'brand.accent',
-                    color: 'brand.darkText',
+                    bg: 'brand.primary',
+                    color: 'white',
                 },
+            },
+            solid: {
+                bg: 'brand.secondary',
+                color: 'brand.darkText',
+                _hover: {
+                    bg: 'brand.secondaryLight',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 10px 40px rgba(78, 205, 196, 0.4)',
+                },
+                transition: 'all 0.3s ease',
             },
             outline: {
                 border: '2px solid',
-                borderColor: 'brand.primary',
+                borderColor: 'brand.border',
                 color: 'brand.darkText',
                 _hover: {
-                    bg: 'brand.primary',
-                    color: 'brand.darkText',
+                    bg: 'brand.surface',
+                    borderColor: 'brand.primary',
+                    color: 'brand.primary',
                 },
+            },
+            ghost: {
+                color: 'brand.darkText',
+                _hover: {
+                    bg: 'brand.surface',
+                    color: 'brand.primary',
+                },
+            },
+        },
+        sizes: {
+            lg: {
+                px: 8,
+                py: 6,
+                fontSize: 'md',
+            },
+            md: {
+                px: 6,
+                py: 4,
+                fontSize: 'sm',
+            },
+            sm: {
+                px: 4,
+                py: 2,
+                fontSize: 'sm',
             },
         },
         defaultProps: {
             variant: 'primary',
+            size: 'md',
         },
     },
     Heading: {
         baseStyle: {
             color: 'brand.darkText',
-            fontWeight: '600',
+            fontWeight: '700',
         },
     },
     Text: {
         baseStyle: {
             color: 'brand.darkText',
+        },
+    },
+    Input: {
+        variants: {
+            outline: {
+                field: {
+                    borderColor: 'brand.border',
+                    bg: 'white',
+                    _hover: {
+                        borderColor: 'brand.primaryLight',
+                    },
+                    _focus: {
+                        borderColor: 'brand.primary',
+                        boxShadow: '0 0 0 1px #FF6B6B',
+                    },
+                },
+            },
+        },
+    },
+    Textarea: {
+        variants: {
+            outline: {
+                borderColor: 'brand.border',
+                bg: 'white',
+                _hover: {
+                    borderColor: 'brand.primaryLight',
+                },
+                _focus: {
+                    borderColor: 'brand.primary',
+                    boxShadow: '0 0 0 1px #FF6B6B',
+                },
+            },
+        },
+    },
+    Badge: {
+        baseStyle: {
+            fontWeight: '600',
+            borderRadius: 'full',
+            textTransform: 'capitalize',
         },
     },
 }
@@ -89,7 +175,20 @@ const styles = {
         },
         '*::selection': {
             bg: 'brand.primary',
-            color: 'brand.darkText',
+            color: 'white',
+        },
+        '::-webkit-scrollbar': {
+            width: '8px',
+        },
+        '::-webkit-scrollbar-track': {
+            bg: 'brand.surface',
+        },
+        '::-webkit-scrollbar-thumb': {
+            bg: 'brand.border',
+            borderRadius: 'full',
+        },
+        '::-webkit-scrollbar-thumb:hover': {
+            bg: 'brand.muted',
         },
     },
 }

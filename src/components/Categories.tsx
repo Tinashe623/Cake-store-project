@@ -1,9 +1,6 @@
-import { Box, Container, HStack, Button, Text } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { Box, Container, HStack, Button } from '@chakra-ui/react'
 import { categories } from '../data/cakes'
 import { Category } from '../types'
-
-const MotionBox = motion(Box)
 
 interface CategoriesProps {
     selectedCategory: Category
@@ -12,7 +9,7 @@ interface CategoriesProps {
 
 export default function Categories({ selectedCategory, onSelectCategory }: CategoriesProps) {
     return (
-        <Box py={8} bg="brand.secondary">
+        <Box py={6} bg="brand.surface" borderRadius="20px">
             <Container maxW="1200px">
                 <HStack
                     spacing={3}
@@ -27,24 +24,26 @@ export default function Categories({ selectedCategory, onSelectCategory }: Categ
                     {categories.map((category) => (
                         <Button
                             key={category.id}
-                            size="sm"
+                            size="md"
                             px={6}
                             py={3}
                             borderRadius="full"
                             fontWeight="500"
                             fontSize="sm"
                             whiteSpace="nowrap"
-                            bg={selectedCategory === category.id ? 'brand.accent' : 'transparent'}
-                            color={selectedCategory === category.id ? 'brand.darkText' : 'brand.darkText'}
+                            bg={selectedCategory === category.id ? 'brand.primary' : 'white'}
+                            color={selectedCategory === category.id ? 'white' : 'brand.muted'}
                             border="2px solid"
-                            borderColor="brand.accent"
+                            borderColor={selectedCategory === category.id ? 'brand.primary' : 'brand.border'}
                             _hover={{
-                                bg: selectedCategory === category.id ? 'brand.accentHover' : 'brand.accent',
-                                color: 'brand.darkText',
+                                bg: selectedCategory === category.id ? 'brand.primaryDark' : 'brand.primary',
+                                color: 'white',
+                                borderColor: 'brand.primary',
                                 transform: 'translateY(-2px)',
                             }}
                             transition="all 0.3s ease"
                             onClick={() => onSelectCategory(category.id)}
+                            boxShadow={selectedCategory === category.id ? '0 4px 15px rgba(255, 107, 107, 0.3)' : 'none'}
                         >
                             {category.label}
                         </Button>

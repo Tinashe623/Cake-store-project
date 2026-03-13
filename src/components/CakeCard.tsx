@@ -29,24 +29,24 @@ export default function CakeCard({ cake }: CakeCardProps) {
     }
 
     const categoryColors: Record<string, string> = {
-        birthday: '#E8B4B8',
-        wedding: '#D4AF37',
-        cupcakes: '#9FE2BF',
-        custom: '#B19CD9',
+        birthday: '#FF6B6B',
+        wedding: '#4ECDC4',
+        cupcakes: '#95E1D3',
+        custom: '#A66CFF',
         seasonal: '#FFB347',
     }
 
     return (
         <MotionBox
             bg="brand.cardBg"
-            borderRadius="20px"
+            borderRadius="24px"
             overflow="hidden"
-            boxShadow="0 10px 40px rgba(74, 55, 40, 0.1)"
+            boxShadow="0 10px 40px rgba(0, 0, 0, 0.08)"
             _hover={{
                 transform: 'translateY(-8px)',
-                boxShadow: '0 20px 50px rgba(74, 55, 40, 0.15)',
+                boxShadow: '0 20px 50px rgba(255, 107, 107, 0.15)',
             }}
-            transition="all 0.3s ease"
+            style={{ transition: 'all 0.3s ease' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -60,14 +60,14 @@ export default function CakeCard({ cake }: CakeCardProps) {
                     h="full"
                     objectFit="cover"
                     transition="transform 0.5s ease"
-                    _hover={{ transform: 'scale(1.05)' }}
+                    _hover={{ transform: 'scale(1.08)' }}
                 />
                 <Badge
                     position="absolute"
                     top={3}
                     left={3}
                     bg={categoryColors[cake.category] || 'brand.primary'}
-                    color="brand.darkText"
+                    color="white"
                     px={3}
                     py={1}
                     borderRadius="full"
@@ -93,55 +93,61 @@ export default function CakeCard({ cake }: CakeCardProps) {
 
                 <Text
                     fontSize="sm"
-                    color="brand.darkText"
-                    opacity={0.7}
+                    color="brand.muted"
                     noOfLines={2}
+                    lineHeight="1.5"
                 >
                     {cake.description}
                 </Text>
 
-                <HStack justify="space-between" align="center">
+                <HStack justify="space-between" align="center" pt={1}>
                     <Text
                         fontSize="xl"
                         fontWeight="700"
-                        color="brand.accent"
+                        color="brand.primary"
                     >
                         ${cake.price}
                     </Text>
-                    <Text fontSize="xs" color="brand.darkText" opacity={0.6}>
+                    <Text fontSize="xs" color="brand.muted">
                         {cake.sizes?.[0]}
                     </Text>
                 </HStack>
 
                 <HStack spacing={2} pt={2}>
                     <Button
-                        size="sm"
+                        size="md"
                         flex={1}
-                        bg="brand.accent"
-                        color="brand.darkText"
+                        bg="brand.primary"
+                        color="white"
                         leftIcon={<FaShoppingCart />}
                         _hover={{
-                            bg: 'brand.accentHover',
+                            bg: 'brand.primaryDark',
                             transform: 'translateY(-2px)',
                         }}
-                        transition="all 0.3s ease"
+                        style={{ transition: 'all 0.3s ease' }}
                         onClick={() => addToCart(cake)}
+                        fontWeight="600"
+                        borderRadius="12px"
                     >
                         Add to Cart
                     </Button>
                     <Button
-                        size="sm"
+                        size="md"
                         flex={1}
-                        variant="outline"
-                        borderColor="brand.primary"
-                        color="brand.darkText"
+                        bg="transparent"
+                        border="2px solid"
+                        borderColor="brand.secondary"
+                        color="brand.secondary"
                         leftIcon={<FaWhatsapp />}
                         _hover={{
-                            bg: 'brand.primary',
-                            color: 'brand.darkText',
+                            bg: 'brand.secondary',
+                            color: 'white',
+                            transform: 'translateY(-2px)',
                         }}
-                        transition="all 0.3s ease"
+                        style={{ transition: 'all 0.3s ease' }}
                         onClick={handleWhatsAppOrder}
+                        fontWeight="600"
+                        borderRadius="12px"
                     >
                         WhatsApp
                     </Button>

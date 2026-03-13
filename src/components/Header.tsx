@@ -6,7 +6,6 @@ import {
     Button,
     Badge,
     useDisclosure,
-    Stack,
     Heading,
     Text,
     Container,
@@ -17,13 +16,11 @@ import {
     DrawerContent,
     DrawerCloseButton,
     VStack,
+    Image,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { HamburgerIcon } from '@chakra-ui/icons'
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa'
 import { useCart } from '../context/CartContext'
-import { motion } from 'framer-motion'
-
-const MotionBox = motion(Box)
 
 const navLinks = [
     { name: 'Home', href: '#home' },
@@ -45,23 +42,22 @@ export default function Header() {
             left={0}
             right={0}
             zIndex={1000}
-            bg="brand.background"
-            boxShadow="0 2px 20px rgba(74, 55, 40, 0.08)"
-            backdropFilter="blur(10px)"
+            bg="rgba(255, 255, 255, 0.85)"
+            backdropFilter="blur(20px)"
+            borderBottom="1px solid"
+            borderColor="brand.border"
         >
             <Container maxW="1200px" py={3}>
                 <Flex align="center" justify="space-between">
                     {/* Logo */}
-                    <HStack spacing={2}>
-                        <Text fontSize="2xl">🎂</Text>
-                        <Heading
-                            size="md"
-                            fontFamily="heading"
-                            color="brand.darkText"
-                            letterSpacing="0.5px"
-                        >
-                            Tarie Cakes
-                        </Heading>
+                    <HStack spacing={3}>
+                        <Image
+                            src="/tarie logo.png"
+                            alt="Tarie Cakes Logo"
+                            h="65px"
+                            w="auto"
+                            objectFit="contain"
+                        />
                     </HStack>
 
                     {/* Desktop Navigation */}
@@ -79,8 +75,8 @@ export default function Header() {
                                 <Text
                                     fontSize="sm"
                                     fontWeight="500"
-                                    color="brand.darkText"
-                                    _hover={{ color: 'brand.accent' }}
+                                    color="brand.muted"
+                                    _hover={{ color: 'brand.primary' }}
                                     transition="all 0.3s ease"
                                     cursor="pointer"
                                     position="relative"
@@ -91,7 +87,7 @@ export default function Header() {
                                         left: 0,
                                         width: '0%',
                                         height: '2px',
-                                        bg: 'brand.accent',
+                                        bg: 'brand.primary',
                                         transition: 'width 0.3s ease',
                                     }}
                                     sx={{
@@ -112,30 +108,32 @@ export default function Header() {
                             aria-label="WhatsApp"
                             icon={<FaWhatsapp />}
                             variant="ghost"
-                            color="brand.accent"
+                            color="brand.muted"
                             fontSize="xl"
-                            _hover={{ bg: 'brand.primaryLight' }}
+                            _hover={{ bg: 'brand.surface', color: '#25D366' }}
                             as="a"
                             href="https://wa.me/263771234567"
                             target="_blank"
+                            borderRadius="full"
                         />
                         <Box position="relative">
                             <IconButton
                                 aria-label="Cart"
                                 icon={<FaShoppingCart />}
                                 variant="ghost"
-                                color="brand.darkText"
+                                color="brand.muted"
                                 fontSize="lg"
-                                _hover={{ bg: 'brand.primaryLight' }}
+                                _hover={{ bg: 'brand.surface', color: 'brand.primary' }}
                                 onClick={openCart}
+                                borderRadius="full"
                             />
                             {totalItems > 0 && (
                                 <Badge
                                     position="absolute"
                                     top="-2px"
                                     right="-2px"
-                                    bg="brand.accent"
-                                    color="brand.darkText"
+                                    bg="brand.primary"
+                                    color="white"
                                     borderRadius="full"
                                     fontSize="xs"
                                     minW="18px"
@@ -157,6 +155,7 @@ export default function Header() {
                             onClick={onOpen}
                             variant="ghost"
                             color="brand.darkText"
+                            borderRadius="full"
                         />
                     </HStack>
                 </Flex>
@@ -168,9 +167,14 @@ export default function Header() {
                 <DrawerContent bg="brand.background">
                     <DrawerCloseButton />
                     <DrawerHeader borderBottomWidth="1px">
-                        <HStack spacing={2}>
-                            <Text fontSize="2xl">🎂</Text>
-                            <Text fontFamily="heading">Tarie Cakes</Text>
+                        <HStack spacing={3}>
+                            <Image
+                                src="/tarie logo.png"
+                                alt="Tarie Cakes Logo"
+                                h="50px"
+                                w="auto"
+                                objectFit="contain"
+                            />
                         </HStack>
                     </DrawerHeader>
 
@@ -187,7 +191,7 @@ export default function Header() {
                                         fontSize="lg"
                                         fontWeight="500"
                                         color="brand.darkText"
-                                        _hover={{ color: 'brand.accent' }}
+                                        _hover={{ color: 'brand.primary' }}
                                         py={2}
                                     >
                                         {link.name}
@@ -201,6 +205,7 @@ export default function Header() {
                                 href="https://wa.me/263771234567"
                                 target="_blank"
                                 w="full"
+                                size="lg"
                             >
                                 Order via WhatsApp
                             </Button>
