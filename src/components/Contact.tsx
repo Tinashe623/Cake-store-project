@@ -46,8 +46,8 @@ export default function Contact() {
     }
 
     return (
-        <Box id="contact" py={{ base: 16, md: 20 }} bg="brand.secondary">
-            <Container maxW="1200px">
+        <Box id="contact" py={{ base: 16, md: 20 }} bg="#FAFAFA" position="relative" overflow="hidden">
+            <Container maxW="1400px">
                 <VStack spacing={4} mb={12} textAlign="center">
                     <MotionBox
                         initial={{ opacity: 0, y: 20 }}
@@ -218,13 +218,12 @@ export default function Contact() {
                                         borderColor="brand.primary"
                                         _focus={{
                                             borderColor: 'brand.accent',
-                                            boxShadow: '0 0 0 1px #D4AF37',
+                                            boxShadow: '0 0 0 1px #C5A059',
                                         }}
                                     />
                                 </FormControl>
 
                                 <FormControl isRequired>
-                                    <FormLabel color="brand.darkText">Email</FormLabel>
                                     <Input
                                         name="email"
                                         type="email"
@@ -236,7 +235,7 @@ export default function Contact() {
                                         borderColor="brand.primary"
                                         _focus={{
                                             borderColor: 'brand.accent',
-                                            boxShadow: '0 0 0 1px #D4AF37',
+                                            boxShadow: '0 0 0 1px #C5A059',
                                         }}
                                     />
                                 </FormControl>
@@ -254,7 +253,7 @@ export default function Contact() {
                                         borderColor="brand.primary"
                                         _focus={{
                                             borderColor: 'brand.accent',
-                                            boxShadow: '0 0 0 1px #D4AF37',
+                                            boxShadow: '0 0 0 1px #C5A059',
                                         }}
                                     />
                                 </FormControl>
@@ -272,7 +271,7 @@ export default function Contact() {
                                         borderColor="brand.primary"
                                         _focus={{
                                             borderColor: 'brand.accent',
-                                            boxShadow: '0 0 0 1px #D4AF37',
+                                            boxShadow: '0 0 0 1px #C5A059',
                                         }}
                                     />
                                 </FormControl>

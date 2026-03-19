@@ -1,55 +1,85 @@
-import { Box, Container, HStack, Button } from '@chakra-ui/react'
+import { Box, HStack, Button, Text } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 import { categories } from '../data/cakes'
 import { Category } from '../types'
+
+const MotionBox = motion(Box)
 
 interface CategoriesProps {
     selectedCategory: Category
     onSelectCategory: (category: Category) => void
 }
 
+const categoryColors: Record<string, string> = {
+    all: '#C5A059',
+    birthday: '#C5A059',
+    wedding: '#0A192F',
+    cupcakes: '#C5A059',
+    custom: '#C5A059',
+    seasonal: '#C5A059',
+}
+
 export default function Categories({ selectedCategory, onSelectCategory }: CategoriesProps) {
     return (
-        <Box py={6} bg="brand.surface" borderRadius="20px">
-            <Container maxW="1200px">
-                <HStack
-                    spacing={3}
-                    overflowX="auto"
-                    py={2}
-                    css={{
-                        '&::-webkit-scrollbar': {
-                            display: 'none',
-                        },
-                    }}
-                >
-                    {categories.map((category) => (
+        <HStack
+            spacing={{ base: 2, md: 3 }}
+            overflowX="auto"
+            py={1}
+            px={1}
+            justify={{ base: 'flex-start', md: 'center' }}
+            flexWrap="nowrap"
+            minW="max-content"
+            css={{
+                '&::-webkit-scrollbar': {
+                    display: 'none',
+                },
+                scrollbarWidth: 'none',
+            }}
+        >
+            {categories.map((category) => {
+                const isSelected = selectedCategory === category.id
+                const color = categoryColors[category.id] || categoryColors.all
+
+                return (
+                    <Box key={category.id} position="relative">
+                        {isSelected && (
+                            <MotionBox
+                                layoutId="activeCategory"
+                                position="absolute"
+                                inset={0}
+                                bg={color}
+                                borderRadius="full"
+                                initial={false}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 500,
+                                    damping: 35
+                                }}
+                            />
+                        )}
                         <Button
-                            key={category.id}
                             size="md"
-                            px={6}
-                            py={3}
+                            px={{ base: 4, md: 5 }}
+                            py={2.5}
                             borderRadius="full"
-                            fontWeight="500"
-                            fontSize="sm"
+                            fontWeight="600"
+                            fontSize={{ base: 'xs', md: 'sm' }}
                             whiteSpace="nowrap"
-                            bg={selectedCategory === category.id ? 'brand.primary' : 'white'}
-                            color={selectedCategory === category.id ? 'white' : 'brand.muted'}
-                            border="2px solid"
-                            borderColor={selectedCategory === category.id ? 'brand.primary' : 'brand.border'}
+                            bg="transparent"
+                            color={isSelected ? 'white' : 'gray.500'}
                             _hover={{
-                                bg: selectedCategory === category.id ? 'brand.primaryDark' : 'brand.primary',
-                                color: 'white',
-                                borderColor: 'brand.primary',
-                                transform: 'translateY(-2px)',
+                                bg: isSelected ? color : `${color}10`,
+                                color: isSelected ? 'white' : color,
                             }}
-                            transition="all 0.3s ease"
                             onClick={() => onSelectCategory(category.id)}
-                            boxShadow={selectedCategory === category.id ? '0 4px 15px rgba(255, 107, 107, 0.3)' : 'none'}
+                            position="relative"
+                            zIndex={1}
                         >
-                            {category.label}
+                            <Text>{category.label}</Text>
                         </Button>
-                    ))}
-                </HStack>
-            </Container>
-        </Box>
+                    </Box>
+                )
+            })}
+        </HStack>
     )
 }

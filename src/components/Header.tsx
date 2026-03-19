@@ -6,7 +6,6 @@ import {
     Button,
     Badge,
     useDisclosure,
-    Heading,
     Text,
     Container,
     Drawer,
@@ -21,6 +20,9 @@ import {
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa'
 import { useCart } from '../context/CartContext'
+import { motion } from 'framer-motion'
+
+const MotionBox = motion(Box)
 
 const navLinks = [
     { name: 'Home', href: '#home' },
@@ -35,36 +37,37 @@ export default function Header() {
     const { totalItems, onOpen: openCart } = useCart()
 
     return (
-        <Box
+        <MotionBox
             as="header"
             position="fixed"
             top={0}
             left={0}
             right={0}
             zIndex={1000}
-            bg="rgba(255, 255, 255, 0.85)"
-            backdropFilter="blur(20px)"
+            bg="#0A192F"
             borderBottom="1px solid"
-            borderColor="brand.border"
+            borderColor="#C5A059"
+            boxShadow="none"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5 }}
         >
-            <Container maxW="1200px" py={3}>
+            <Container maxW="1400px" py={{ base: 2, md: 2 }}>
                 <Flex align="center" justify="space-between">
                     {/* Logo */}
-                    <HStack spacing={3}>
-                        <Image
-                            src="/tarie logo.png"
-                            alt="Tarie Cakes Logo"
-                            h="65px"
-                            w="auto"
-                            objectFit="contain"
-                        />
-                    </HStack>
+                    <Image
+                        src="/tarie cakes logo.png"
+                        alt="Tarie Cakes Logo"
+                        h={{ base: '50px', md: '65px' }}
+                        w="auto"
+                        objectFit="contain"
+                    />
 
                     {/* Desktop Navigation */}
                     <HStack
                         as="nav"
-                        spacing={8}
-                        display={{ base: 'none', md: 'flex' }}
+                        spacing={{ base: 4, md: 8 }}
+                        display={{ base: 'none', lg: 'flex' }}
                     >
                         {navLinks.map((link) => (
                             <a
@@ -75,26 +78,12 @@ export default function Header() {
                                 <Text
                                     fontSize="sm"
                                     fontWeight="500"
-                                    color="brand.muted"
-                                    _hover={{ color: 'brand.primary' }}
+                                    color="white"
+                                    _hover={{ color: '#C5A059' }}
                                     transition="all 0.3s ease"
                                     cursor="pointer"
                                     position="relative"
-                                    _after={{
-                                        content: '""',
-                                        position: 'absolute',
-                                        bottom: '-4px',
-                                        left: 0,
-                                        width: '0%',
-                                        height: '2px',
-                                        bg: 'brand.primary',
-                                        transition: 'width 0.3s ease',
-                                    }}
-                                    sx={{
-                                        '&:hover::after': {
-                                            width: '100%',
-                                        },
-                                    }}
+                                    letterSpacing="0.5px"
                                 >
                                     {link.name}
                                 </Text>
@@ -104,43 +93,54 @@ export default function Header() {
 
                     {/* Cart & WhatsApp */}
                     <HStack spacing={3}>
-                        <IconButton
-                            aria-label="WhatsApp"
-                            icon={<FaWhatsapp />}
-                            variant="ghost"
-                            color="brand.muted"
-                            fontSize="xl"
-                            _hover={{ bg: 'brand.surface', color: '#25D366' }}
+                        <Button
+                            display={{ base: 'none', md: 'flex' }}
+                            leftIcon={<FaWhatsapp />}
+                            variant="solid"
+                            bg="#25D366"
+                            color="white"
+                            size="sm"
+                            borderRadius="full"
+                            px={5}
+                            fontWeight="600"
+                            _hover={{
+                                bg: '#20BD59',
+                                transform: 'translateY(-2px)',
+                                boxShadow: '0 8px 20px rgba(37, 211, 102, 0.3)'
+                            }}
                             as="a"
                             href="https://wa.me/263771234567"
                             target="_blank"
-                            borderRadius="full"
-                        />
+                        >
+                            Order Now
+                        </Button>
                         <Box position="relative">
                             <IconButton
                                 aria-label="Cart"
                                 icon={<FaShoppingCart />}
                                 variant="ghost"
-                                color="brand.muted"
+                                color="white"
                                 fontSize="lg"
-                                _hover={{ bg: 'brand.surface', color: 'brand.primary' }}
+                                _hover={{ bg: 'gray.100', color: '#C5A059' }}
                                 onClick={openCart}
                                 borderRadius="full"
+                                size="md"
                             />
                             {totalItems > 0 && (
                                 <Badge
                                     position="absolute"
                                     top="-2px"
                                     right="-2px"
-                                    bg="brand.primary"
+                                    bg="#C5A059"
                                     color="white"
                                     borderRadius="full"
                                     fontSize="xs"
-                                    minW="18px"
-                                    h="18px"
+                                    minW="20px"
+                                    h="20px"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
+                                    fontWeight="bold"
                                 >
                                     {totalItems}
                                 </Badge>
@@ -151,11 +151,12 @@ export default function Header() {
                         <IconButton
                             aria-label="Open menu"
                             icon={<HamburgerIcon />}
-                            display={{ base: 'flex', md: 'none' }}
+                            display={{ base: 'flex', lg: 'none' }}
                             onClick={onOpen}
                             variant="ghost"
-                            color="brand.darkText"
+                            color="white"
                             borderRadius="full"
+                            size="md"
                         />
                     </HStack>
                 </Flex>
@@ -163,15 +164,15 @@ export default function Header() {
 
             {/* Mobile Drawer */}
             <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-                <DrawerOverlay />
-                <DrawerContent bg="brand.background">
+                <DrawerOverlay backdropFilter="blur(10px)" />
+                <DrawerContent bg="white">
                     <DrawerCloseButton />
-                    <DrawerHeader borderBottomWidth="1px">
+                    <DrawerHeader borderBottomWidth="1px" borderColor="gray.100">
                         <HStack spacing={3}>
                             <Image
                                 src="/tarie logo.png"
                                 alt="Tarie Cakes Logo"
-                                h="50px"
+                                h="40px"
                                 w="auto"
                                 objectFit="contain"
                             />
@@ -179,7 +180,7 @@ export default function Header() {
                     </DrawerHeader>
 
                     <DrawerBody>
-                        <VStack spacing={6} align="stretch" mt={6}>
+                        <VStack spacing={6} align="stretch" mt={8}>
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
@@ -190,22 +191,27 @@ export default function Header() {
                                     <Text
                                         fontSize="lg"
                                         fontWeight="500"
-                                        color="brand.darkText"
-                                        _hover={{ color: 'brand.primary' }}
+                                        color="white"
+                                        _hover={{ color: '#C5A059' }}
                                         py={2}
+                                        transition="all 0.2s"
                                     >
                                         {link.name}
                                     </Text>
                                 </a>
                             ))}
                             <Button
-                                variant="primary"
                                 leftIcon={<FaWhatsapp />}
+                                bg="#25D366"
+                                color="white"
+                                size="lg"
+                                borderRadius="full"
+                                _hover={{ bg: '#20BD59' }}
                                 as="a"
                                 href="https://wa.me/263771234567"
                                 target="_blank"
                                 w="full"
-                                size="lg"
+                                mt={4}
                             >
                                 Order via WhatsApp
                             </Button>
@@ -213,6 +219,6 @@ export default function Header() {
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
-        </Box>
+        </MotionBox>
     )
 }

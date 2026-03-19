@@ -5,23 +5,24 @@ const config: ThemeConfig = {
     useSystemColorMode: false,
 }
 
-// Modern, sophisticated color palette
+// Modern, sophisticated color palette - Navy Gold Luxury
 const colors = {
     brand: {
-        primary: '#FF6B6B',       // Coral red - vibrant and modern
-        primaryLight: '#FF8E8E',  // Light coral
-        primaryDark: '#E85555',   // Dark coral
-        secondary: '#4ECDC4',     // Teal - modern accent
-        secondaryLight: '#7EDDD6',
-        accent: '#FFE66D',        // Sunny yellow accent
-        accentHover: '#FFD93D',  // Darker yellow
-        darkText: '#2D3436',      // Modern dark gray
-        lightText: '#FFFFFF',
-        background: '#FAFAFA',    // Off-white background
-        cardBg: '#FFFFFF',
-        surface: '#F8F9FA',       // Light surface
-        muted: '#636E72',         // Muted text
-        border: '#DFE6E9',        // Light border
+        primary: '#0A192F',          // Midnight Navy - headers, footers, bold CTAs
+        primaryLight: '#1A2D4A',     // Lighter navy
+        primaryDark: '#060D19',      // Darker navy
+        secondary: '#C5A059',        // Champagne Gold - accents, borders, icons
+        secondaryLight: '#D4B67A',   // Light gold
+        accent: '#C5A059',           // Gold accent
+        accentHover: '#B89545',       // Darker gold
+        darkText: '#2D2D2D',          // Deep Charcoal - body text
+        lightText: '#FFFFFF',        // White text
+        background: '#F8F9FA',       // Soft Alabaster - main background
+        cardBg: '#FFFFFF',           // Ivory Silk - card components
+        surface: '#F8F9FA',          // Soft Alabaster - secondary sections
+        muted: '#6B7280',            // Muted text
+        border: '#E5E7EB',            // Light border
+        gold: '#C5A059',             // Gold for highlights
     },
 }
 
@@ -45,7 +46,7 @@ const components = {
                 _hover: {
                     bg: 'brand.primaryDark',
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 10px 40px rgba(255, 107, 107, 0.4)',
+                    boxShadow: '0 10px 40px rgba(10, 25, 47, 0.4)',
                 },
                 _active: {
                     bg: 'brand.primaryDark',
@@ -55,21 +56,21 @@ const components = {
             },
             secondary: {
                 bg: 'transparent',
-                color: 'brand.primary',
+                color: 'brand.secondary',
                 border: '2px solid',
-                borderColor: 'brand.primary',
+                borderColor: 'brand.secondary',
                 _hover: {
-                    bg: 'brand.primary',
+                    bg: 'brand.secondary',
                     color: 'white',
                 },
             },
             solid: {
                 bg: 'brand.secondary',
-                color: 'brand.darkText',
+                color: 'brand.primary',
                 _hover: {
                     bg: 'brand.secondaryLight',
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 10px 40px rgba(78, 205, 196, 0.4)',
+                    boxShadow: '0 10px 40px rgba(197, 160, 89, 0.4)',
                 },
                 transition: 'all 0.3s ease',
             },
@@ -79,15 +80,15 @@ const components = {
                 color: 'brand.darkText',
                 _hover: {
                     bg: 'brand.surface',
-                    borderColor: 'brand.primary',
-                    color: 'brand.primary',
+                    borderColor: 'brand.secondary',
+                    color: 'brand.secondary',
                 },
             },
             ghost: {
                 color: 'brand.darkText',
                 _hover: {
                     bg: 'brand.surface',
-                    color: 'brand.primary',
+                    color: 'brand.secondary',
                 },
             },
         },
@@ -131,11 +132,11 @@ const components = {
                     borderColor: 'brand.border',
                     bg: 'white',
                     _hover: {
-                        borderColor: 'brand.primaryLight',
+                        borderColor: 'brand.secondary',
                     },
                     _focus: {
-                        borderColor: 'brand.primary',
-                        boxShadow: '0 0 0 1px #FF6B6B',
+                        borderColor: 'brand.secondary',
+                        boxShadow: '0 0 0 1px #C5A059',
                     },
                 },
             },
@@ -147,11 +148,11 @@ const components = {
                 borderColor: 'brand.border',
                 bg: 'white',
                 _hover: {
-                    borderColor: 'brand.primaryLight',
+                    borderColor: 'brand.secondary',
                 },
                 _focus: {
-                    borderColor: 'brand.primary',
-                    boxShadow: '0 0 0 1px #FF6B6B',
+                    borderColor: 'brand.secondary',
+                    boxShadow: '0 0 0 1px #C5A059',
                 },
             },
         },
@@ -174,7 +175,7 @@ const styles = {
             lineHeight: '1.6',
         },
         '*::selection': {
-            bg: 'brand.primary',
+            bg: 'brand.secondary',
             color: 'white',
         },
         '::-webkit-scrollbar': {
@@ -189,6 +190,16 @@ const styles = {
         },
         '::-webkit-scrollbar-thumb:hover': {
             bg: 'brand.muted',
+        },
+        '@keyframes sparkle': {
+            '0%, 100%': {
+                opacity: 0,
+                transform: 'scale(0)',
+            },
+            '50%': {
+                opacity: 1,
+                transform: 'scale(1)',
+            },
         },
     },
 }

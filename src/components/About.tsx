@@ -1,92 +1,117 @@
-import { Box, Container, Heading, Text, SimpleGrid, VStack, Image, HStack, Icon } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, SimpleGrid, VStack, Image, HStack, Icon, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FaAward, FaHeart, FaStar } from 'react-icons/fa'
+import { FaAward, FaHeart, FaStar, FaArrowRight } from 'react-icons/fa'
 
 const MotionBox = motion(Box)
 
 const stats = [
-    { icon: FaAward, value: '10+', label: 'Years Experience' },
-    { icon: FaHeart, value: '500+', label: 'Cakes Made' },
-    { icon: FaStar, value: '4.9', label: 'Star Rating' },
+    { icon: FaAward, value: '10+', label: 'Years Experience', color: '#C5A059' },
+    { icon: FaHeart, value: '500+', label: 'Cakes Made', color: '#C5A059' },
+    { icon: FaStar, value: '4.9', label: 'Star Rating', color: '#C5A059' },
 ]
 
 export default function About() {
     return (
-        <Box id="about" py={{ base: 16, md: 20 }} bg="brand.background">
-            <Container maxW="1200px">
-                <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={12} alignItems="center">
+        <Box id="about" py={{ base: 16, md: 20 }} bg="white" position="relative" overflow="hidden">
+            {/* Background decoration */}
+            <Box
+                position="absolute"
+                top="0"
+                right="0"
+                w="400px"
+                h="400px"
+                borderRadius="full"
+                bg="#C5A059"
+                opacity={0.03}
+                filter="blur(100px)"
+            />
+
+            <Container maxW="1400px" position="relative" zIndex={1}>
+                <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 10, lg: 16 }} alignItems="center">
                     {/* Image */}
                     <MotionBox
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
                         <Box position="relative">
+                            {/* Decorative border */}
                             <Box
                                 position="absolute"
                                 top="-20px"
                                 left="-20px"
                                 w="100%"
                                 h="100%"
-                                border="3px solid"
-                                borderColor="brand.primary"
-                                borderRadius="24px"
+                                border="2px solid"
+                                borderColor="#C5A059"
+                                borderRadius="32px"
                                 zIndex={0}
                             />
                             <Image
                                 src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=500&h=600&fit=crop"
                                 alt="Baker at work"
-                                borderRadius="24px"
-                                boxShadow="0 25px 50px rgba(255, 107, 107, 0.15)"
+                                borderRadius="32px"
+                                boxShadow="0 30px 60px rgba(255, 107, 107, 0.15)"
                                 position="relative"
                                 zIndex={1}
                             />
                             {/* Floating Stats Card */}
-                            <Box
+                            <MotionBox
                                 position="absolute"
                                 bottom="-30px"
-                                right="-20px"
+                                right={{ base: 0, md: "-30px" }}
                                 bg="white"
-                                p={4}
-                                borderRadius="20px"
-                                boxShadow="0 15px 40px rgba(0, 0, 0, 0.1)"
+                                p={5}
+                                borderRadius="24px"
+                                boxShadow="0 20px 50px rgba(0, 0, 0, 0.1)"
                                 zIndex={2}
-                                display={{ base: 'none', md: 'block' }}
+                                initial={{ y: 20 }}
+                                whileInView={{ y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.3 }}
                             >
                                 <HStack spacing={4}>
                                     <Box
-                                        w="50px"
-                                        h="50px"
-                                        bg="brand.primary"
-                                        borderRadius="full"
+                                        w="55px"
+                                        h="55px"
+                                        bg="#C5A059"
+                                        borderRadius="16px"
                                         display="flex"
                                         alignItems="center"
                                         justifyContent="center"
                                     >
-                                        <Icon as={FaAward} color="white" boxSize={5} />
+                                        <Icon as={FaAward} color="white" boxSize={6} />
                                     </Box>
                                     <VStack align="start" spacing={0}>
-                                        <Text fontWeight="700" fontSize="xl" color="brand.darkText">10+</Text>
-                                        <Text fontSize="xs" color="brand.muted">Years of Excellence</Text>
+                                        <Text fontWeight="700" fontSize="2xl" color="gray.800">10+</Text>
+                                        <Text fontSize="sm" color="gray.500">Years of Excellence</Text>
                                     </VStack>
                                 </HStack>
-                            </Box>
+                            </MotionBox>
                         </Box>
                     </MotionBox>
 
                     {/* Content */}
-                    <VStack align="start" spacing={6}>
+                    <VStack align="start" spacing={7}>
                         <MotionBox
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.5 }}
                         >
-                            <HStack spacing={2}>
-                                <Box w="40px" h="2px" bg="brand.primary" borderRadius="full" />
+                            <Box
+                                display="inline-flex"
+                                alignItems="center"
+                                gap={2}
+                                bg="#0A192F"
+                                px={5}
+                                py={2.5}
+                                borderRadius="full"
+                            >
+                                <Box w="8px" h="8px" borderRadius="full" bg="#C5A059" />
                                 <Text
-                                    color="brand.primary"
+                                    color="#C5A059"
                                     fontWeight="600"
                                     fontSize="sm"
                                     textTransform="uppercase"
@@ -94,75 +119,68 @@ export default function About() {
                                 >
                                     About Us
                                 </Text>
-                            </HStack>
+                                <Box w="8px" h="8px" borderRadius="full" bg="#C5A059" />
+                            </Box>
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
                         >
                             <Heading
                                 as="h2"
-                                fontSize={{ base: '2xl', md: '3xl' }}
+                                fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}
                                 fontFamily="heading"
-                                color="brand.darkText"
+                                color="gray.800"
+                                fontWeight="700"
                                 lineHeight="1.2"
                             >
-                                Baking Dreams, One Cake at a Time
+                                Crafting Sweet{' '}
+                                <Text as="span" color="#C5A059">
+                                    Memories
+                                </Text>{' '}
+                                Since 2014
                             </Heading>
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
                         >
-                            <Text fontSize="md" color="brand.muted" lineHeight="1.8">
-                                Welcome to Tarie Cakes! I'm Tarie, and I've been baking delicious cakes
-                                for over 10 years. Every cake I make is crafted with the finest ingredients
-                                and lots of love, ensuring each bite is a memorable experience.
-                            </Text>
-                        </MotionBox>
-
-                        <MotionBox
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                        >
-                            <Text fontSize="md" color="brand.muted" lineHeight="1.8">
-                                From elegant wedding cakes to fun birthday cupcakes, I take pride in creating
-                                beautiful desserts that not only look stunning but taste absolutely delicious.
-                                Customer satisfaction is my top priority!
+                            <Text
+                                fontSize={{ base: 'md', md: 'lg' }}
+                                color="gray.500"
+                                lineHeight="1.9"
+                                maxW="550px"
+                            >
+                                At Tarie Cakes, we believe every celebration deserves a perfect cake.
+                                With over 10 years of experience, we've been crafting delicious,
+                                beautiful cakes that make your special moments even more memorable.
                             </Text>
                         </MotionBox>
 
                         {/* Stats */}
                         <MotionBox
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            pt={4}
-                            w="full"
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            pt={2}
                         >
-                            <SimpleGrid columns={3} spacing={4} w="full">
-                                {stats.map((stat) => (
-                                    <VStack
-                                        key={stat.label}
-                                        p={4}
-                                        bg="brand.surface"
-                                        borderRadius="16px"
-                                        spacing={1}
-                                    >
-                                        <Icon as={stat.icon} color="brand.primary" boxSize={5} />
-                                        <Text fontWeight="700" fontSize="xl" color="brand.darkText">
-                                            {stat.value}
-                                        </Text>
-                                        <Text fontSize="xs" color="brand.muted" textAlign="center">
+                            <SimpleGrid columns={{ base: 3 }} spacing={6}>
+                                {stats.map((stat, index) => (
+                                    <VStack key={index} spacing={2} align="start">
+                                        <HStack spacing={2}>
+                                            <Icon as={stat.icon} color={stat.color} boxSize={4} />
+                                            <Text fontWeight="700" fontSize="2xl" color="gray.800">
+                                                {stat.value}
+                                            </Text>
+                                        </HStack>
+                                        <Text fontSize="sm" color="gray.500">
                                             {stat.label}
                                         </Text>
                                     </VStack>
@@ -171,14 +189,29 @@ export default function About() {
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
                         >
-                            <Text fontSize="md" fontWeight="600" color="brand.primary">
-                                ✨ Making your celebrations sweeter since 2014
-                            </Text>
+                            <Button
+                                size="lg"
+                                bg="#C5A059"
+                                color="white"
+                                px={8}
+                                py={6}
+                                fontWeight="600"
+                                rightIcon={<FaArrowRight />}
+                                _hover={{
+                                    bg: '#B89545',
+                                    transform: 'translateY(-3px)',
+                                    boxShadow: '0 15px 40px rgba(197, 160, 89, 0.35)',
+                                }}
+                                transition="all 0.3s ease"
+                                borderRadius="14px"
+                            >
+                                Learn Our Story
+                            </Button>
                         </MotionBox>
                     </VStack>
                 </SimpleGrid>

@@ -12,7 +12,6 @@ import {
     Image,
     Button,
     IconButton,
-    Divider,
     Box,
 } from '@chakra-ui/react'
 import { AddIcon, MinusIcon, DeleteIcon } from '@chakra-ui/icons'

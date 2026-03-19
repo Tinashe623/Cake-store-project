@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Categories from './components/Categories'
 import Menu from './components/Menu'
 import HowItWorks from './components/HowItWorks'
 import Gallery from './components/Gallery'
@@ -16,7 +15,6 @@ function App() {
         <Box>
             <Header />
             <Hero />
-            <Categories />
             <Menu />
             <HowItWorks />
             <Gallery />
