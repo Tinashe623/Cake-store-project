@@ -30,8 +30,8 @@ export default function Footer() {
                     {/* Brand & Social */}
                     <VStack align="start" spacing={6}>
                         <Logo height={50} colorScheme="light" />
-                        <Text opacity={0.7} fontSize="md" lineHeight="1.8" maxW="300px">
-                            Handcrafted luxury cakes for your most extraordinary moments.
+                        <Text color="whiteAlpha.800" fontSize="md" lineHeight="1.8" maxW="300px">
+                            Handcrafted luxury cakes for your most extraordinary moments. Mutare, Zimbabwe
                         </Text>
                         <HStack spacing={4} pt={2}>
                             <IconButton
@@ -106,10 +106,10 @@ export default function Footer() {
                         <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
                             Get in Touch
                         </Heading>
-                        <VStack align="start" spacing={4} color="rgba(245, 230, 211, 0.7)" fontWeight="500">
-                            <Text>Harare, Zimbabwe</Text>
-                            <Text>+263 77 123 4567</Text>
-                            <Text>hello@tariecakes.co.zw</Text>
+                        <VStack align="start" spacing={4} color="whiteAlpha.800" fontWeight="500">
+                            <Text color="whiteAlpha.800">Mutare, Zimbabwe</Text>
+                            <Text color="whiteAlpha.800">+263 77 123 4567</Text>
+                            <Text color="whiteAlpha.800">hello@tariecakes.co.zw</Text>
                             <Text pt={2} color="brand.accent" fontWeight="700">Open Mon-Sat: 8am - 6pm</Text>
                         </VStack>
                     </VStack>
@@ -119,7 +119,7 @@ export default function Footer() {
                         <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
                             Join Our Newsletter
                         </Heading>
-                        <Text color="rgba(245, 230, 211, 0.7)" fontSize="sm" lineHeight="1.6">
+                        <Text color="whiteAlpha.700" fontSize="sm" lineHeight="1.6">
                             Subscribe to receive sweet updates, exclusive offers, and baking tips directly in your inbox.
                         </Text>
                         <Box as="form" onSubmit={handleSubscribe} w="full" pt={2}>
@@ -168,13 +168,37 @@ export default function Footer() {
                     alignItems="center"
                     gap={4}
                 >
-                    <Text opacity={0.6} fontSize="sm" fontWeight="500">
+                    <Text color="whiteAlpha.600" fontSize="sm" fontWeight="500">
                         © {new Date().getFullYear()} Tarie Cakes. All rights reserved.
                     </Text>
                     <HStack spacing={6}>
-                        <Link fontSize="sm" opacity={0.6} _hover={{ opacity: 1, color: 'brand.accent' }}>Privacy Policy</Link>
-                        <Link fontSize="sm" opacity={0.6} _hover={{ opacity: 1, color: 'brand.accent' }}>Terms of Service</Link>
+                        <Link fontSize="sm" color="whiteAlpha.600" _hover={{ color: 'brand.accent' }}>Privacy Policy</Link>
+                        <Link fontSize="sm" color="whiteAlpha.600" _hover={{ color: 'brand.accent' }}>Terms of Service</Link>
                     </HStack>
+                </Box>
+
+                {/* Developer Credit */}
+                <Box
+                    mt={8}
+                    pt={6}
+                    borderTop="1px solid"
+                    borderColor="whiteAlpha.100"
+                    textAlign="center"
+                >
+                    <Text color="whiteAlpha.400" fontSize="xs" fontWeight="500" letterSpacing="0.5px">
+                        Designed & Developed by{' '}
+                        <Link
+                            href="https://tinashe-mundieta.vercel.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            color="whiteAlpha.500"
+                            fontWeight="600"
+                            _hover={{ color: 'brand.accent', textDecoration: 'underline' }}
+                            transition="all 0.3s ease"
+                        >
+                            Tinashe Mundieta
+                        </Link>
+                    </Text>
                 </Box>
             </Container>
         </Box>

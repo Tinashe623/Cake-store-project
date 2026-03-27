@@ -1,13 +1,23 @@
 import { Cake, Testimonial, GalleryImage, Category } from '../types'
+import { getAvailableImages, getImageCount } from '../utils/imageLoader'
 
-export const cakesData: Cake[] = [
+interface CakeTemplate {
+    id: number
+    name: string
+    category: Category
+    description: string
+    price: number
+    flavors: string[]
+    sizes: string[]
+}
+
+const CAKE_TEMPLATES: CakeTemplate[] = [
     {
         id: 1,
         name: "Chocolate Dream",
         category: "birthday",
         description: "Rich chocolate cake layered with silky ganache and topped with chocolate shavings. A chocolate lover's paradise.",
         price: 45,
-        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop",
         flavors: ["Chocolate", "Dark Chocolate", "Milk Chocolate"],
         sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"]
     },
@@ -17,7 +27,6 @@ export const cakesData: Cake[] = [
         category: "birthday",
         description: "Light and fluffy vanilla cake with Madagascar vanilla buttercream. Classic and elegant.",
         price: 40,
-        image: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=400&h=300&fit=crop",
         flavors: ["Vanilla", "Madagascar Vanilla", "French Vanilla"],
         sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"]
     },
@@ -27,7 +36,6 @@ export const cakesData: Cake[] = [
         category: "birthday",
         description: "Traditional red velvet cake with cream cheese frosting. A timeless favorite for celebrations.",
         price: 50,
-        image: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=400&h=300&fit=crop",
         flavors: ["Classic Red Velvet", "Red Velvet with Chocolate"],
         sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"]
     },
@@ -37,7 +45,6 @@ export const cakesData: Cake[] = [
         category: "wedding",
         description: "Elegant three-tier white cake with delicate sugar flowers. Perfect for your special day.",
         price: 250,
-        image: "https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=400&h=300&fit=crop",
         flavors: ["Vanilla", "White Chocolate", "Almond"],
         sizes: ["2 Tier", "3 Tier", "4 Tier"]
     },
@@ -47,7 +54,6 @@ export const cakesData: Cake[] = [
         category: "wedding",
         description: "Semi-naked cake with fresh flowers and berries. Natural beauty for modern weddings.",
         price: 200,
-        image: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400&h=300&fit=crop",
         flavors: ["Vanilla", "Lemon", "Carrot"],
         sizes: ["2 Tier", "3 Tier"]
     },
@@ -57,7 +63,6 @@ export const cakesData: Cake[] = [
         category: "wedding",
         description: "Stunning white cake with gold drip effect and edible gold leaf accents.",
         price: 300,
-        image: "https://images.unsplash.com/photo-1563729768-6af58466dfd9?w=400&h=300&fit=crop",
         flavors: ["White Chocolate", "Champagne", "Vanilla"],
         sizes: ["3 Tier", "4 Tier"]
     },
@@ -67,7 +72,6 @@ export const cakesData: Cake[] = [
         category: "cupcakes",
         description: "Decadent chocolate cupcakes with chocolate buttercream. Sold per dozen.",
         price: 30,
-        image: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&h=300&fit=crop",
         flavors: ["Chocolate", "Double Chocolate", "Chocolate Mint"],
         sizes: ["Regular", "Mini", "Jumbo"]
     },
@@ -77,7 +81,6 @@ export const cakesData: Cake[] = [
         category: "cupcakes",
         description: "Classic vanilla cupcakes with vanilla buttercream. Light and delicious.",
         price: 25,
-        image: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=400&h=300&fit=crop",
         flavors: ["Vanilla", "Vanilla Bean", "French Vanilla"],
         sizes: ["Regular", "Mini", "Jumbo"]
     },
@@ -87,7 +90,6 @@ export const cakesData: Cake[] = [
         category: "cupcakes",
         description: "Colorful vanilla cupcakes with rainbow sprinkles. Fun for parties!",
         price: 35,
-        image: "https://images.unsplash.com/photo-1599785209707-306a98893304?w=400&h=300&fit=crop",
         flavors: ["Confetti", "Birthday Cake", "Funfetti"],
         sizes: ["Regular", "Mini"]
     },
@@ -97,7 +99,6 @@ export const cakesData: Cake[] = [
         category: "seasonal",
         description: "Fresh strawberry cake with strawberry cream cheese frosting. Perfect for summer!",
         price: 55,
-        image: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=300&fit=crop",
         flavors: ["Fresh Strawberry", "Strawberry Vanilla"],
         sizes: ["6 inch (serves 8)", "8 inch (serves 16)"]
     },
@@ -107,7 +108,6 @@ export const cakesData: Cake[] = [
         category: "seasonal",
         description: "Warm pumpkin cake with cinnamon cream cheese frosting. Cozy autumn flavors.",
         price: 48,
-        image: "https://images.unsplash.com/photo-1509365390695-33aee754301f?w=400&h=300&fit=crop",
         flavors: ["Pumpkin Spice", "Pumpkin Chocolate"],
         sizes: ["6 inch (serves 8)", "8 inch (serves 16)"]
     },
@@ -117,11 +117,39 @@ export const cakesData: Cake[] = [
         category: "custom",
         description: "Your dream cake, designed exactly as you imagine. Let's create something unique!",
         price: 80,
-        image: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=400&h=300&fit=crop",
         flavors: ["Custom Selection"],
         sizes: ["Custom Size"]
     }
 ]
+
+// Dynamically maps available local images to cakes — no repetition, auto-adapts
+const buildCakesData = (): Cake[] => {
+    const images = getAvailableImages()
+
+    return CAKE_TEMPLATES.map((cake, index) => {
+        const imageIndex = index % Math.max(images.length, 1)
+        const image = images[imageIndex]
+
+        return {
+            ...cake,
+            image: image?.url || '/images/placeholder.jpg',
+        }
+    }).slice(0, Math.max(images.length, CAKE_TEMPLATES.length))
+}
+
+export const cakesData: Cake[] = buildCakesData()
+
+export const getCakeById = (id: number): Cake | undefined => {
+    return cakesData.find((cake) => cake.id === id)
+}
+
+export const getCakesByCategory = (category: Category): Cake[] => {
+    return category === 'all'
+        ? cakesData
+        : cakesData.filter((cake) => cake.category === category)
+}
+
+export const TOTAL_AVAILABLE_IMAGES = (): number => getImageCount()
 
 export const categories: { id: Category; label: string }[] = [
     { id: 'all', label: 'All Cakes' },
@@ -167,17 +195,21 @@ export const testimonials: Testimonial[] = [
     }
 ]
 
-export const galleryImages: GalleryImage[] = [
-    { id: 1, src: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=800&fit=crop", alt: "Chocolate Dream" },
-    { id: 2, src: "https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=600&h=450&fit=crop", alt: "White Wedding" },
-    { id: 3, src: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=600&h=600&fit=crop", alt: "Vanilla Birthday" },
-    { id: 4, src: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=600&h=900&fit=crop", alt: "Rustic Naked" },
-    { id: 5, src: "https://images.unsplash.com/photo-1563729768-6af58466dfd9?w=600&h=450&fit=crop", alt: "Gold Drip" },
-    { id: 6, src: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&h=800&fit=crop", alt: "Chocolate Cupcakes" },
-    { id: 7, src: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=600&h=600&fit=crop", alt: "Vanilla Cupcakes" },
-    { id: 8, src: "https://images.unsplash.com/photo-1599785209707-306a98893304?w=600&h=450&fit=crop", alt: "Rainbow Cupcakes" },
-    { id: 9, src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=800&fit=crop", alt: "Strawberry Dream" },
-    { id: 10, src: "https://images.unsplash.com/photo-1509365390695-33aee754301f?w=600&h=900&fit=crop", alt: "Pumpkin Spice" },
-    { id: 11, src: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=600&h=450&fit=crop", alt: "Custom Celebration" },
-    { id: 12, src: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=600&fit=crop", alt: "Master Baker" },
-]
+// Gallery images dynamically mapped from local images
+const buildGalleryImages = (): GalleryImage[] => {
+    const images = getAvailableImages()
+
+    const galleryAlts = [
+        "Chocolate Dream", "White Wedding", "Vanilla Birthday", "Rustic Naked",
+        "Gold Drip", "Chocolate Cupcakes", "Vanilla Cupcakes", "Rainbow Cupcakes",
+        "Strawberry Dream", "Pumpkin Spice", "Custom Celebration", "Master Baker"
+    ]
+
+    return images.map((img, index) => ({
+        id: index + 1,
+        src: img.url,
+        alt: img.name || galleryAlts[index] || `Cake ${index + 1}`,
+    }))
+}
+
+export const galleryImages: GalleryImage[] = buildGalleryImages()

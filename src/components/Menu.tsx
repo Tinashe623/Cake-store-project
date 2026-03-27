@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaSearch, FaTimes, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import Categories from './Categories'
 import CakeCard from './CakeCard'
-import { cakesData } from '../data/cakes'
+import { useCakesByCategory } from '../hooks/useCakes'
 import { Category } from '../types'
 
 const MotionBox = motion(Box)
@@ -28,14 +28,14 @@ export default function Menu() {
     const [searchQuery, setSearchQuery] = useState('')
     const [visibleCount, setVisibleCount] = useState(DEFAULT_VISIBLE)
 
+    const { cakes: cakesData } = useCakesByCategory(selectedCategory)
+
     useEffect(() => {
         setVisibleCount(DEFAULT_VISIBLE)
     }, [selectedCategory, searchQuery])
 
     const filteredCakes = useMemo(() => {
-        let cakes = selectedCategory === 'all'
-            ? cakesData
-            : cakesData.filter(cake => cake.category === selectedCategory)
+        let cakes = cakesData
 
         if (searchQuery.trim()) {
             const query = searchQuery.toLowerCase()
@@ -45,7 +45,7 @@ export default function Menu() {
             )
         }
         return cakes
-    }, [selectedCategory, searchQuery])
+    }, [cakesData, searchQuery])
 
     const clearSearch = () => setSearchQuery('')
     const hasMore = filteredCakes.length > visibleCount
