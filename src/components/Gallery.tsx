@@ -702,11 +702,11 @@ function GalleryCard({ cake, index, isLiked, isLoaded, onLike, onExpand, onImage
                     zIndex={1}
                 />
 
-                {/* Hover overlay with details */}
+                {/* Hover overlay with details — replaces cake name on hover */}
                 <Box
                     position="absolute"
                     inset={0}
-                    bgGradient="linear(to-t, rgba(45,10,10,0.92) 0%, rgba(45,10,10,0.5) 50%, rgba(45,10,10,0.15) 100%)"
+                    bgGradient="linear(to-t, rgba(45,10,10,0.95) 0%, rgba(45,10,10,0.6) 55%, rgba(45,10,10,0.2) 100%)"
                     opacity={0}
                     _groupHover={{ opacity: 1 }}
                     transition="opacity 0.4s ease"
@@ -714,9 +714,9 @@ function GalleryCard({ cake, index, isLiked, isLoaded, onLike, onExpand, onImage
                     flexDirection="column"
                     justifyContent="flex-end"
                     p={5}
-                    zIndex={2}
+                    zIndex={3}
                 >
-                    <VStack align="start" spacing={3} transform="translateY(10px)" _groupHover={{ transform: 'translateY(0)' }} transition="transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)">
+                    <VStack align="start" spacing={3} transform="translateY(12px)" _groupHover={{ transform: 'translateY(0)' }} transition="transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)">
                         {/* Flavor profile */}
                         {cake.flavorProfile && (
                             <HStack spacing={2} align="start">
@@ -851,8 +851,18 @@ function GalleryCard({ cake, index, isLiked, isLoaded, onLike, onExpand, onImage
                     </Box>
                 )}
 
-                {/* Cake name overlay — always visible at bottom */}
-                <Box position="absolute" bottom={0} left={0} right={0} p={4} zIndex={2}>
+                {/* Cake name — fades out on hover, replaced by details overlay */}
+                <Box
+                    position="absolute"
+                    bottom={0}
+                    left={0}
+                    right={0}
+                    p={4}
+                    zIndex={2}
+                    opacity={1}
+                    _groupHover={{ opacity: 0, transform: 'translateY(8px)' }}
+                    transition="all 0.35s ease"
+                >
                     <Text
                         color="white"
                         fontWeight="800"
