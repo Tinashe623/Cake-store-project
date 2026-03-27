@@ -15,12 +15,14 @@ import {
     DrawerContent,
     DrawerCloseButton,
     VStack,
-    Image,
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa'
 import { useCart } from '../context/CartContext'
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { getWhatsAppUrl } from '../config/constants'
+import Logo from './Logo'
 
 const MotionBox = motion(Box)
 
@@ -35,6 +37,39 @@ const navLinks = [
 export default function Header() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { totalItems, onOpen: openCart } = useCart()
+    const [scrolled, setScrolled] = useState(false)
+    const [activeSection, setActiveSection] = useState('home')
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    // Intersection Observer for active nav tracking
+    useEffect(() => {
+        const sectionIds = navLinks.map(l => l.href.replace('#', ''))
+        const observers: IntersectionObserver[] = []
+
+        sectionIds.forEach((id) => {
+            const el = document.getElementById(id)
+            if (!el) return
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(id)
+                    }
+                },
+                { rootMargin: '-40% 0px -60% 0px' }
+            )
+            observer.observe(el)
+            observers.push(observer)
+        })
+
+        return () => observers.forEach(o => o.disconnect())
+    }, [])
 
     return (
         <MotionBox
@@ -44,64 +79,106 @@ export default function Header() {
             left={0}
             right={0}
             zIndex={1000}
-            bg="#0A192F"
-            borderBottom="1px solid"
-            borderColor="#C5A059"
-            boxShadow="none"
+            style={{ transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+            bg={scrolled ? 'rgba(253, 248, 243, 0.85)' : 'transparent'}
+            backdropFilter={scrolled ? 'blur(20px)' : 'none'}
+            boxShadow={scrolled ? '0 10px 30px -10px rgba(45, 10, 10, 0.1)' : 'none'}
+            borderBottom={scrolled ? '1px solid rgba(253, 248, 243, 0.9)' : 'none'}
+            py={scrolled ? 2 : 4}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.5 }}
         >
-            <Container maxW="1400px" py={{ base: 2, md: 2 }}>
+            <Container maxW="1400px">
                 <Flex align="center" justify="space-between">
-                    {/* Logo */}
-                    <Image
-                        src="/tarie cakes logo.png"
-                        alt="Tarie Cakes Logo"
-                        h={{ base: '50px', md: '65px' }}
-                        w="auto"
-                        objectFit="contain"
-                    />
+                    <Box
+                        as="a"
+                        href="#home"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        position="relative"
+                        _hover={{ opacity: 0.8 }}
+                        transition="all 0.3s ease"
+                    >
+                        {scrolled && (
+                            <Box
+                                position="absolute"
+                                inset="-10px"
+                                bg="rgba(245, 230, 211, 0.5)"
+                                filter="blur(15px)"
+                                borderRadius="full"
+                                zIndex={0}
+                            />
+                        )}
+                        <Box position="relative" zIndex={1}>
+                            <Logo
+                                height={scrolled ? 38 : 52}
+                                colorScheme="dark"
+                            />
+                        </Box>
+                    </Box>
 
                     {/* Desktop Navigation */}
-                    <HStack
-                        as="nav"
-                        spacing={{ base: 4, md: 8 }}
+                    <Box
+                        bg={scrolled ? 'transparent' : 'rgba(253,248,243,0.1)'}
+                        backdropFilter={scrolled ? 'none' : 'blur(10px)'}
+                        borderRadius="full"
+                        px={scrolled ? 0 : 6}
+                        py={scrolled ? 0 : 2}
+                        border={scrolled ? 'none' : '1px solid rgba(245,230,211,0.2)'}
+                        transition="all 0.4s ease"
                         display={{ base: 'none', lg: 'flex' }}
                     >
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <Text
-                                    fontSize="sm"
-                                    fontWeight="500"
-                                    color="white"
-                                    _hover={{ color: '#C5A059' }}
-                                    transition="all 0.3s ease"
-                                    cursor="pointer"
-                                    position="relative"
-                                    letterSpacing="0.5px"
-                                >
-                                    {link.name}
-                                </Text>
-                            </a>
-                        ))}
-                    </HStack>
+                        <HStack as="nav" spacing={8}>
+                            {navLinks.map((link) => {
+                                const isActive = activeSection === link.href.replace('#', '')
+                                return (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <Text
+                                            fontSize="sm"
+                                            fontWeight="700"
+                                            color={isActive ? 'brand.accent' : 'brand.primary'}
+                                            _hover={{ color: 'brand.accent' }}
+                                            transition="all 0.3s ease"
+                                            position="relative"
+                                            letterSpacing="0.5px"
+                                            textTransform="uppercase"
+                                            _after={{
+                                                content: '""',
+                                                position: 'absolute',
+                                                bottom: '-4px',
+                                                left: '50%',
+                                                transform: isActive ? 'translateX(-50%) scaleX(1)' : 'translateX(-50%) scaleX(0)',
+                                                w: 'full',
+                                                h: '2px',
+                                                bg: 'brand.accent',
+                                                borderRadius: 'full',
+                                                transition: 'transform 0.3s ease',
+                                            }}
+                                        >
+                                            {link.name}
+                                        </Text>
+                                    </a>
+                                )
+                            })}
+                        </HStack>
+                    </Box>
 
                     {/* Cart & WhatsApp */}
-                    <HStack spacing={3}>
+                    <HStack spacing={4}>
                         <Button
                             display={{ base: 'none', md: 'flex' }}
                             leftIcon={<FaWhatsapp />}
                             variant="solid"
                             bg="#25D366"
                             color="white"
-                            size="sm"
+                            size="md"
                             borderRadius="full"
-                            px={5}
+                            px={6}
                             fontWeight="600"
                             _hover={{
                                 bg: '#20BD59',
@@ -109,7 +186,7 @@ export default function Header() {
                                 boxShadow: '0 8px 20px rgba(37, 211, 102, 0.3)'
                             }}
                             as="a"
-                            href="https://wa.me/263771234567"
+                            href={getWhatsAppUrl('Hello Tarie Cakes!')}
                             target="_blank"
                         >
                             Order Now
@@ -119,9 +196,9 @@ export default function Header() {
                                 aria-label="Cart"
                                 icon={<FaShoppingCart />}
                                 variant="ghost"
-                                color="white"
-                                fontSize="lg"
-                                _hover={{ bg: 'gray.100', color: '#C5A059' }}
+                                color="brand.primary"
+                                fontSize="xl"
+                                _hover={{ bg: 'brand.surface', color: 'brand.accent' }}
                                 onClick={openCart}
                                 borderRadius="full"
                                 size="md"
@@ -131,16 +208,17 @@ export default function Header() {
                                     position="absolute"
                                     top="-2px"
                                     right="-2px"
-                                    bg="#C5A059"
-                                    color="white"
+                                    bg="brand.accent"
+                                    color="brand.primary"
                                     borderRadius="full"
                                     fontSize="xs"
-                                    minW="20px"
-                                    h="20px"
+                                    minW="22px"
+                                    h="22px"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
-                                    fontWeight="bold"
+                                    fontWeight="bolder"
+                                    boxShadow="sm"
                                 >
                                     {totalItems}
                                 </Badge>
@@ -154,9 +232,10 @@ export default function Header() {
                             display={{ base: 'flex', lg: 'none' }}
                             onClick={onOpen}
                             variant="ghost"
-                            color="white"
+                            color="brand.primary"
                             borderRadius="full"
                             size="md"
+                            _hover={{ bg: 'brand.surface' }}
                         />
                     </HStack>
                 </Flex>
@@ -164,19 +243,11 @@ export default function Header() {
 
             {/* Mobile Drawer */}
             <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-                <DrawerOverlay backdropFilter="blur(10px)" />
-                <DrawerContent bg="white">
-                    <DrawerCloseButton />
-                    <DrawerHeader borderBottomWidth="1px" borderColor="gray.100">
-                        <HStack spacing={3}>
-                            <Image
-                                src="/tarie logo.png"
-                                alt="Tarie Cakes Logo"
-                                h="40px"
-                                w="auto"
-                                objectFit="contain"
-                            />
-                        </HStack>
+                <DrawerOverlay backdropFilter="blur(10px)" bg="rgba(26, 5, 5, 0.3)" />
+                <DrawerContent bg="rgba(253, 248, 243, 0.95)" backdropFilter="blur(20px)">
+                    <DrawerCloseButton mt={2} />
+                    <DrawerHeader borderBottomWidth="1px" borderColor="brand.border" pt={5}>
+                        <Logo height={36} colorScheme="dark" />
                     </DrawerHeader>
 
                     <DrawerBody>
@@ -189,32 +260,34 @@ export default function Header() {
                                     style={{ textDecoration: 'none' }}
                                 >
                                     <Text
-                                        fontSize="lg"
-                                        fontWeight="500"
-                                        color="white"
-                                        _hover={{ color: '#C5A059' }}
+                                        fontSize="xl"
+                                        fontWeight="700"
+                                        color="brand.darkText"
+                                        _hover={{ color: 'brand.accent', x: 2 }}
                                         py={2}
-                                        transition="all 0.2s"
+                                        transition="all 0.3s ease"
                                     >
                                         {link.name}
                                     </Text>
                                 </a>
                             ))}
-                            <Button
-                                leftIcon={<FaWhatsapp />}
-                                bg="#25D366"
-                                color="white"
-                                size="lg"
-                                borderRadius="full"
-                                _hover={{ bg: '#20BD59' }}
-                                as="a"
-                                href="https://wa.me/263771234567"
-                                target="_blank"
-                                w="full"
-                                mt={4}
-                            >
-                                Order via WhatsApp
-                            </Button>
+                            <Box pt={6}>
+                                <Button
+                                    leftIcon={<FaWhatsapp />}
+                                    bg="#25D366"
+                                    color="white"
+                                    size="lg"
+                                    h="60px"
+                                    borderRadius="20px"
+                                    _hover={{ bg: '#20BD59', transform: 'translateY(-2px)', boxShadow: 'lg' }}
+                                    as="a"
+                                    href={getWhatsAppUrl('Hello Tarie Cakes!')}
+                                    target="_blank"
+                                    w="full"
+                                >
+                                    Order via WhatsApp
+                                </Button>
+                            </Box>
                         </VStack>
                     </DrawerBody>
                 </DrawerContent>

@@ -3,7 +3,7 @@ import { CartItem, Cake } from '../types'
 
 interface CartContextType {
     items: CartItem[]
-    addToCart: (cake: Cake) => void
+    addToCart: (cake: Cake, selectedFlavor?: string, selectedSize?: string) => void
     removeFromCart: (cakeId: number) => void
     updateQuantity: (cakeId: number, quantity: number) => void
     clearCart: () => void
@@ -33,17 +33,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
     }, [items])
 
-    const addToCart = (cake: Cake) => {
+    const addToCart = (cake: Cake, selectedFlavor?: string, selectedSize?: string) => {
         setItems(prev => {
-            const existing = prev.find(item => item.cake.id === cake.id)
+            const existing = prev.find(item =>
+                item.cake.id === cake.id &&
+                item.selectedFlavor === selectedFlavor &&
+                item.selectedSize === selectedSize
+            )
             if (existing) {
                 return prev.map(item =>
-                    item.cake.id === cake.id
+                    item === existing
                         ? { ...item, quantity: Math.min(item.quantity + 1, 10) }
                         : item
                 )
             }
-            return [...prev, { cake, quantity: 1 }]
+            return [...prev, { cake, quantity: 1, selectedFlavor, selectedSize }]
         })
         setIsOpen(true)
     }

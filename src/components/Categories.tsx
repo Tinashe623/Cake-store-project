@@ -1,4 +1,4 @@
-import { Box, HStack, Button, Text } from '@chakra-ui/react'
+import { Box, Flex, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { categories } from '../data/cakes'
 import { Category } from '../types'
@@ -10,44 +10,37 @@ interface CategoriesProps {
     onSelectCategory: (category: Category) => void
 }
 
-const categoryColors: Record<string, string> = {
-    all: '#C5A059',
-    birthday: '#C5A059',
-    wedding: '#0A192F',
-    cupcakes: '#C5A059',
-    custom: '#C5A059',
-    seasonal: '#C5A059',
-}
+const activeBg = 'brand.accent'
 
 export default function Categories({ selectedCategory, onSelectCategory }: CategoriesProps) {
     return (
-        <HStack
-            spacing={{ base: 2, md: 3 }}
-            overflowX="auto"
+        <Flex
+            gap={{ base: 1.5, md: 2 }}
             py={1}
-            px={1}
-            justify={{ base: 'flex-start', md: 'center' }}
-            flexWrap="nowrap"
-            minW="max-content"
+            px={{ base: 2, md: 4 }}
+            justify={{ base: 'flex-start', xl: 'center' }}
+            flexWrap={{ base: 'nowrap', lg: 'wrap' }}
+            minW={{ base: 'max-content', lg: '0' }}
+            w="full"
             css={{
                 '&::-webkit-scrollbar': {
                     display: 'none',
                 },
                 scrollbarWidth: 'none',
             }}
+            overflowX={{ base: 'auto', lg: 'visible' }}
         >
             {categories.map((category) => {
                 const isSelected = selectedCategory === category.id
-                const color = categoryColors[category.id] || categoryColors.all
 
                 return (
-                    <Box key={category.id} position="relative">
+                    <Box key={category.id} position="relative" flexShrink={0}>
                         {isSelected && (
                             <MotionBox
                                 layoutId="activeCategory"
                                 position="absolute"
                                 inset={0}
-                                bg={color}
+                                bg={activeBg}
                                 borderRadius="full"
                                 initial={false}
                                 transition={{
@@ -55,31 +48,38 @@ export default function Categories({ selectedCategory, onSelectCategory }: Categ
                                     stiffness: 500,
                                     damping: 35
                                 }}
+                                boxShadow="0 4px 15px rgba(201, 169, 110, 0.4)"
+                                zIndex={0}
                             />
                         )}
                         <Button
-                            size="md"
-                            px={{ base: 4, md: 5 }}
-                            py={2.5}
+                            variant="unstyled"
+                            display="inline-flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            h="36px"
+                            px={{ base: 3, md: 4 }}
                             borderRadius="full"
                             fontWeight="600"
-                            fontSize={{ base: 'xs', md: 'sm' }}
+                            fontSize={{ base: '2xs', md: 'xs' }}
                             whiteSpace="nowrap"
-                            bg="transparent"
-                            color={isSelected ? 'white' : 'gray.500'}
+                            color={isSelected ? 'brand.primary' : 'brand.secondary'}
                             _hover={{
-                                bg: isSelected ? color : `${color}10`,
-                                color: isSelected ? 'white' : color,
+                                bg: isSelected ? 'transparent' : 'rgba(245, 230, 211, 0.15)',
+                                color: isSelected ? 'brand.primary' : 'brand.lightText',
                             }}
                             onClick={() => onSelectCategory(category.id)}
                             position="relative"
                             zIndex={1}
+                            transition="all 0.3s ease"
+                            textTransform="uppercase"
+                            letterSpacing="0.5px"
                         >
-                            <Text>{category.label}</Text>
+                            {category.label}
                         </Button>
                     </Box>
                 )
             })}
-        </HStack>
+        </Flex>
     )
 }

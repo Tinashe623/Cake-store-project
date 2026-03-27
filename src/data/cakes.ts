@@ -168,10 +168,16 @@ export const testimonials: Testimonial[] = [
 ]
 
 export const galleryImages: GalleryImage[] = [
-    { id: 1, src: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop", alt: "Chocolate Dream Cake" },
-    { id: 2, src: "https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=400&h=300&fit=crop", alt: "White Wedding Cake" },
-    { id: 3, src: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=400&h=300&fit=crop", alt: "Vanilla Birthday Cake" },
-    { id: 4, src: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400&h=300&fit=crop", alt: "Rustic Naked Cake" },
-    { id: 5, src: "https://images.unsplash.com/photo-1563729768-6af58466dfd9?w=400&h=300&fit=crop", alt: "Gold Drip Wedding" },
-    { id: 6, src: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&h=300&fit=crop", alt: "Chocolate Cupcakes" },
+    { id: 1, src: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=800&fit=crop", alt: "Chocolate Dream" },
+    { id: 2, src: "https://images.unsplash.com/photo-1562777717-dc6984f65a63?w=600&h=450&fit=crop", alt: "White Wedding" },
+    { id: 3, src: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=600&h=600&fit=crop", alt: "Vanilla Birthday" },
+    { id: 4, src: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=600&h=900&fit=crop", alt: "Rustic Naked" },
+    { id: 5, src: "https://images.unsplash.com/photo-1563729768-6af58466dfd9?w=600&h=450&fit=crop", alt: "Gold Drip" },
+    { id: 6, src: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&h=800&fit=crop", alt: "Chocolate Cupcakes" },
+    { id: 7, src: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=600&h=600&fit=crop", alt: "Vanilla Cupcakes" },
+    { id: 8, src: "https://images.unsplash.com/photo-1599785209707-306a98893304?w=600&h=450&fit=crop", alt: "Rainbow Cupcakes" },
+    { id: 9, src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=800&fit=crop", alt: "Strawberry Dream" },
+    { id: 10, src: "https://images.unsplash.com/photo-1509365390695-33aee754301f?w=600&h=900&fit=crop", alt: "Pumpkin Spice" },
+    { id: 11, src: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=600&h=450&fit=crop", alt: "Custom Celebration" },
+    { id: 12, src: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=600&fit=crop", alt: "Master Baker" },
 ]

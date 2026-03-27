@@ -19,141 +19,158 @@ export default function Testimonials() {
     const currentTestimonial = testimonials[currentIndex]
 
     return (
-        <Box py={{ base: 16, md: 20 }} bg="white" position="relative" overflow="hidden">
-            {/* Background decoration */}
+        <Box py={{ base: 20, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
+            {/* Smooth gradient transition from Menu */}
             <Box
                 position="absolute"
-                top="-50px"
-                left="-50px"
-                w="250px"
-                h="250px"
-                borderRadius="full"
-                bg="#0A192F"
-                opacity={0.05}
-                filter="blur(80px)"
-            />
-            <Box
-                position="absolute"
-                bottom="-50px"
-                right="-50px"
-                w="200px"
-                h="200px"
-                borderRadius="full"
-                bg="#C5A059"
-                opacity={0.05}
-                filter="blur(60px)"
+                top="-80px"
+                left={0}
+                w="full"
+                h="120px"
+                bgGradient="linear(to-b, brand.primary, brand.background)"
+                zIndex={1}
             />
 
-            <Container maxW="900px" position="relative" zIndex={1}>
-                <VStack spacing={4} mb={{ base: 10, md: 14 }} textAlign="center">
-                    <Box
-                        display="inline-flex"
-                        alignItems="center"
-                        gap={2}
-                        bg="#0A192F"
-                        px={5}
-                        py={2.5}
-                        borderRadius="full"
+            {/* Background Orbs */}
+            <Box
+                position="absolute"
+                bottom="-10%"
+                left="-5%"
+                w="500px"
+                h="500px"
+                borderRadius="full"
+                bg="brand.secondaryLight"
+                opacity={0.2}
+                filter="blur(120px)"
+            />
+            <Box
+                position="absolute"
+                top="10%"
+                right="-10%"
+                w="400px"
+                h="400px"
+                borderRadius="full"
+                bg="brand.accent"
+                opacity={0.1}
+                filter="blur(100px)"
+            />
+
+            <Container maxW="1200px" position="relative" zIndex={2}>
+                <VStack spacing={6} mb={{ base: 12, md: 16 }} textAlign="center">
+                    <MotionBox
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
                     >
-                        <Box w="8px" h="8px" borderRadius="full" bg="#C5A059" />
                         <Text
-                            color="#C5A059"
-                            fontWeight="600"
+                            color="brand.accent"
+                            fontWeight="700"
                             fontSize="sm"
                             textTransform="uppercase"
-                            letterSpacing="2px"
+                            letterSpacing="3px"
                         >
-                            Testimonials
+                            Client Stories
                         </Text>
-                        <Box w="8px" h="8px" borderRadius="full" bg="#C5A059" />
-                    </Box>
+                    </MotionBox>
 
                     <Heading
                         as="h2"
-                        fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}
+                        fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}
                         fontFamily="heading"
-                        color="gray.800"
-                        fontWeight="700"
+                        color="brand.primary"
+                        fontWeight="800"
+                        letterSpacing="-0.02em"
                     >
-                        What Our{' '}
-                        <Text as="span" color="#C5A059">
-                            Clients
-                        </Text>{' '}
-                        Say
+                        Moments of{' '}
+                        <Text as="span" className="text-gradient">
+                            Joy
+                        </Text>
                     </Heading>
                 </VStack>
 
-                <Box position="relative" minH={{ base: '280px', md: '320px' }}>
+                <Box position="relative" minH={{ base: '320px', md: '360px' }}>
                     <AnimatePresence mode="wait">
                         <MotionBox
                             key={currentIndex}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -30 }}
-                            transition={{ duration: 0.5 }}
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            h="full"
                         >
                             <VStack
-                                spacing={6}
-                                bg="white"
-                                p={{ base: 8, md: 12 }}
-                                borderRadius="32px"
-                                boxShadow="0 8px 40px rgba(0, 0, 0, 0.06)"
-                                border="1px solid"
-                                borderColor="gray.100"
+                                spacing={8}
+                                bg="rgba(255, 255, 255, 0.7)"
+                                backdropFilter="blur(20px)"
+                                border="1px solid rgba(255, 255, 255, 0.9)"
+                                p={{ base: 8, md: 16 }}
+                                borderRadius="40px"
+                                boxShadow="0 30px 60px -15px rgba(45, 10, 10, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5)"
                                 textAlign="center"
                                 position="relative"
                             >
                                 {/* Quote icon */}
                                 <Box
                                     position="absolute"
-                                    top={-4}
-                                    left={8}
-                                    bg="#C5A059"
-                                    p={3}
+                                    top="-20px"
+                                    left={{ base: "50%", md: "40px" }}
+                                    transform={{ base: "translateX(-50%)", md: "none" }}
+                                    bg="brand.accent"
+                                    w="60px"
+                                    h="60px"
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent="center"
                                     borderRadius="full"
+                                    boxShadow="0 10px 20px rgba(201, 169, 110, 0.3)"
                                 >
-                                    <FaQuoteLeft color="white" size={20} />
+                                    <FaQuoteLeft color="white" size={24} />
                                 </Box>
 
                                 {/* Stars */}
-                                <HStack spacing={2} pt={2}>
+                                <HStack spacing={2} pt={4}>
                                     {[...Array(5)].map((_, i) => (
                                         <Icon
                                             key={i}
                                             as={FaStar}
-                                            color="#FFD700"
+                                            color="brand.accent"
                                             boxSize={5}
-                                            fill="#FFD700"
                                         />
                                     ))}
                                 </HStack>
 
-                                {/* Quote */}
+                                {/* Quote Text */}
                                 <Text
-                                    fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-                                    color="gray.600"
+                                    fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+                                    color="brand.primary"
+                                    fontFamily="heading"
                                     fontStyle="italic"
-                                    maxW="650px"
-                                    lineHeight="1.9"
-                                    fontWeight="500"
+                                    maxW="750px"
+                                    lineHeight="1.8"
+                                    fontWeight="600"
                                 >
                                     "{currentTestimonial.text}"
                                 </Text>
 
                                 {/* Author */}
-                                <HStack spacing={4} pt={4}>
-                                    <Avatar
-                                        src={currentTestimonial.photo}
-                                        name={currentTestimonial.name}
-                                        size="lg"
-                                        border="3px solid"
-                                        borderColor="#C5A059"
-                                    />
-                                    <VStack align="start" spacing={0}>
-                                        <Text fontWeight="600" color="gray.800" fontSize="md">
+                                <HStack spacing={4} pt={2}>
+                                    <Box position="relative">
+                                        <Box position="absolute" inset="-3px" borderRadius="full" bgGradient="linear(to-tr, brand.accent, brand.secondary)" zIndex={0} />
+                                        <Avatar
+                                            src={currentTestimonial.photo}
+                                            name={currentTestimonial.name}
+                                            size="xl"
+                                            border="4px solid white"
+                                            position="relative"
+                                            zIndex={1}
+                                        />
+                                    </Box>
+                                    <VStack align="start" spacing={1}>
+                                        <Text fontWeight="800" color="brand.primary" fontSize="lg">
                                             {currentTestimonial.name}
                                         </Text>
-                                        <Text fontSize="sm" color="gray.400">
+                                        <Text fontSize="sm" color="brand.muted" fontWeight="600">
                                             {currentTestimonial.date}
                                         </Text>
                                     </VStack>
@@ -163,19 +180,19 @@ export default function Testimonials() {
                     </AnimatePresence>
                 </Box>
 
-                {/* Dots */}
-                <Flex justify="center" mt={8} gap={2}>
+                {/* Custom Dots Pagination */}
+                <Flex justify="center" mt={10} gap={3}>
                     {testimonials.map((_, index) => (
                         <Box
                             key={index}
-                            w={index === currentIndex ? '32px' : '8px'}
-                            h="8px"
+                            w={index === currentIndex ? '32px' : '10px'}
+                            h="10px"
                             borderRadius="full"
-                            bg={index === currentIndex ? '#C5A059' : 'gray.200'}
+                            bg={index === currentIndex ? 'brand.accent' : 'brand.border'}
                             cursor="pointer"
                             onClick={() => setCurrentIndex(index)}
-                            transition="all 0.3s ease"
-                            _hover={{ bg: index === currentIndex ? '#C5A059' : 'gray.300' }}
+                            transition="all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                            _hover={{ bg: 'brand.accentHover' }}
                         />
                     ))}
                 </Flex>

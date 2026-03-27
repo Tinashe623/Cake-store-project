@@ -1,74 +1,99 @@
-import { Box, Container, SimpleGrid, VStack, HStack, Heading, Text, IconButton, Link, Image } from '@chakra-ui/react'
-import { FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa'
+import { Box, Container, SimpleGrid, VStack, HStack, Heading, Text, IconButton, Link, Input, Button, InputGroup, InputRightElement, useToast } from '@chakra-ui/react'
+import { FaInstagram, FaFacebook, FaWhatsapp, FaPaperPlane } from 'react-icons/fa'
+import { useState } from 'react'
+import { getWhatsAppUrl } from '../config/constants'
+import Logo from './Logo'
 
 export default function Footer() {
+    const [email, setEmail] = useState('')
+    const toast = useToast()
+
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault()
+        setEmail('')
+        toast({
+            title: 'Subscribed!',
+            description: 'Thank you for joining our newsletter.',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+        })
+    }
+
     return (
-        <Box as="footer" bg="#0A192F" color="white" py={{ base: 12, md: 16 }}>
-            <Container maxW="1400px">
-                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 10, md: 12 }}>
-                    {/* Brand */}
-                    <VStack align="start" spacing={5}>
-                        <HStack spacing={3}>
-                            <Image src="/tarie logo.png" h="50px" w="auto" alt="Tarie Cakes" />
-                        </HStack>
+        <Box as="footer" bg="brand.primary" color="white" pt={{ base: 16, md: 24 }} pb={8} position="relative" overflow="hidden">
+            {/* Background Texture */}
+            <Box position="absolute" top={0} left={0} w="full" h="full" opacity={0.03} bgImage="url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')" />
+            
+            <Container maxW="1400px" position="relative" zIndex={1}>
+                <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={{ base: 12, md: 10 }}>
+                    {/* Brand & Social */}
+                    <VStack align="start" spacing={6}>
+                        <Logo height={50} colorScheme="light" />
                         <Text opacity={0.7} fontSize="md" lineHeight="1.8" maxW="300px">
-                            Handcrafted cakes for every celebration.
-                            Making your moments sweeter since 2014.
+                            Handcrafted luxury cakes for your most extraordinary moments.
                         </Text>
-                        <HStack spacing={3} pt={2}>
+                        <HStack spacing={4} pt={2}>
                             <IconButton
                                 aria-label="Instagram"
-                                icon={<FaInstagram />}
+                                icon={<FaInstagram size={20} />}
                                 variant="ghost"
                                 color="white"
                                 bg="whiteAlpha.100"
-                                _hover={{ bg: '#C5A059', color: 'white' }}
-                                borderRadius="full"
+                                _hover={{ bg: 'brand.accent', color: 'brand.primary', transform: 'translateY(-2px)' }}
+                                borderRadius="12px"
+                                w="44px"
+                                h="44px"
                                 as="a"
                                 href="https://instagram.com"
                                 target="_blank"
                             />
                             <IconButton
                                 aria-label="Facebook"
-                                icon={<FaFacebook />}
+                                icon={<FaFacebook size={20} />}
                                 variant="ghost"
                                 color="white"
                                 bg="whiteAlpha.100"
-                                _hover={{ bg: '#C5A059', color: 'white' }}
-                                borderRadius="full"
+                                _hover={{ bg: 'brand.accent', color: 'brand.primary', transform: 'translateY(-2px)' }}
+                                borderRadius="12px"
+                                w="44px"
+                                h="44px"
                                 as="a"
                                 href="https://facebook.com"
                                 target="_blank"
                             />
                             <IconButton
                                 aria-label="WhatsApp"
-                                icon={<FaWhatsapp />}
+                                icon={<FaWhatsapp size={20} />}
                                 variant="ghost"
                                 color="white"
                                 bg="whiteAlpha.100"
-                                _hover={{ bg: '#25D366', color: 'white' }}
-                                borderRadius="full"
+                                _hover={{ bg: '#25D366', color: 'white', transform: 'translateY(-2px)' }}
+                                borderRadius="12px"
+                                w="44px"
+                                h="44px"
                                 as="a"
-                                href="https://wa.me/263771234567"
+                                href={getWhatsAppUrl('Hello Tarie Cakes!')}
                                 target="_blank"
                             />
                         </HStack>
                     </VStack>
 
                     {/* Quick Links */}
-                    <VStack align="start" spacing={5}>
-                        <Heading size="md" fontFamily="heading" fontWeight="600">
-                            Quick Links
+                    <VStack align="start" spacing={6}>
+                        <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
+                            Explore
                         </Heading>
-                        <VStack align="start" spacing={3}>
+                        <VStack align="start" spacing={4}>
                             {['Home', 'Menu', 'Gallery', 'About', 'Contact'].map((link) => (
                                 <Link
                                     key={link}
                                     href={`#${link.toLowerCase()}`}
-                                    opacity={0.7}
-                                    _hover={{ color: '#C5A059', opacity: 1 }}
-                                    transition="all 0.2s"
+                                    color="rgba(245, 230, 211, 0.7)"
+                                    _hover={{ color: 'brand.accent', pl: 1 }}
+                                    transition="all 0.3s ease"
                                     fontSize="md"
+                                    fontWeight="500"
                                 >
                                     {link}
                                 </Link>
@@ -77,29 +102,79 @@ export default function Footer() {
                     </VStack>
 
                     {/* Contact Info */}
-                    <VStack align="start" spacing={5}>
-                        <Heading size="md" fontFamily="heading" fontWeight="600">
-                            Contact Us
+                    <VStack align="start" spacing={6}>
+                        <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
+                            Get in Touch
                         </Heading>
-                        <VStack align="start" spacing={3} opacity={0.7}>
-                            <Text fontSize="md">Harare, Zimbabwe</Text>
-                            <Text fontSize="md">+263 77 123 4567</Text>
-                            <Text fontSize="md">hello@tariecakes.co.zw</Text>
+                        <VStack align="start" spacing={4} color="rgba(245, 230, 211, 0.7)" fontWeight="500">
+                            <Text>Harare, Zimbabwe</Text>
+                            <Text>+263 77 123 4567</Text>
+                            <Text>hello@tariecakes.co.zw</Text>
+                            <Text pt={2} color="brand.accent" fontWeight="700">Open Mon-Sat: 8am - 6pm</Text>
                         </VStack>
+                    </VStack>
+
+                    {/* Newsletter Signup */}
+                    <VStack align="start" spacing={6}>
+                        <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
+                            Join Our Newsletter
+                        </Heading>
+                        <Text color="rgba(245, 230, 211, 0.7)" fontSize="sm" lineHeight="1.6">
+                            Subscribe to receive sweet updates, exclusive offers, and baking tips directly in your inbox.
+                        </Text>
+                        <Box as="form" onSubmit={handleSubscribe} w="full" pt={2}>
+                            <InputGroup size="lg">
+                                <Input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    bg="whiteAlpha.100"
+                                    border="1px solid"
+                                    borderColor="whiteAlpha.200"
+                                    color="white"
+                                    _placeholder={{ color: 'whiteAlpha.400', fontSize: 'sm' }}
+                                    borderRadius="16px"
+                                    _focus={{ borderColor: 'brand.accent', boxShadow: 'none', bg: 'whiteAlpha.200' }}
+                                    required
+                                />
+                                <InputRightElement w="auto" p={1}>
+                                    <Button
+                                        type="submit"
+                                        size="md"
+                                        bg="brand.accent"
+                                        color="brand.primary"
+                                        borderRadius="12px"
+                                        _hover={{ bg: 'brand.accentHover' }}
+                                        px={4}
+                                    >
+                                        <FaPaperPlane />
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                        </Box>
                     </VStack>
                 </SimpleGrid>
 
+                {/* Bottom Bar */}
                 <Box
-                    mt={12}
+                    mt={16}
                     pt={8}
                     borderTop="1px solid"
                     borderColor="whiteAlpha.100"
-                    textAlign="center"
+                    display="flex"
+                    flexDirection={{ base: 'column', md: 'row' }}
+                    justifyContent="space-between"
+                    alignItems="center"
+                    gap={4}
                 >
-                    <Text opacity={0.5} fontSize="sm">
+                    <Text opacity={0.6} fontSize="sm" fontWeight="500">
                         © {new Date().getFullYear()} Tarie Cakes. All rights reserved.
-                        Made with ❤️ in Zimbabwe
                     </Text>
+                    <HStack spacing={6}>
+                        <Link fontSize="sm" opacity={0.6} _hover={{ opacity: 1, color: 'brand.accent' }}>Privacy Policy</Link>
+                        <Link fontSize="sm" opacity={0.6} _hover={{ opacity: 1, color: 'brand.accent' }}>Terms of Service</Link>
+                    </HStack>
                 </Box>
             </Container>
         </Box>

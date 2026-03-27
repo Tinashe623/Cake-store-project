@@ -14,6 +14,8 @@ export type Category = 'all' | 'birthday' | 'wedding' | 'cupcakes' | 'custom' | 
 export interface CartItem {
     cake: Cake
     quantity: number
+    selectedFlavor?: string
+    selectedSize?: string
 }
 
 export interface Testimonial {

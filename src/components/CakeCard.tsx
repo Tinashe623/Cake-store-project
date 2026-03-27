@@ -8,12 +8,19 @@ import {
     HStack,
     Badge,
     Tag,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalCloseButton,
+    Divider,
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-import { FaShoppingCart, FaWhatsapp, FaHeart, FaStar } from 'react-icons/fa'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaShoppingCart, FaWhatsapp, FaHeart, FaStar, FaEye, FaCheck } from 'react-icons/fa'
 import { Cake } from '../types'
 import { useCart } from '../context/CartContext'
 import { useState } from 'react'
+import { getWhatsAppUrl } from '../config/constants'
 
 const MotionBox = motion(Box)
 
@@ -24,242 +31,382 @@ interface CakeCardProps {
 export default function CakeCard({ cake }: CakeCardProps) {
     const { addToCart } = useCart()
     const [isLiked, setIsLiked] = useState(false)
+    const [addedToCart, setAddedToCart] = useState(false)
+    const [selectedFlavor, setSelectedFlavor] = useState(cake.flavors?.[0] || '')
+    const [selectedSize, setSelectedSize] = useState(cake.sizes?.[0] || '')
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const handleWhatsAppOrder = () => {
         const message = `Hello Tarie Cakes! I'd like to order:\n\n${cake.name}\nPrice: $${cake.price}\n\nPlease confirm my order.`
-        const phoneNumber = '263771234567'
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank')
+        window.open(getWhatsAppUrl(message), '_blank')
+    }
+
+    const handleAddToCart = () => {
+        addToCart(cake, selectedFlavor, selectedSize)
+        setAddedToCart(true)
+        setTimeout(() => setAddedToCart(false), 1500)
     }
 
     const categoryColors: Record<string, string> = {
-        birthday: '#C5A059',
-        wedding: '#0A192F',
-        cupcakes: '#C5A059',
-        custom: '#C5A059',
-        seasonal: '#C5A059',
+        birthday: 'brand.primary',
+        wedding: 'brand.accent',
+        cupcakes: 'brand.secondary',
+        custom: 'brand.primaryLight',
+        seasonal: 'brand.muted',
     }
 
     const accentColor = categoryColors[cake.category] || categoryColors.birthday
 
     return (
-        <MotionBox
-            bg="white"
-            borderRadius="28px"
-            overflow="hidden"
-            boxShadow="0 2px 16px rgba(0, 0, 0, 0.04)"
-            _hover={{
-                transform: 'translateY(-12px)',
-                boxShadow: `0 24px 48px ${accentColor}15`,
-            }}
-            style={{ transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            position="relative"
-            role="group"
-        >
-            {/* Like button */}
-            <Box
-                position="absolute"
-                top={4}
-                right={4}
-                zIndex={2}
-                opacity={0}
-                transform="translateY(-10px)"
-                _groupHover={{ opacity: 1, transform: 'translateY(0)' }}
-                style={{ transition: 'all 0.3s ease' }}
+        <>
+            <MotionBox
+                bg="rgba(255, 255, 255, 0.06)"
+                border="1px solid rgba(245, 230, 211, 0.08)"
+                backdropFilter="blur(10px)"
+                borderRadius="30px"
+                overflow="hidden"
+                boxShadow="0 20px 40px rgba(0,0,0,0.2)"
+                _hover={{
+                    transform: 'translateY(-12px)',
+                    boxShadow: '0 30px 60px -15px rgba(0,0,0,0.4)',
+                    borderColor: 'rgba(201, 169, 110, 0.3)',
+                }}
+                style={{ transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                position="relative"
+                role="group"
             >
-                <Button
-                    size="lg"
-                    w="48px"
-                    h="48px"
-                    borderRadius="full"
-                    bg="white"
-                    color={isLiked ? '#C5A059' : 'gray.500'}
-                    boxShadow="0 4px 16px rgba(0,0,0,0.12)"
-                    _hover={{
-                        bg: isLiked ? '#C5A059' : '#C5A059',
-                        color: 'white',
-                        transform: 'scale(1.1)',
-                    }}
-                    onClick={() => setIsLiked(!isLiked)}
-                    style={{ transition: 'all 0.3s ease' }}
-                >
-                    <FaHeart size={18} fill={isLiked ? '#C5A059' : 'none'} />
-                </Button>
-            </Box>
-
-            {/* Bestseller badge */}
-            {cake.id <= 3 && (
+                {/* Like button */}
                 <Box
                     position="absolute"
                     top={4}
-                    left={4}
+                    right={4}
                     zIndex={2}
-                    bg="white"
-                    px={3}
-                    py={1.5}
-                    borderRadius="full"
-                    boxShadow="0 2px 12px rgba(0,0,0,0.1)"
-                    display="flex"
-                    alignItems="center"
-                    gap={1}
+                    opacity={0}
+                    transform="translateY(-10px)"
+                    _groupHover={{ opacity: 1, transform: 'translateY(0)' }}
+                    style={{ transition: 'all 0.4s ease' }}
                 >
-                    <FaStar size={10} color="#C5A059" fill="#C5A059" />
-                    <Text fontSize="xs" fontWeight="600" color="gray.700">
-                        Bestseller
-                    </Text>
-                </Box>
-            )}
-
-            {/* Image */}
-            <Box
-                position="relative"
-                overflow="hidden"
-                h="220px"
-            >
-                <Image
-                    src={cake.image}
-                    alt={cake.name}
-                    w="full"
-                    h="full"
-                    objectFit="cover"
-                    transition="transform 0.7s ease"
-                    _groupHover={{ transform: 'scale(1.08)' }}
-                />
-                <Box
-                    position="absolute"
-                    bottom={0}
-                    left={0}
-                    right={0}
-                    h="80px"
-                    bgGradient="linear(to-t, blackAlpha.500, transparent)"
-                />
-                {/* Category badge on image */}
-                <Badge
-                    position="absolute"
-                    bottom={3}
-                    left={3}
-                    bg={accentColor}
-                    color="white"
-                    px={4}
-                    py={1.5}
-                    borderRadius="full"
-                    fontSize="xs"
-                    fontWeight="600"
-                    textTransform="capitalize"
-                    boxShadow="0 2px 8px rgba(0,0,0,0.2)"
-                >
-                    {cake.category}
-                </Badge>
-            </Box>
-
-            {/* Content */}
-            <VStack p={6} spacing={4} align="stretch">
-                <Heading
-                    as="h3"
-                    size="md"
-                    fontFamily="heading"
-                    color="gray.800"
-                    noOfLines={1}
-                    fontWeight="600"
-                    letterSpacing="-0.02em"
-                >
-                    {cake.name}
-                </Heading>
-
-                <Text
-                    fontSize="sm"
-                    color="gray.500"
-                    noOfLines={2}
-                    lineHeight="1.7"
-                >
-                    {cake.description}
-                </Text>
-
-                {/* Flavor tags */}
-                <HStack spacing={2} flexWrap="wrap">
-                    {cake.flavors?.slice(0, 2).map((flavor, idx) => (
-                        <Tag
-                            key={idx}
-                            size="sm"
-                            bg={`${accentColor}10`}
-                            color={accentColor}
+                    <HStack spacing={2}>
+                        <Button
+                            size="md"
+                            w="44px"
+                            h="44px"
                             borderRadius="full"
-                            fontWeight="500"
+                            bg="brand.primaryLight"
+                            color="white"
+                            boxShadow="0 4px 15px rgba(0,0,0,0.3)"
+                            _hover={{ bg: 'brand.accent', color: 'brand.primary', transform: 'scale(1.1)' }}
+                            onClick={onOpen}
+                            style={{ transition: 'all 0.3s ease' }}
                         >
-                            {flavor}
-                        </Tag>
-                    ))}
-                </HStack>
+                            <FaEye size={16} />
+                        </Button>
+                        <Button
+                            size="md"
+                            w="44px"
+                            h="44px"
+                            borderRadius="full"
+                            bg="brand.primaryLight"
+                            color={isLiked ? 'red.400' : 'rgba(245, 230, 211, 0.7)'}
+                            boxShadow="0 4px 15px rgba(0,0,0,0.3)"
+                            _hover={{ bg: 'rgba(245, 230, 211, 0.2)', transform: 'scale(1.1)' }}
+                            onClick={() => setIsLiked(!isLiked)}
+                            style={{ transition: 'all 0.3s ease' }}
+                        >
+                            <FaHeart size={16} fill={isLiked ? 'currentColor' : 'none'} />
+                        </Button>
+                    </HStack>
+                </Box>
 
-                {/* Price and size */}
-                <HStack justify="space-between" align="center" pt={2}>
-                    <HStack spacing={2} align="baseline">
+                {/* Bestseller badge */}
+                {cake.id <= 3 && (
+                    <Box
+                        position="absolute"
+                        top={4}
+                        left={4}
+                        zIndex={2}
+                        bg="brand.primary"
+                        border="1px solid"
+                        borderColor="brand.accent"
+                        px={3}
+                        py={1.5}
+                        borderRadius="full"
+                        display="flex"
+                        alignItems="center"
+                        gap={1.5}
+                        boxShadow="0 4px 15px rgba(201, 169, 110, 0.2)"
+                    >
+                        <FaStar size={12} color="#C9A96E" fill="#C9A96E" />
+                        <Text fontSize="xs" fontWeight="700" color="brand.accent" textTransform="uppercase" letterSpacing="0.5px">
+                            Bestseller
+                        </Text>
+                    </Box>
+                )}
+
+                {/* Image */}
+                <Box position="relative" overflow="hidden" h="280px">
+                    <Image
+                        src={cake.image}
+                        alt={cake.name}
+                        w="full"
+                        h="full"
+                        objectFit="cover"
+                        transition="transform 0.8s ease"
+                        _groupHover={{ transform: 'scale(1.1)' }}
+                    />
+                    <Box
+                        position="absolute"
+                        bottom={0}
+                        left={0}
+                        right={0}
+                        h="140px"
+                        bgGradient="linear(to-t, brand.primary, transparent)"
+                        opacity={0.8}
+                    />
+                    <Badge
+                        position="absolute"
+                        bottom={4}
+                        left={4}
+                        bg={accentColor}
+                        color="white"
+                        px={4}
+                        py={1.5}
+                        borderRadius="full"
+                        fontSize="xs"
+                        fontWeight="700"
+                        textTransform="uppercase"
+                        boxShadow="0 4px 10px rgba(0,0,0,0.2)"
+                    >
+                        {cake.category}
+                    </Badge>
+                </Box>
+
+                {/* Content */}
+                <VStack p={6} spacing={4} align="stretch" bg="transparent">
+                    <HStack justify="space-between" align="start">
+                        <Heading
+                            as="h3"
+                            size="md"
+                            fontFamily="heading"
+                            color="brand.lightText"
+                            noOfLines={2}
+                            lineHeight="1.3"
+                        >
+                            {cake.name}
+                        </Heading>
                         <Text
                             fontSize="2xl"
-                            fontWeight="700"
-                            color="gray.800"
-                            letterSpacing="-0.03em"
+                            fontWeight="800"
+                            color="brand.accent"
+                            letterSpacing="-1px"
                         >
                             ${cake.price}
                         </Text>
                     </HStack>
-                    <Text fontSize="xs" color="gray.400" fontWeight="500">
-                        {cake.sizes?.[0]}
-                    </Text>
-                </HStack>
 
-                {/* Action buttons */}
-                <HStack spacing={3} pt={2}>
-                    <Button
-                        flex={1}
-                        bg="gray.800"
-                        color="white"
-                        size="md"
-                        h="48px"
-                        leftIcon={<FaShoppingCart />}
-                        _hover={{
-                            bg: '#C5A059',
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 12px 24px rgba(197, 160, 89, 0.25)',
-                        }}
-                        style={{
-                            transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                            fontWeight: '600',
-                            borderRadius: '16px',
-                        }}
-                        onClick={() => addToCart(cake)}
+                    <Text
+                        fontSize="sm"
+                        color="rgba(245, 230, 211, 0.7)"
+                        noOfLines={2}
                     >
-                        Add to Cart
-                    </Button>
-                    <Button
-                        flex={1}
-                        size="md"
-                        h="48px"
-                        bg="white"
-                        border="2px solid"
-                        borderColor="gray.200"
-                        color="gray.700"
-                        leftIcon={<FaWhatsapp />}
-                        _hover={{
-                            bg: '#25D366',
-                            borderColor: '#25D366',
-                            color: 'white',
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 12px 24px rgba(37, 211, 102, 0.25)',
-                        }}
-                        style={{
-                            transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                            fontWeight: '600',
-                            borderRadius: '16px',
-                        }}
-                        onClick={handleWhatsAppOrder}
-                    >
-                        Order
-                    </Button>
-                </HStack>
-            </VStack>
-        </MotionBox>
+                        {cake.description}
+                    </Text>
+
+                    {/* Flavors */}
+                    <HStack spacing={2} flexWrap="wrap" pt={1}>
+                        {cake.flavors?.slice(0, 3).map((flavor, idx) => (
+                            <Tag
+                                key={idx}
+                                size="sm"
+                                variant="subtle"
+                                bg="rgba(245, 230, 211, 0.1)"
+                                color="rgba(245, 230, 211, 0.8)"
+                                borderRadius="full"
+                                fontWeight="600"
+                            >
+                                {flavor}
+                            </Tag>
+                        ))}
+                        {(cake.flavors?.length || 0) > 3 && (
+                            <Text fontSize="xs" color="brand.accent" fontWeight="600">
+                                +{(cake.flavors?.length || 0) - 3} more
+                            </Text>
+                        )}
+                    </HStack>
+
+                    {/* Actions */}
+                    <Box pt={4} mt="auto" position="relative">
+                        <AnimatePresence mode="wait">
+                            {addedToCart ? (
+                                <MotionBox
+                                    key="added"
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ scale: 0.8, opacity: 0 }}
+                                    w="full"
+                                    h="54px"
+                                    bg="green.500"
+                                    borderRadius="16px"
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                    gap={2}
+                                    color="white"
+                                    fontWeight="800"
+                                >
+                                    <FaCheck /> Added!
+                                </MotionBox>
+                            ) : (
+                                <MotionBox
+                                    key="add"
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ scale: 0.8, opacity: 0 }}
+                                >
+                                    <Button
+                                        w="full"
+                                        bg="brand.accent"
+                                        color="brand.primary"
+                                        _hover={{ bg: 'brand.accentHover', transform: 'translateY(-2px)', boxShadow: '0 10px 20px -5px rgba(201, 169, 110, 0.4)' }}
+                                        size="lg"
+                                        h="54px"
+                                        leftIcon={<FaShoppingCart />}
+                                        onClick={handleAddToCart}
+                                        borderRadius="16px"
+                                        fontWeight="800"
+                                    >
+                                        Add to Cart
+                                    </Button>
+                                </MotionBox>
+                            )}
+                        </AnimatePresence>
+                    </Box>
+                </VStack>
+            </MotionBox>
+
+            {/* Quick View Modal */}
+            <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
+                <ModalOverlay backdropFilter="blur(10px)" bg="rgba(26, 5, 5, 0.5)" />
+                <ModalContent overflow="hidden" borderRadius="30px" bg="transparent" boxShadow="none">
+                    <Box display="flex" flexDirection={{ base: 'column', md: 'row' }} bg="white">
+                        <Box w={{ base: 'full', md: '50%' }} position="relative" h={{ base: '300px', md: 'auto' }}>
+                            <Image src={cake.image} alt={cake.name} w="full" h="full" objectFit="cover" />
+                            <ModalCloseButton
+                                position="absolute"
+                                top={4}
+                                left={4}
+                                right="auto"
+                                bg="white"
+                                borderRadius="full"
+                                boxShadow="sm"
+                                _hover={{ bg: 'brand.surface' }}
+                                display={{ base: 'flex', md: 'none' }}
+                            />
+                        </Box>
+                        <Box w={{ base: 'full', md: '50%' }} p={{ base: 6, md: 10 }} position="relative">
+                            <ModalCloseButton
+                                position="absolute"
+                                top={4}
+                                right={4}
+                                bg="brand.surface"
+                                borderRadius="full"
+                                _hover={{ bg: 'brand.border' }}
+                                display={{ base: 'none', md: 'flex' }}
+                            />
+                            <VStack align="start" spacing={5}>
+                                <Badge bg={accentColor} color="white" px={3} py={1} borderRadius="full">
+                                    {cake.category}
+                                </Badge>
+                                <Heading color="brand.primary" size="lg" lineHeight="1.2">
+                                    {cake.name}
+                                </Heading>
+                                <Text fontSize="3xl" fontWeight="800" color="brand.accent">
+                                    ${cake.price}
+                                </Text>
+                                <Divider borderColor="brand.border" />
+                                <Text color="brand.muted" lineHeight="1.8">
+                                    {cake.description}
+                                </Text>
+                                <Box w="full">
+                                    <Text fontWeight="700" color="brand.primary" mb={2}>Available Flavors:</Text>
+                                    <HStack spacing={2} flexWrap="wrap">
+                                        {cake.flavors?.map((flavor, idx) => (
+                                            <Tag
+                                                key={idx}
+                                                size="md"
+                                                borderRadius="full"
+                                                cursor="pointer"
+                                                bg={selectedFlavor === flavor ? 'brand.accent' : 'brand.surface'}
+                                                color={selectedFlavor === flavor ? 'brand.primary' : 'brand.muted'}
+                                                fontWeight={selectedFlavor === flavor ? '700' : '500'}
+                                                border={selectedFlavor === flavor ? '2px solid' : '2px solid transparent'}
+                                                borderColor={selectedFlavor === flavor ? 'brand.accentHover' : 'transparent'}
+                                                onClick={() => setSelectedFlavor(flavor)}
+                                                transition="all 0.2s ease"
+                                                _hover={{ borderColor: 'brand.accent' }}
+                                            >
+                                                {flavor}
+                                            </Tag>
+                                        ))}
+                                    </HStack>
+                                </Box>
+                                <Box w="full">
+                                    <Text fontWeight="700" color="brand.primary" mb={2}>Size/Portions:</Text>
+                                    <HStack spacing={2} flexWrap="wrap">
+                                        {cake.sizes?.map((size, idx) => (
+                                            <Tag
+                                                key={idx}
+                                                size="md"
+                                                borderRadius="full"
+                                                cursor="pointer"
+                                                bg={selectedSize === size ? 'brand.primary' : 'brand.surface'}
+                                                color={selectedSize === size ? 'brand.lightText' : 'brand.muted'}
+                                                fontWeight={selectedSize === size ? '700' : '500'}
+                                                border={selectedSize === size ? '2px solid' : '2px solid transparent'}
+                                                borderColor={selectedSize === size ? 'brand.primaryLight' : 'transparent'}
+                                                onClick={() => setSelectedSize(size)}
+                                                transition="all 0.2s ease"
+                                                _hover={{ borderColor: 'brand.primary' }}
+                                            >
+                                                {size}
+                                            </Tag>
+                                        ))}
+                                    </HStack>
+                                </Box>
+                                <HStack w="full" spacing={3} pt={4}>
+                                    <Button
+                                        flex={1}
+                                        variant="primary"
+                                        size="lg"
+                                        leftIcon={<FaShoppingCart />}
+                                        onClick={() => {
+                                            addToCart(cake, selectedFlavor, selectedSize)
+                                            onClose()
+                                        }}
+                                    >
+                                        Add
+                                    </Button>
+                                    <Button
+                                        flex={1}
+                                        variant="outline"
+                                        size="lg"
+                                        leftIcon={<FaWhatsapp />}
+                                        onClick={handleWhatsAppOrder}
+                                        color="#25D366"
+                                        borderColor="#25D366"
+                                        _hover={{ bg: '#25D366', color: 'white' }}
+                                    >
+                                        Order
+                                    </Button>
+                                </HStack>
+                            </VStack>
+                        </Box>
+                    </Box>
+                </ModalContent>
+            </Modal>
+        </>
     )
 }
