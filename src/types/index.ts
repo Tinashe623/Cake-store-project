@@ -7,6 +7,10 @@ export interface Cake {
     image: string
     flavors?: string[]
     sizes?: string[]
+    flavorProfile?: string
+    ingredients?: string[]
+    occasion?: string
+    servings?: string
 }
 
 export type Category = 'all' | 'birthday' | 'wedding' | 'cupcakes' | 'custom' | 'seasonal'

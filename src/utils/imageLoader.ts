@@ -1,4 +1,4 @@
-const imageModules = import.meta.glob('/public/images/*.{png,jpg,jpeg,gif,webp,svg}', {
+const imageModules = import.meta.glob('/src/assets/images/*.{png,jpg,jpeg,gif,webp,svg}', {
     eager: true,
     query: '?url',
     import: 'default',
@@ -13,7 +13,7 @@ export interface DiscoveredImage {
 const ALL_IMAGES: DiscoveredImage[] = Object.entries(imageModules)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([path, url]) => {
-        const filename = path.replace('/public/images/', '')
+        const filename = path.replace('/src/assets/images/', '')
         return {
             url,
             filename,

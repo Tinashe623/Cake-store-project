@@ -8,6 +8,7 @@ import {
     HStack,
     Badge,
     Tag,
+    Icon,
     useDisclosure,
     Modal,
     ModalOverlay,
@@ -16,7 +17,7 @@ import {
     Divider,
 } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaShoppingCart, FaWhatsapp, FaHeart, FaStar, FaEye, FaCheck } from 'react-icons/fa'
+import { FaShoppingCart, FaWhatsapp, FaHeart, FaStar, FaEye, FaCheck, FaUtensils, FaSeedling, FaCalendarAlt, FaUsers } from 'react-icons/fa'
 import { Cake } from '../types'
 import { useCart } from '../context/CartContext'
 import { useState } from 'react'
@@ -330,6 +331,50 @@ export default function CakeCard({ cake }: CakeCardProps) {
                                 <Text color="brand.muted" lineHeight="1.8">
                                     {cake.description}
                                 </Text>
+
+                                {/* Flavor Profile & Ingredients */}
+                                {cake.flavorProfile && (
+                                    <HStack spacing={2} align="start" w="full">
+                                        <Icon as={FaUtensils} color="brand.accent" boxSize="14px" mt={1} flexShrink={0} />
+                                        <VStack align="start" spacing={0}>
+                                            <Text fontWeight="700" color="brand.primary" fontSize="sm">Flavor Profile</Text>
+                                            <Text color="brand.muted" fontSize="sm" lineHeight="1.6">{cake.flavorProfile}</Text>
+                                        </VStack>
+                                    </HStack>
+                                )}
+                                {cake.ingredients && cake.ingredients.length > 0 && (
+                                    <HStack spacing={2} align="start" w="full">
+                                        <Icon as={FaSeedling} color="brand.accent" boxSize="14px" mt={1} flexShrink={0} />
+                                        <VStack align="start" spacing={0}>
+                                            <Text fontWeight="700" color="brand.primary" fontSize="sm">Key Ingredients</Text>
+                                            <Text color="brand.muted" fontSize="sm" lineHeight="1.6">{cake.ingredients.join(', ')}</Text>
+                                        </VStack>
+                                    </HStack>
+                                )}
+
+                                {/* Occasion & Servings */}
+                                <HStack spacing={6} w="full" flexWrap="wrap">
+                                    {cake.occasion && (
+                                        <HStack spacing={2}>
+                                            <Icon as={FaCalendarAlt} color="brand.accent" boxSize="13px" />
+                                            <VStack align="start" spacing={0}>
+                                                <Text fontWeight="700" color="brand.primary" fontSize="2xs" textTransform="uppercase" letterSpacing="0.5px">Occasion</Text>
+                                                <Text color="brand.muted" fontSize="xs">{cake.occasion}</Text>
+                                            </VStack>
+                                        </HStack>
+                                    )}
+                                    {cake.servings && (
+                                        <HStack spacing={2}>
+                                            <Icon as={FaUsers} color="brand.accent" boxSize="13px" />
+                                            <VStack align="start" spacing={0}>
+                                                <Text fontWeight="700" color="brand.primary" fontSize="2xs" textTransform="uppercase" letterSpacing="0.5px">Servings</Text>
+                                                <Text color="brand.muted" fontSize="xs">{cake.servings}</Text>
+                                            </VStack>
+                                        </HStack>
+                                    )}
+                                </HStack>
+
+                                <Divider borderColor="brand.border" />
                                 <Box w="full">
                                     <Text fontWeight="700" color="brand.primary" mb={2}>Available Flavors:</Text>
                                     <HStack spacing={2} flexWrap="wrap">

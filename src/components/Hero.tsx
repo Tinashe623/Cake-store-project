@@ -1,6 +1,7 @@
 import { Box, Container, Heading, Text, Button, VStack, HStack, Image, Flex, Icon } from '@chakra-ui/react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaArrowRight, FaGem } from 'react-icons/fa'
+import heroImg from '../assets/images/tarie-cakes-hero.jpg'
 
 const MotionBox = motion(Box)
 const MotionFlex = motion(Flex)
@@ -331,7 +332,7 @@ export default function Hero() {
                             }}
                         >
                             <Image
-                                src="./images/tarie-cakes-hero.jpg"
+                                src={heroImg}
                                 alt="Exquisite Wedding Cake"
                                 objectFit="cover"
                                 w="100%"

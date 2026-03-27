@@ -2,6 +2,7 @@ import { Box, Container, Heading, Text, SimpleGrid, VStack, Image, HStack, Icon,
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaAward, FaHeart, FaStar, FaArrowRight } from 'react-icons/fa'
 import { useRef } from 'react'
+import aboutImg from '../assets/images/about1.jpg'
 
 const MotionBox = motion(Box)
 
@@ -111,7 +112,7 @@ export default function About() {
                             style={{ y: yImg1 }}
                         >
                             <Image
-                                src="./images/about1.jpg"
+                                src={aboutImg}
                                 alt="Master Baker at work"
                                 w="full"
                                 objectFit="contain"
