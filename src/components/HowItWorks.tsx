@@ -39,7 +39,7 @@ const SPARKLE_DATA = [
 
 export default function HowItWorks() {
     return (
-        <Box py={{ base: 20, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
+        <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
             {/* Smooth gradient transition from previous section */}
             <Box
                 position="absolute"
@@ -199,7 +199,7 @@ export default function HowItWorks() {
                                 >
                                     <VStack
                                         spacing={6}
-                                        p={8}
+                                        p={{ base: 6, md: 8 }}
                                         bg="rgba(255, 255, 255, 0.7)"
                                         backdropFilter="blur(20px)"
                                         border="1px solid rgba(255, 255, 255, 0.9)"
@@ -219,8 +219,8 @@ export default function HowItWorks() {
                                         <Box position="relative" zIndex={1}>
                                             <Flex justify="space-between" align="center" w="full" mb={4}>
                                                 <Box
-                                                    w="64px"
-                                                    h="64px"
+                                                    w={{ base: '52px', md: '64px' }}
+                                                    h={{ base: '52px', md: '64px' }}
                                                     borderRadius="20px"
                                                     bg={`${step.color}15`}
                                                     display="flex"
@@ -233,7 +233,7 @@ export default function HowItWorks() {
                                                     <Icon as={step.icon} boxSize={6} />
                                                 </Box>
                                                 <Text
-                                                    fontSize="6xl"
+                                                    fontSize={{ base: '4xl', md: '6xl' }}
                                                     fontWeight="800"
                                                     color="brand.accent"
                                                     opacity={0.7}

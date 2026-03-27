@@ -169,7 +169,7 @@ export default function Header() {
                     </Box>
 
                     {/* Cart & WhatsApp */}
-                    <HStack spacing={4}>
+                    <HStack spacing={{ base: 2, md: 4 }}>
                         <Button
                             display={{ base: 'none', md: 'flex' }}
                             leftIcon={<FaWhatsapp />}
@@ -250,8 +250,8 @@ export default function Header() {
                         <Logo height={36} colorScheme="dark" />
                     </DrawerHeader>
 
-                    <DrawerBody>
-                        <VStack spacing={6} align="stretch" mt={8}>
+                    <DrawerBody px={{ base: 4, md: 6 }}>
+                        <VStack spacing={{ base: 2, md: 6 }} align="stretch" mt={8}>
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
@@ -259,16 +259,22 @@ export default function Header() {
                                     onClick={onClose}
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <Text
-                                        fontSize="xl"
-                                        fontWeight="700"
-                                        color="brand.darkText"
-                                        _hover={{ color: 'brand.accent', x: 2 }}
-                                        py={2}
-                                        transition="all 0.3s ease"
+                                    <Box
+                                        py={{ base: 3, md: 2 }}
+                                        px={3}
+                                        borderRadius="12px"
+                                        _hover={{ bg: 'brand.surface' }}
+                                        transition="all 0.2s ease"
                                     >
-                                        {link.name}
-                                    </Text>
+                                        <Text
+                                            fontSize={{ base: 'lg', md: 'xl' }}
+                                            fontWeight="700"
+                                            color="brand.darkText"
+                                            transition="all 0.3s ease"
+                                        >
+                                            {link.name}
+                                        </Text>
+                                    </Box>
                                 </a>
                             ))}
                             <Box pt={6}>

@@ -48,22 +48,22 @@ function App() {
             {/* Mobile Floating WhatsApp CTA */}
             <IconButton
                 aria-label="Order on WhatsApp"
-                icon={<FaWhatsapp size={24} />}
+                icon={<FaWhatsapp size={18} />}
                 position="fixed"
-                bottom="24px"
-                right="24px"
+                bottom="20px"
+                right="20px"
                 zIndex={900}
                 display={{ base: 'flex', md: 'none' }}
-                w="60px"
-                h="60px"
+                w="48px"
+                h="48px"
                 borderRadius="full"
                 bg="#25D366"
                 color="white"
-                boxShadow="0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(201, 169, 110, 0.3)"
+                boxShadow="0 4px 16px rgba(37, 211, 102, 0.35)"
                 _hover={{
                     bg: '#20BD59',
                     transform: 'scale(1.1)',
-                    boxShadow: '0 6px 30px rgba(37, 211, 102, 0.5), 0 0 0 4px rgba(201, 169, 110, 0.5)',
+                    boxShadow: '0 6px 24px rgba(37, 211, 102, 0.5)',
                 }}
                 transition="all 0.3s ease"
                 as="a"

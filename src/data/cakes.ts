@@ -243,7 +243,7 @@ export const testimonials: Testimonial[] = [
         photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
         rating: 5,
         date: "September 2024",
-        text: "Best cakes in Harare! I've ordered multiple times and every single time the quality is outstanding. Highly recommend!"
+        text: "Best cakes in Mutare! I've ordered multiple times and every single time the quality is outstanding. Highly recommend!"
     }
 ]
 

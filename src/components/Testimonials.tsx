@@ -19,7 +19,7 @@ export default function Testimonials() {
     const currentTestimonial = testimonials[currentIndex]
 
     return (
-        <Box py={{ base: 20, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
+        <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
             {/* Smooth gradient transition from Menu */}
             <Box
                 position="absolute"
@@ -104,7 +104,7 @@ export default function Testimonials() {
                                 bg="rgba(255, 255, 255, 0.7)"
                                 backdropFilter="blur(20px)"
                                 border="1px solid rgba(255, 255, 255, 0.9)"
-                                p={{ base: 8, md: 16 }}
+                                p={{ base: 6, sm: 8, md: 16 }}
                                 borderRadius="40px"
                                 boxShadow="0 30px 60px -15px rgba(45, 10, 10, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5)"
                                 textAlign="center"
@@ -117,15 +117,15 @@ export default function Testimonials() {
                                     left={{ base: "50%", md: "40px" }}
                                     transform={{ base: "translateX(-50%)", md: "none" }}
                                     bg="brand.accent"
-                                    w="60px"
-                                    h="60px"
+                                    w={{ base: '50px', md: '60px' }}
+                                    h={{ base: '50px', md: '60px' }}
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
                                     borderRadius="full"
                                     boxShadow="0 10px 20px rgba(201, 169, 110, 0.3)"
                                 >
-                                    <FaQuoteLeft color="white" size={24} />
+                                    <FaQuoteLeft color="white" size={20} />
                                 </Box>
 
                                 {/* Stars */}
@@ -160,7 +160,7 @@ export default function Testimonials() {
                                         <Avatar
                                             src={currentTestimonial.photo}
                                             name={currentTestimonial.name}
-                                            size="xl"
+                                            size={{ base: 'lg', md: 'xl' }}
                                             border="4px solid white"
                                             position="relative"
                                             zIndex={1}

@@ -54,8 +54,8 @@ export default function Menu() {
     return (
         <Box
             id="menu"
-            pt={{ base: 20, md: 32 }}
-            pb={{ base: 16, md: 32 }}
+            pt={{ base: 16, md: 32 }}
+            pb={{ base: 14, md: 32 }}
             position="relative"
             overflow="hidden"
             bg="brand.primary"

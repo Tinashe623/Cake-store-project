@@ -116,11 +116,11 @@ export default function Contact() {
     const contactCards = [
         { icon: FaPhone, bg: 'brand.primaryLight', label: 'Phone', value: '+263 77 123 4567' },
         { icon: FaEnvelope, bg: 'brand.accent', label: 'Email', value: 'hello@tariecakes.co.zw' },
-        { icon: FaMapMarkerAlt, bg: 'brand.primary', label: 'Location', value: 'Harare, Zimbabwe' },
+        { icon: FaMapMarkerAlt, bg: 'brand.primary', label: 'Location', value: 'Mutare, Zimbabwe' },
     ]
 
     return (
-        <Box id="contact" py={{ base: 20, md: 32 }} bg="white" position="relative" overflow="hidden">
+        <Box id="contact" py={{ base: 16, md: 32 }} bg="white" position="relative" overflow="hidden">
             {/* Gradient transition from About */}
             <Box
                 position="absolute"

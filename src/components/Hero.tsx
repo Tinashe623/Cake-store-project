@@ -34,11 +34,12 @@ export default function Hero() {
         <Box
             id="home"
             position="relative"
-            minH={{ base: '100vh', md: '110vh' }}
+            minH={{ base: 'auto', md: '100vh', lg: '110vh' }}
             display="flex"
             alignItems="center"
             overflow="hidden"
             bg="brand.background"
+            pb={{ base: 6, md: 0 }}
         >
             {/* Background elements */}
             <Box position="absolute" top={0} left={0} right={0} bottom={0} overflow="hidden">
@@ -67,33 +68,35 @@ export default function Hero() {
                     animation="pulseFade 6s infinite alternate-reverse"
                 />
 
-                {/* Floating Sparkles */}
-                {SPARKLE_DATA.map((s, i) => (
-                    <MotionBox
-                        key={i}
-                        position="absolute"
-                        top={s.top}
-                        left={s.left}
-                        fontSize={s.fontSize}
-                        color={i % 2 === 0 ? 'brand.accent' : 'brand.secondary'}
-                        opacity={0.4}
-                        animate={{
-                            y: [0, -20, 0],
-                            x: [0, s.dx, 0],
-                            rotate: [0, 180, 360],
-                            scale: [1, 1.2, 1],
-                        }}
-                        transition={{
-                            duration: s.duration,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: s.delay,
-                        }}
-                        zIndex={1}
-                    >
-                        ✨
-                    </MotionBox>
-                ))}
+                {/* Floating Sparkles - hidden on very small screens */}
+                <Box display={{ base: 'none', sm: 'block' }}>
+                    {SPARKLE_DATA.map((s, i) => (
+                        <MotionBox
+                            key={i}
+                            position="absolute"
+                            top={s.top}
+                            left={s.left}
+                            fontSize={s.fontSize}
+                            color={i % 2 === 0 ? 'brand.accent' : 'brand.secondary'}
+                            opacity={0.4}
+                            animate={{
+                                y: [0, -20, 0],
+                                x: [0, s.dx, 0],
+                                rotate: [0, 180, 360],
+                                scale: [1, 1.2, 1],
+                            }}
+                            transition={{
+                                duration: s.duration,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: s.delay,
+                            }}
+                            zIndex={1}
+                        >
+                            ✨
+                        </MotionBox>
+                    ))}
+                </Box>
                 
                 {CIRCLE_DATA.map((c, i) => (
                     <MotionBox
@@ -121,20 +124,21 @@ export default function Hero() {
                 ))}
             </Box>
 
-            <Container maxW="1400px" position="relative" zIndex={2} mt={{ base: 20, md: 0 }}>
+            <Container maxW="1400px" position="relative" zIndex={2} mt={{ base: '60px', md: 0 }} px={{ base: 4, sm: 6, md: 8 }}>
                 <Flex
                     direction={{ base: 'column', lg: 'row' }}
                     align="center"
                     justify="space-between"
-                    gap={{ base: 12, lg: 8 }}
+                    gap={{ base: 4, md: 10, lg: 8 }}
                 >
                     {/* Text Content */}
                     <VStack
-                        spacing={8}
+                        spacing={{ base: 3, md: 8 }}
                         align={{ base: 'center', lg: 'flex-start' }}
                         textAlign={{ base: 'center', lg: 'left' }}
                         w={{ base: 'full', lg: '50%' }}
-                        pt={{ base: 8, md: 24 }}
+                        pt={{ base: 4, sm: 6, md: 16, lg: 24 }}
+                        order={{ base: 1, lg: 0 }}
                     >
                         <MotionBox
                             initial={{ opacity: 0, y: 40 }}
@@ -143,15 +147,15 @@ export default function Hero() {
                         >
                             <Box
                                 display="inline-block"
-                                px={5}
-                                py={2.5}
+                                px={{ base: 4, md: 5 }}
+                                py={{ base: 2, md: 2.5 }}
                                 mb={2}
                                 borderRadius="full"
                                 bg="brand.primary"
                                 color="brand.accent"
                                 fontWeight="700"
-                                fontSize="sm"
-                                letterSpacing="2px"
+                                fontSize={{ base: '2xs', sm: 'xs', md: 'sm' }}
+                                letterSpacing={{ base: '1px', md: '2px' }}
                                 textTransform="uppercase"
                                 boxShadow="0 10px 20px -5px rgba(45, 10, 10, 0.2)"
                             >
@@ -166,15 +170,16 @@ export default function Hero() {
                         >
                             <Heading
                                 as="h1"
-                                fontSize={{ base: '5xl', sm: '6xl', md: '7xl', lg: '8xl' }}
+                                fontSize={{ base: '4xl', sm: '5xl', md: '6xl', lg: '7xl', xl: '8xl' }}
                                 fontFamily="heading"
                                 color="brand.primary"
                                 lineHeight="0.95"
                                 fontWeight="800"
                                 letterSpacing="-0.04em"
-                                mb={4}
+                                mb={{ base: 2, md: 4 }}
                             >
-                                Baking Dreams <br />
+                                Baking Dreams{' '}
+                                <Box as="br" display={{ base: 'none', sm: 'inline' }} />
                                 Into{' '}
                                 <Text as="span" color="brand.accent" fontStyle="italic">
                                     Reality
@@ -188,11 +193,12 @@ export default function Hero() {
                             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <Text
-                                fontSize={{ base: 'lg', md: '2xl' }}
+                                fontSize={{ base: 'sm', sm: 'lg', md: '2xl' }}
                                 color="brand.muted"
                                 maxW="580px"
                                 fontWeight="500"
                                 lineHeight="1.6"
+                                px={{ base: 1, sm: 0 }}
                             >
                                 Elevate your celebrations with our bespoke, luxury cakes. Every tier is crafted with the finest ingredients and an artisan's touch.
                             </Text>
@@ -202,19 +208,21 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            w={{ base: 'full', sm: 'auto' }}
                         >
-                            <HStack spacing={4} flexDir={{ base: 'column', sm: 'row' }} w={{ base: 'full', sm: 'auto' }}>
+                            <HStack spacing={{ base: 3, md: 4 }} flexDir={{ base: 'column', sm: 'row' }} w={{ base: 'full', sm: 'auto' }}>
                                 <Button
-                                    size="lg"
+                                    size={{ base: 'md', md: 'lg' }}
                                     bg="brand.primary"
                                     color="brand.accent"
-                                    px={10}
-                                    py={7}
-                                    fontSize="lg"
+                                    px={{ base: 6, md: 10 }}
+                                    py={{ base: 5, md: 7 }}
+                                    fontSize={{ base: 'sm', md: 'lg' }}
                                     leftIcon={<FaArrowRight />}
                                     as="a"
                                     href="#menu"
                                     w={{ base: 'full', sm: 'auto' }}
+                                    h={{ base: '50px', md: 'auto' }}
                                     boxShadow="0 15px 30px -5px rgba(45, 10, 10, 0.25)"
                                     _hover={{
                                         transform: 'translateY(-3px)',
@@ -225,10 +233,10 @@ export default function Hero() {
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    size="lg"
-                                    px={10}
-                                    py={7}
-                                    fontSize="lg"
+                                    size={{ base: 'md', md: 'lg' }}
+                                    px={{ base: 6, md: 10 }}
+                                    py={{ base: 5, md: 7 }}
+                                    fontSize={{ base: 'sm', md: 'lg' }}
                                     border="2px solid"
                                     borderColor="brand.primary"
                                     color="brand.primary"
@@ -239,26 +247,28 @@ export default function Hero() {
                                     as="a"
                                     href="#contact"
                                     w={{ base: 'full', sm: 'auto' }}
+                                    h={{ base: '50px', md: 'auto' }}
                                 >
                                     Book a Tasting
                                 </Button>
                             </HStack>
                         </MotionBox>
 
-                        {/* Social Proof */}
+                        {/* Social Proof — hidden on mobile */}
                         <MotionBox
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 0.8 }}
-                            pt={8}
+                            pt={{ base: 2, md: 8 }}
+                            display={{ base: 'none', sm: 'block' }}
                         >
-                            <HStack spacing={4} align="center">
+                            <HStack spacing={{ base: 3, md: 4 }} align="center">
                                 <HStack spacing={-3}>
                                     {[1, 2, 3].map((i) => (
                                         <Image
                                             key={i}
                                             src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                                            boxSize="40px"
+                                            boxSize={{ base: '34px', md: '40px' }}
                                             borderRadius="full"
                                             border="2px solid white"
                                             boxShadow="sm"
@@ -266,7 +276,7 @@ export default function Hero() {
                                     ))}
                                 </HStack>
                                 <VStack align="start" spacing={0}>
-                                    <Text fontWeight="700" color="brand.primary" fontSize="sm">500+ Happy Clients</Text>
+                                    <Text fontWeight="700" color="brand.primary" fontSize={{ base: 'xs', md: 'sm' }}>500+ Happy Clients</Text>
                                     <HStack spacing={1}>
                                         {[1, 2, 3, 4, 5].map((i) => (
                                             <Box key={i} color="brand.accent" fontSize="xs">★</Box>
@@ -279,21 +289,22 @@ export default function Hero() {
 
                     {/* Image Area */}
                     <MotionFlex
-                        w={{ base: 'full', lg: '50%' }}
+                        w={{ base: '100%', lg: '50%' }}
                         justify="center"
                         position="relative"
                         style={{ y: y1 }}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        order={{ base: 2, lg: 0 }}
                     >
                         {/* Decorative Background for Image */}
                         <Box
                             position="absolute"
-                            w={{ base: '280px', md: '450px' }}
-                            h={{ base: '400px', md: '600px' }}
+                            w={{ base: '85%', sm: '70%', md: '75%', lg: '450px' }}
+                            h={{ base: '90%', sm: '80%', md: '75%', lg: '600px' }}
                             bg="brand.accent"
-                            borderRadius="100px"
+                            borderRadius={{ base: '60px', md: '100px' }}
                             transform="rotate(-5deg)"
                             zIndex={0}
                             opacity={0.15}
@@ -302,20 +313,21 @@ export default function Hero() {
                         {/* Neon Glow Layer */}
                         <Box
                             position="absolute"
-                            w={{ base: '310px', md: '490px' }}
-                            h={{ base: '430px', md: '650px' }}
-                            borderRadius="65px 205px 65px 65px"
+                            w={{ base: 'calc(85% + 30px)', sm: 'calc(70% + 40px)', md: '490px' }}
+                            h={{ base: 'calc(90% + 30px)', sm: 'calc(80% + 50px)', md: '650px' }}
+                            borderRadius={{ base: '45px 120px 45px 45px', md: '65px 205px 65px 65px' }}
                             zIndex={0}
                             boxShadow="0 0 40px rgba(201, 169, 110, 0.4), 0 0 80px rgba(201, 169, 110, 0.2), 0 0 120px rgba(45, 10, 10, 0.15)"
                             animation="neonPulse 3s ease-in-out infinite alternate"
                         />
 
-                        {/* Main Image Container */}
+                        {/* Main Image Container — fully visible on all screens */}
                         <Box
                             position="relative"
-                            w={{ base: '300px', md: '480px' }}
-                            h={{ base: '420px', md: '640px' }}
-                            borderRadius="60px 200px 60px 60px"
+                            w={{ base: '90%', sm: '70%', md: '75%', lg: '480px' }}
+                            maxW="480px"
+                            aspectRatio={{ base: 4 / 5, md: 3 / 4 }}
+                            borderRadius={{ base: '40px 100px 40px 40px', md: '60px 200px 60px 60px' }}
                             overflow="hidden"
                             zIndex={1}
                             border="2px solid rgba(201, 169, 110, 0.6)"
@@ -324,7 +336,7 @@ export default function Hero() {
                                 content: '""',
                                 position: 'absolute',
                                 inset: '-3px',
-                                borderRadius: '63px 203px 63px 63px',
+                                borderRadius: 'inherit',
                                 background: 'conic-gradient(from 180deg, #C9A96E, #2D0A0A, #C9A96E, #2D0A0A, #C9A96E)',
                                 zIndex: -1,
                                 animation: 'neonBorderRotate 6s linear infinite',
@@ -344,8 +356,8 @@ export default function Hero() {
                         {/* Floating Badge */}
                         <MotionBox
                             position="absolute"
-                            bottom="10%"
-                            left={{ base: "-5%", md: "-10%" }}
+                            bottom={{ base: '5%', md: '10%' }}
+                            left={{ base: '0%', md: '-10%' }}
                             zIndex={3}
                             style={{ y: y2 }}
                         >
@@ -354,30 +366,30 @@ export default function Hero() {
                                 backdropFilter="blur(20px)"
                                 border="1px solid rgba(201, 169, 110, 0.4)"
                                 boxShadow="0 0 20px rgba(201, 169, 110, 0.15), 0 8px 32px rgba(0,0,0,0.2)"
-                                px={5}
-                                py={3.5}
-                                borderRadius="20px"
+                                px={{ base: 3, md: 5 }}
+                                py={{ base: 2.5, md: 3.5 }}
+                                borderRadius={{ base: '14px', md: '20px' }}
                                 display="flex"
                                 alignItems="center"
-                                gap={3}
+                                gap={{ base: 1.5, md: 3 }}
                             >
                                 <Box
-                                    w="42px"
-                                    h="42px"
-                                    borderRadius="14px"
+                                    w={{ base: '28px', md: '42px' }}
+                                    h={{ base: '28px', md: '42px' }}
+                                    borderRadius={{ base: '10px', md: '14px' }}
                                     bg="linear-gradient(135deg, #C9A96E 0%, #B8944F 100%)"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
                                     boxShadow="0 0 12px rgba(201, 169, 110, 0.4)"
                                 >
-                                    <Icon as={FaGem} color="brand.primary" boxSize={4} />
+                                    <Icon as={FaGem} color="brand.primary" boxSize={{ base: 2.5, md: 4 }} />
                                 </Box>
                                 <VStack align="start" spacing={0}>
-                                    <Text fontWeight="800" color="brand.accent" fontSize="lg" lineHeight="1.1" letterSpacing="-0.5px">
+                                    <Text fontWeight="800" color="brand.accent" fontSize={{ base: 'sm', md: 'lg' }} lineHeight="1.1" letterSpacing="-0.5px">
                                         100%
                                     </Text>
-                                    <Text fontSize="2xs" color="rgba(245, 230, 211, 0.7)" fontWeight="600" textTransform="uppercase" letterSpacing="1.5px">
+                                    <Text fontSize={{ base: '3xs', md: '2xs' }} color="rgba(245, 230, 211, 0.7)" fontWeight="600" textTransform="uppercase" letterSpacing="1.5px">
                                         Bespoke Design
                                     </Text>
                                 </VStack>

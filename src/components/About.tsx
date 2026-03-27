@@ -1,14 +1,14 @@
-import { Box, Container, Heading, Text, SimpleGrid, VStack, Image, HStack, Icon, Button, Flex } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, VStack, Image, HStack, Icon, Flex } from '@chakra-ui/react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { FaAward, FaHeart, FaStar, FaArrowRight } from 'react-icons/fa'
+import { FaAward, FaHeart, FaStar } from 'react-icons/fa'
 import { useRef } from 'react'
 import aboutImg from '../assets/images/about1.jpg'
 
 const MotionBox = motion(Box)
 
 const stats = [
-    { icon: FaAward, value: '10+', label: 'Years Experience', color: 'brand.accent' },
-    { icon: FaHeart, value: '500+', label: 'Cakes Made', color: 'brand.secondary' },
+    { icon: FaAward, value: '3+', label: 'Years Experience', color: 'brand.accent' },
+    { icon: FaHeart, value: '100+', label: 'Cakes Made', color: 'brand.secondary' },
     { icon: FaStar, value: '4.9', label: 'Average Rating', color: 'brand.accent' },
 ]
 
@@ -22,7 +22,7 @@ export default function About() {
     const yImg1 = useTransform(scrollYProgress, [0, 1], [30, -30])
 
     return (
-        <Box id="about" py={{ base: 20, md: 32 }} bg="brand.primary" position="relative" overflow="hidden" ref={sectionRef}>
+        <Box id="about" py={{ base: 16, md: 32 }} bg="brand.primary" position="relative" overflow="hidden" ref={sectionRef}>
             {/* Smooth gradient transition from Testimonials */}
             <Box
                 position="absolute"
@@ -36,7 +36,7 @@ export default function About() {
             <Container maxW="1400px" position="relative" zIndex={2}>
                 <Flex direction={{ base: 'column', lg: 'row' }} gap={{ base: 16, lg: 20 }} alignItems="center">
                     {/* Premium Image Gallery - Decorated Display */}
-                    <Box w={{ base: 'full', lg: '50%' }} position="relative" pt={8} pl={8} pb={8} pr={8}>
+                    <Box w={{ base: 'full', lg: '50%' }} position="relative" pt={{ base: 4, md: 8 }} pl={{ base: 4, md: 8 }} pb={{ base: 4, md: 8 }} pr={{ base: 4, md: 8 }}>
                         {/* Soft ambient glow */}
                         <Box
                             position="absolute"
@@ -56,8 +56,8 @@ export default function About() {
                             position="absolute"
                             top="0"
                             left="0"
-                            w="80px"
-                            h="80px"
+                            w={{ base: '50px', md: '80px' }}
+                            h={{ base: '50px', md: '80px' }}
                             borderTop="3px solid"
                             borderLeft="3px solid"
                             borderColor="#9b7b51"
@@ -71,8 +71,8 @@ export default function About() {
                             position="absolute"
                             bottom="0"
                             right="0"
-                            w="80px"
-                            h="80px"
+                            w={{ base: '50px', md: '80px' }}
+                            h={{ base: '50px', md: '80px' }}
                             borderBottom="3px solid"
                             borderRight="3px solid"
                             borderColor="#9b7b51"
@@ -81,26 +81,37 @@ export default function About() {
                             opacity={0.7}
                         />
 
-                        {/* Diagonal ribbon - top right */}
-                        <Box
+                        {/* Award badge - top left (moved to prevent overflow) */}
+                        <MotionBox
                             position="absolute"
-                            top="28px"
-                            right="-10px"
+                            top={{ base: '16px', md: '28px' }}
+                            left={{ base: '16px', md: '0px' }}
                             zIndex={6}
-                            bg="brand.accent"
-                            color="brand.primary"
-                            px={10}
-                            py={1.5}
-                            fontWeight="800"
-                            fontSize="2xs"
-                            textTransform="uppercase"
-                            letterSpacing="3px"
-                            boxShadow="0 4px 15px rgba(201, 169, 110, 0.4)"
-                            transform="rotate(0deg)"
-                            borderRadius="0 0 0 8px"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
                         >
-                            Award Winning
-                        </Box>
+                            <HStack
+                                spacing={{ base: 1.5, md: 2 }}
+                                bg="brand.accent"
+                                color="brand.primary"
+                                px={{ base: 3, md: 5 }}
+                                py={{ base: 1.5, md: 2 }}
+                                borderRadius="full"
+                                boxShadow="0 8px 24px rgba(201, 169, 110, 0.35)"
+                            >
+                                <Icon as={FaStar} boxSize={{ base: '10px', md: '12px' }} />
+                                <Text
+                                    fontWeight="700"
+                                    fontSize={{ base: '2xs', md: 'xs' }}
+                                    textTransform="uppercase"
+                                    letterSpacing={{ base: '1.5px', md: '2px' }}
+                                >
+                                    Award Winning
+                                </Text>
+                            </HStack>
+                        </MotionBox>
 
                         {/* Main Image - Full display */}
                         <MotionBox
@@ -120,67 +131,80 @@ export default function About() {
                             />
                         </MotionBox>
 
-                        {/* Floating glass badge - bottom left */}
+                        {/* Premium badge - bottom left */}
                         <MotionBox
                             position="absolute"
-                            bottom="20px"
-                            left="30px"
+                            bottom={{ base: '12px', md: '24px' }}
+                            left={{ base: '12px', md: '28px' }}
                             zIndex={8}
-                            bg="rgba(255, 255, 255, 0.9)"
-                            backdropFilter="blur(20px)"
-                            border="1px solid rgba(201, 169, 110, 0.25)"
-                            px={6}
-                            py={4}
-                            borderRadius="16px"
-                            boxShadow="0 20px 40px -10px rgba(45, 10, 10, 0.1)"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.5 }}
+                            transition={{ delay: 0.5, duration: 0.5 }}
                         >
-                            <HStack spacing={3}>
+                            <HStack
+                                spacing={{ base: 2, md: 3 }}
+                                bg="rgba(45, 10, 10, 0.85)"
+                                backdropFilter="blur(16px)"
+                                border="1px solid rgba(201, 169, 110, 0.3)"
+                                px={{ base: 3, md: 5 }}
+                                py={{ base: 2.5, md: 3.5 }}
+                                borderRadius="16px"
+                                boxShadow="0 12px 32px rgba(0, 0, 0, 0.25)"
+                            >
                                 <Box
-                                    w="40px"
-                                    h="40px"
+                                    w={{ base: '32px', md: '40px' }}
+                                    h={{ base: '32px', md: '40px' }}
                                     borderRadius="12px"
-                                    bg="rgba(201, 169, 110, 0.15)"
+                                    bg="linear-gradient(135deg, rgba(201, 169, 110, 0.25) 0%, rgba(201, 169, 110, 0.08) 100%)"
+                                    border="1px solid rgba(201, 169, 110, 0.2)"
                                     display="flex"
                                     alignItems="center"
                                     justifyContent="center"
                                 >
-                                    <Icon as={FaAward} color="brand.accent" boxSize={5} />
+                                    <Icon as={FaAward} color="brand.accent" boxSize={{ base: 3.5, md: 5 }} />
                                 </Box>
-                                <VStack align="start" spacing={0}>
-                                    <Text fontWeight="800" fontSize="xl" color="brand.primary" lineHeight="1.2">Premium</Text>
-                                    <Text fontSize="2xs" fontWeight="600" color="brand.muted" textTransform="uppercase" letterSpacing="1px">Quality Assured</Text>
+                                <VStack align="start" spacing={0.5}>
+                                    <Text fontWeight="800" fontSize={{ base: 'sm', md: 'md' }} color="white" lineHeight="1.2">Premium</Text>
+                                    <Text fontSize={{ base: '3xs', md: '2xs' }} fontWeight="600" color="rgba(245, 230, 211, 0.6)" textTransform="uppercase" letterSpacing="0.5px">Quality Assured</Text>
                                 </VStack>
                             </HStack>
                         </MotionBox>
 
-                        {/* Decorative star rating - bottom right */}
+                        {/* Rating badge - bottom right */}
                         <MotionBox
                             position="absolute"
-                            bottom="50px"
-                            right="10px"
+                            bottom={{ base: '50px', md: '60px' }}
+                            right={{ base: '12px', md: '20px' }}
                             zIndex={8}
-                            bg="rgba(255, 255, 255, 0.9)"
-                            backdropFilter="blur(20px)"
-                            border="1px solid rgba(201, 169, 110, 0.2)"
-                            px={5}
-                            py={3}
-                            borderRadius="14px"
-                            boxShadow="0 15px 30px -10px rgba(45, 10, 10, 0.1)"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.7 }}
+                            transition={{ delay: 0.7, duration: 0.5 }}
                         >
-                            <HStack spacing={1.5}>
-                                {[...Array(5)].map((_, i) => (
-                                    <Icon key={i} as={FaStar} color="brand.accent" boxSize={3.5} />
-                                ))}
-                                <Text fontSize="xs" fontWeight="700" color="brand.primary" ml={2}>4.9</Text>
-                            </HStack>
+                            <VStack
+                                spacing={{ base: 1.5, md: 2 }}
+                                bg="rgba(45, 10, 10, 0.85)"
+                                backdropFilter="blur(16px)"
+                                border="1px solid rgba(201, 169, 110, 0.3)"
+                                px={{ base: 3, md: 4 }}
+                                py={{ base: 2.5, md: 3.5 }}
+                                borderRadius="16px"
+                                boxShadow="0 12px 32px rgba(0, 0, 0, 0.25)"
+                                align="center"
+                            >
+                                <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="800" color="brand.accent" lineHeight="1">
+                                    4.9
+                                </Text>
+                                <HStack spacing={0.5}>
+                                    {[...Array(5)].map((_, i) => (
+                                        <Icon key={i} as={FaStar} color="brand.accent" boxSize={{ base: '9px', md: '11px' }} />
+                                    ))}
+                                </HStack>
+                                <Text fontSize={{ base: '3xs', md: '2xs' }} color="rgba(245, 230, 211, 0.5)" fontWeight="600" textTransform="uppercase" letterSpacing="0.5px">
+                                    500+ Reviews
+                                </Text>
+                            </VStack>
                         </MotionBox>
 
                         {/* Decorative dots cluster */}
@@ -249,7 +273,7 @@ export default function About() {
                         >
                             <Heading
                                 as="h2"
-                                fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+                                fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}
                                 fontFamily="heading"
                                 color="brand.primary"
                                 fontWeight="800"
@@ -268,7 +292,7 @@ export default function About() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                         >
                             <Text
-                                fontSize={{ base: 'lg', md: 'xl' }}
+                                fontSize={{ base: 'md', sm: 'lg', md: 'xl' }}
                                 color="brand.muted"
                                 lineHeight="1.8"
                                 maxW="580px"
@@ -286,45 +310,26 @@ export default function About() {
                             w="full"
                             pt={4}
                         >
-                            <SimpleGrid columns={{ base: 1, sm: 3 }} spacing={8}>
+                            <VStack spacing={{ base: 4, md: 5 }} align="stretch" w="full">
                                 {stats.map((stat, index) => (
-                                    <HStack key={index} spacing={4} align="center">
-                                        <Box bg="rgba(45, 10, 10, 0.05)" p={4} borderRadius="20px">
-                                            <Icon as={stat.icon} color={stat.color} boxSize={6} />
+                                    <HStack key={index} spacing={3} align="center">
+                                        <Box
+                                            bg="rgba(201, 169, 110, 0.1)"
+                                            p={{ base: 2.5, md: 3 }}
+                                            borderRadius="14px"
+                                            flexShrink={0}
+                                        >
+                                            <Icon as={stat.icon} color={stat.color} boxSize={{ base: 4, md: 5 }} />
                                         </Box>
-                                        <VStack align="start" spacing={1}>
-                                            <Text fontWeight="800" fontSize="2xl" color="brand.primary">{stat.value}</Text>
-                                            <Text fontSize="2xs" fontWeight="700" color="brand.muted" textTransform="uppercase" letterSpacing="1px">{stat.label}</Text>
-                                        </VStack>
+                                        <Text fontWeight="800" fontSize={{ base: 'lg', md: 'xl' }} color="brand.lightText" lineHeight="1">
+                                            {stat.value}
+                                        </Text>
+                                        <Text fontSize={{ base: 'xs', md: 'sm' }} fontWeight="600" color="rgba(245, 230, 211, 0.6)">
+                                            {stat.label}
+                                        </Text>
                                     </HStack>
                                 ))}
-                            </SimpleGrid>
-                        </MotionBox>
-
-                        <MotionBox
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            pt={4}
-                        >
-                            <Button
-                                size="lg"
-                                bg="brand.accent"
-                                color="brand.primary"
-                                _hover={{
-                                    bg: 'brand.lightText',
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: '0 10px 20px -5px rgba(201, 169, 110, 0.4)'
-                                }}
-                                rightIcon={<FaArrowRight />}
-                                px={8}
-                                h="54px"
-                                borderRadius="16px"
-                                fontWeight="800"
-                            >
-                                Meet the Team
-                            </Button>
+                            </VStack>
                         </MotionBox>
                     </VStack>
                 </Flex>
