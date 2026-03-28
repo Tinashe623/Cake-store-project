@@ -20,18 +20,13 @@ import {
 import { motion } from 'framer-motion'
 import { FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaBolt } from 'react-icons/fa'
 import { getWhatsAppUrl } from '../config/constants'
-import { keyframes } from '@emotion/react'
-
-const pulseGlow = keyframes`
-    0% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.3), 0 0 40px rgba(37, 211, 102, 0.1); }
-    50% { box-shadow: 0 0 30px rgba(37, 211, 102, 0.5), 0 0 60px rgba(37, 211, 102, 0.2); }
-    100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.3), 0 0 40px rgba(37, 211, 102, 0.1); }
-`
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 
 export default function Contact() {
     const toast = useToast()
+    const disableHeavy = useIsMobile() || usePrefersReducedMotion()
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -121,53 +116,59 @@ export default function Contact() {
 
     return (
         <Box id="contact" py={{ base: 16, md: 32 }} bg="white" position="relative" overflow="hidden">
-            {/* Ambient glow orbs */}
-            <Box
-                position="absolute"
-                bottom="-10%"
-                left="-5%"
-                w="500px"
-                h="500px"
-                borderRadius="full"
-                bg="brand.accent"
-                opacity={0.08}
-                filter="blur(120px)"
-            />
-            <Box
-                position="absolute"
-                top="-10%"
-                right="-10%"
-                w="600px"
-                h="600px"
-                borderRadius="full"
-                bg="brand.accent"
-                opacity={0.06}
-                filter="blur(140px)"
-            />
-            <Box
-                position="absolute"
-                top="30%"
-                left="50%"
-                w="300px"
-                h="300px"
-                borderRadius="full"
-                bg="brand.primaryLight"
-                opacity={0.04}
-                filter="blur(100px)"
-            />
+            {/* Ambient glow orbs — desktop only */}
+            {!disableHeavy && (
+                <>
+                    <Box
+                        position="absolute"
+                        bottom="-10%"
+                        left="-5%"
+                        w="500px"
+                        h="500px"
+                        borderRadius="full"
+                        bg="brand.accent"
+                        opacity={0.08}
+                        filter="blur(120px)"
+                    />
+                    <Box
+                        position="absolute"
+                        top="-10%"
+                        right="-10%"
+                        w="600px"
+                        h="600px"
+                        borderRadius="full"
+                        bg="brand.accent"
+                        opacity={0.06}
+                        filter="blur(140px)"
+                    />
+                    <Box
+                        position="absolute"
+                        top="30%"
+                        left="50%"
+                        w="300px"
+                        h="300px"
+                        borderRadius="full"
+                        bg="brand.primaryLight"
+                        opacity={0.04}
+                        filter="blur(100px)"
+                    />
+                </>
+            )}
 
-            {/* Subtle grid pattern overlay */}
-            <Box
-                position="absolute"
-                top={0}
-                left={0}
-                w="full"
-                h="full"
-                opacity={0.03}
-                backgroundImage="radial-gradient(rgba(45,10,10,0.15) 1px, transparent 1px)"
-                backgroundSize="30px 30px"
-                zIndex={0}
-            />
+            {/* Subtle grid pattern overlay — desktop only */}
+            {!disableHeavy && (
+                <Box
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    w="full"
+                    h="full"
+                    opacity={0.03}
+                    backgroundImage="radial-gradient(rgba(45,10,10,0.15) 1px, transparent 1px)"
+                    backgroundSize="30px 30px"
+                    zIndex={0}
+                />
+            )}
 
             <Container maxW="1200px" position="relative" zIndex={2}>
                 {/* Section Header */}
@@ -265,17 +266,17 @@ export default function Contact() {
                                             w="full"
                                             p={5}
                                             bg="white"
-                                            backdropFilter="blur(12px)"
+                                            backdropFilter={{ base: 'none', md: 'blur(12px)' }}
                                             borderRadius="20px"
                                             border="1px solid"
                                             borderColor="brand.border"
                                             boxShadow="0 2px 12px rgba(45, 10, 10, 0.06)"
                                             _hover={{
                                                 borderColor: 'brand.accent',
-                                                boxShadow: '0 8px 24px rgba(201, 169, 110, 0.15)',
-                                                transform: 'translateX(8px)',
+                                                boxShadow: disableHeavy ? undefined : '0 8px 24px rgba(201, 169, 110, 0.15)',
+                                                transform: disableHeavy ? 'none' : 'translateX(8px)',
                                             }}
-                                            transition="all 0.3s ease"
+                                            transition={disableHeavy ? 'none' : "all 0.3s ease"}
                                             cursor="pointer"
                                         >
                                             <Box
@@ -311,35 +312,39 @@ export default function Contact() {
                             <Box
                                 p={{ base: 6, md: 8 }}
                                 bg="rgba(37, 211, 102, 0.04)"
-                                backdropFilter="blur(20px)"
+                                backdropFilter={{ base: 'none', md: 'blur(20px)' }}
                                 borderRadius="24px"
                                 border="1px solid rgba(37, 211, 102, 0.12)"
                                 position="relative"
                                 overflow="hidden"
                             >
-                                {/* Glow accent */}
-                                <Box
-                                    position="absolute"
-                                    top="-30px"
-                                    right="-30px"
-                                    w="120px"
-                                    h="120px"
-                                    bg="#25D366"
-                                    borderRadius="full"
-                                    opacity={0.12}
-                                    filter="blur(40px)"
-                                />
-                                <Box
-                                    position="absolute"
-                                    bottom="-20px"
-                                    left="-20px"
-                                    w="80px"
-                                    h="80px"
-                                    bg="#25D366"
-                                    borderRadius="full"
-                                    opacity={0.08}
-                                    filter="blur(30px)"
-                                />
+                                {/* Glow accent — desktop only */}
+                                {!disableHeavy && (
+                                    <>
+                                        <Box
+                                            position="absolute"
+                                            top="-30px"
+                                            right="-30px"
+                                            w="120px"
+                                            h="120px"
+                                            bg="#25D366"
+                                            borderRadius="full"
+                                            opacity={0.12}
+                                            filter="blur(40px)"
+                                        />
+                                        <Box
+                                            position="absolute"
+                                            bottom="-20px"
+                                            left="-20px"
+                                            w="80px"
+                                            h="80px"
+                                            bg="#25D366"
+                                            borderRadius="full"
+                                            opacity={0.08}
+                                            filter="blur(30px)"
+                                        />
+                                    </>
+                                )}
 
                                 <VStack align="start" spacing={5} position="relative" zIndex={1}>
                                     <HStack spacing={3}>
@@ -393,8 +398,8 @@ export default function Contact() {
                                         fontWeight="700"
                                         fontSize="md"
                                         letterSpacing="0.5px"
-                                        transition="all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
-                                        animation={`${pulseGlow} 3s ease-in-out infinite`}
+                                        transition={disableHeavy ? 'none' : "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"}
+                                        animation={disableHeavy ? undefined : `pulseGlow 3s ease-in-out infinite`}
                                         border="none"
                                     >
                                         Chat on WhatsApp
@@ -416,7 +421,7 @@ export default function Contact() {
                             as="form"
                             onSubmit={handleSubmit}
                             bg="white"
-                            backdropFilter="blur(24px)"
+                            backdropFilter={{ base: 'none', md: 'blur(24px)' }}
                             p={{ base: 6, md: 10 }}
                             borderRadius="28px"
                             border="1px solid"
@@ -425,18 +430,20 @@ export default function Contact() {
                             position="relative"
                             overflow="hidden"
                         >
-                            {/* Form glow accent */}
-                            <Box
-                                position="absolute"
-                                top="-50px"
-                                right="-50px"
-                                w="200px"
-                                h="200px"
-                                bg="brand.accent"
-                                borderRadius="full"
-                                opacity={0.04}
-                                filter="blur(60px)"
-                            />
+                            {/* Form glow accent — desktop only */}
+                            {!disableHeavy && (
+                                <Box
+                                    position="absolute"
+                                    top="-50px"
+                                    right="-50px"
+                                    w="200px"
+                                    h="200px"
+                                    bg="brand.accent"
+                                    borderRadius="full"
+                                    opacity={0.04}
+                                    filter="blur(60px)"
+                                />
+                            )}
 
                             <VStack spacing={6} position="relative" zIndex={1}>
                                 <Box w="full" mb={2}>
@@ -553,7 +560,7 @@ export default function Contact() {
                                     fontWeight="800"
                                     fontSize="md"
                                     letterSpacing="0.5px"
-                                    transition="all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                                    transition={disableHeavy ? 'none' : "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"}
                                     mt={2}
                                 >
                                     Send Inquiry via WhatsApp
