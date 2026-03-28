@@ -1,6 +1,7 @@
 import { Box, Container, Heading, Text, SimpleGrid, VStack, Icon, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiShoppingBag, FiTruck, FiHeart } from 'react-icons/fi'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 
@@ -38,6 +39,8 @@ const SPARKLE_DATA = [
 ]
 
 export default function HowItWorks() {
+    const disableHeavy = useIsMobile() || usePrefersReducedMotion()
+
     return (
         <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
             {/* Smooth gradient transition from previous section */}
@@ -60,9 +63,9 @@ export default function HowItWorks() {
                     h="40vw"
                     borderRadius="full"
                     bg="brand.secondaryLight"
-                    opacity={0.15}
-                    filter="blur(120px)"
-                    animation="pulseFade 8s infinite alternate"
+                    opacity={{ base: 0.08, md: 0.15 }}
+                    filter={{ base: 'blur(60px)', md: 'blur(120px)' }}
+                    animation={disableHeavy ? undefined : "pulseFade 8s infinite alternate"}
                 />
                 <Box
                     position="absolute"
@@ -72,13 +75,13 @@ export default function HowItWorks() {
                     h="50vw"
                     borderRadius="full"
                     bg="brand.accent"
-                    opacity={0.1}
-                    filter="blur(150px)"
-                    animation="pulseFade 6s infinite alternate-reverse"
+                    opacity={{ base: 0.05, md: 0.1 }}
+                    filter={{ base: 'blur(80px)', md: 'blur(150px)' }}
+                    animation={disableHeavy ? undefined : "pulseFade 6s infinite alternate-reverse"}
                 />
 
-                {/* Floating Sparkles */}
-                {SPARKLE_DATA.map((s, i) => (
+                {/* Floating Sparkles — desktop only */}
+                {!disableHeavy && SPARKLE_DATA.map((s, i) => (
                     <MotionBox
                         key={`sparkle-${i}`}
                         position="absolute"

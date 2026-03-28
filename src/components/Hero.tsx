@@ -2,6 +2,7 @@ import { Box, Container, Heading, Text, Button, VStack, HStack, Image, Flex, Ico
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaArrowRight, FaGem } from 'react-icons/fa'
 import heroImg from '../assets/images/tarie-cakes-hero.jpg'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 const MotionFlex = motion(Flex)
@@ -26,9 +27,12 @@ const CIRCLE_DATA = [
 ]
 
 export default function Hero() {
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
     const { scrollY } = useScroll()
-    const y1 = useTransform(scrollY, [0, 1000], [0, 200])
-    const y2 = useTransform(scrollY, [0, 1000], [0, -100])
+    const y1 = useTransform(scrollY, [0, 1000], [0, isMobile ? 0 : 200])
+    const y2 = useTransform(scrollY, [0, 1000], [0, isMobile ? 0 : -100])
+    const disableHeavy = isMobile || prefersReducedMotion
 
     return (
         <Box
@@ -51,9 +55,9 @@ export default function Hero() {
                     h="50vw"
                     borderRadius="full"
                     bg="brand.secondaryLight"
-                    opacity={0.15}
-                    filter="blur(120px)"
-                    animation="pulseFade 8s infinite alternate"
+                    opacity={{ base: 0.1, md: 0.15 }}
+                    filter={{ base: 'blur(80px)', md: 'blur(120px)' }}
+                    animation={disableHeavy ? undefined : "pulseFade 8s infinite alternate"}
                 />
                 <Box
                     position="absolute"
@@ -63,42 +67,45 @@ export default function Hero() {
                     h="40vw"
                     borderRadius="full"
                     bg="brand.accent"
-                    opacity={0.1}
-                    filter="blur(100px)"
-                    animation="pulseFade 6s infinite alternate-reverse"
+                    opacity={{ base: 0.06, md: 0.1 }}
+                    filter={{ base: 'blur(60px)', md: 'blur(100px)' }}
+                    animation={disableHeavy ? undefined : "pulseFade 6s infinite alternate-reverse"}
                 />
 
-                {/* Floating Sparkles - hidden on very small screens */}
-                <Box display={{ base: 'none', sm: 'block' }}>
-                    {SPARKLE_DATA.map((s, i) => (
-                        <MotionBox
-                            key={i}
-                            position="absolute"
-                            top={s.top}
-                            left={s.left}
-                            fontSize={s.fontSize}
-                            color={i % 2 === 0 ? 'brand.accent' : 'brand.secondary'}
-                            opacity={0.4}
-                            animate={{
-                                y: [0, -20, 0],
-                                x: [0, s.dx, 0],
-                                rotate: [0, 180, 360],
-                                scale: [1, 1.2, 1],
-                            }}
-                            transition={{
-                                duration: s.duration,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: s.delay,
-                            }}
-                            zIndex={1}
-                        >
-                            ✨
-                        </MotionBox>
-                    ))}
-                </Box>
+                {/* Floating Sparkles — desktop only */}
+                {!disableHeavy && (
+                    <Box display={{ base: 'none', md: 'block' }}>
+                        {SPARKLE_DATA.map((s, i) => (
+                            <MotionBox
+                                key={i}
+                                position="absolute"
+                                top={s.top}
+                                left={s.left}
+                                fontSize={s.fontSize}
+                                color={i % 2 === 0 ? 'brand.accent' : 'brand.secondary'}
+                                opacity={0.4}
+                                animate={{
+                                    y: [0, -20, 0],
+                                    x: [0, s.dx, 0],
+                                    rotate: [0, 180, 360],
+                                    scale: [1, 1.2, 1],
+                                }}
+                                transition={{
+                                    duration: s.duration,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: s.delay,
+                                }}
+                                zIndex={1}
+                            >
+                                ✨
+                            </MotionBox>
+                        ))}
+                    </Box>
+                )}
                 
-                {CIRCLE_DATA.map((c, i) => (
+                {/* Floating circles — desktop only */}
+                {!disableHeavy && CIRCLE_DATA.map((c, i) => (
                     <MotionBox
                         key={`circle-${i}`}
                         position="absolute"
@@ -317,8 +324,8 @@ export default function Hero() {
                             h={{ base: 'calc(90% + 30px)', sm: 'calc(80% + 50px)', md: '650px' }}
                             borderRadius={{ base: '45px 120px 45px 45px', md: '65px 205px 65px 65px' }}
                             zIndex={0}
-                            boxShadow="0 0 40px rgba(201, 169, 110, 0.4), 0 0 80px rgba(201, 169, 110, 0.2), 0 0 120px rgba(45, 10, 10, 0.15)"
-                            animation="neonPulse 3s ease-in-out infinite alternate"
+                            boxShadow={{ base: 'none', md: '0 0 40px rgba(201, 169, 110, 0.4), 0 0 80px rgba(201, 169, 110, 0.2), 0 0 120px rgba(45, 10, 10, 0.15)' }}
+                            animation={disableHeavy ? undefined : "neonPulse 3s ease-in-out infinite alternate"}
                         />
 
                         {/* Main Image Container — fully visible on all screens */}
@@ -332,7 +339,7 @@ export default function Hero() {
                             zIndex={1}
                             border="2px solid rgba(201, 169, 110, 0.6)"
                             boxShadow="0 0 15px rgba(201, 169, 110, 0.3), 0 0 30px rgba(201, 169, 110, 0.15), 20px 30px 60px rgba(45,10,10,0.2)"
-                            _before={{
+                            _before={disableHeavy ? undefined : {
                                 content: '""',
                                 position: 'absolute',
                                 inset: '-3px',
@@ -363,7 +370,7 @@ export default function Hero() {
                         >
                             <Box
                                 bg="rgba(45, 10, 10, 0.75)"
-                                backdropFilter="blur(20px)"
+                                backdropFilter={{ base: 'blur(10px)', md: 'blur(20px)' }}
                                 border="1px solid rgba(201, 169, 110, 0.4)"
                                 boxShadow="0 0 20px rgba(201, 169, 110, 0.15), 0 8px 32px rgba(0,0,0,0.2)"
                                 px={{ base: 3, md: 5 }}

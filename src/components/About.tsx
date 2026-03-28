@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaAward, FaHeart, FaStar } from 'react-icons/fa'
 import { useRef } from 'react'
 import aboutImg from '../assets/images/about1.jpg'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 
@@ -14,12 +15,13 @@ const stats = [
 
 export default function About() {
     const sectionRef = useRef(null)
+    const disableHeavy = useIsMobile() || usePrefersReducedMotion()
     const { scrollYProgress } = useScroll({
-        target: sectionRef,
+        target: disableHeavy ? undefined : sectionRef,
         offset: ['start end', 'end start']
     })
 
-    const yImg1 = useTransform(scrollYProgress, [0, 1], [30, -30])
+    const yImg1 = useTransform(scrollYProgress, [0, 1], [0, 0])
 
     return (
         <Box id="about" py={{ base: 16, md: 32 }} bg="brand.primary" position="relative" overflow="hidden" ref={sectionRef}>
@@ -46,7 +48,7 @@ export default function About() {
                             h="120%"
                             bg="brand.accent"
                             opacity={0.08}
-                            filter="blur(150px)"
+                            filter={{ base: 'blur(80px)', md: 'blur(150px)' }}
                             borderRadius="full"
                             zIndex={0}
                         />
@@ -145,7 +147,7 @@ export default function About() {
                             <HStack
                                 spacing={{ base: 2, md: 3 }}
                                 bg="rgba(45, 10, 10, 0.85)"
-                                backdropFilter="blur(16px)"
+                                backdropFilter={{ base: 'blur(10px)', md: 'blur(16px)' }}
                                 border="1px solid rgba(201, 169, 110, 0.3)"
                                 px={{ base: 3, md: 5 }}
                                 py={{ base: 2.5, md: 3.5 }}
@@ -185,7 +187,7 @@ export default function About() {
                             <VStack
                                 spacing={{ base: 1.5, md: 2 }}
                                 bg="rgba(45, 10, 10, 0.85)"
-                                backdropFilter="blur(16px)"
+                                backdropFilter={{ base: 'blur(10px)', md: 'blur(16px)' }}
                                 border="1px solid rgba(201, 169, 110, 0.3)"
                                 px={{ base: 3, md: 4 }}
                                 py={{ base: 2.5, md: 3.5 }}

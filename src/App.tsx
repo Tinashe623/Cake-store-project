@@ -1,49 +1,57 @@
+import { lazy, Suspense } from 'react'
 import { Box, IconButton } from '@chakra-ui/react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaWhatsapp } from 'react-icons/fa'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Menu from './components/Menu'
-import HowItWorks from './components/HowItWorks'
-import Gallery from './components/Gallery'
-import Testimonials from './components/Testimonials'
-import About from './components/About'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import CartDrawer from './components/CartDrawer'
 import { getWhatsAppUrl } from './config/constants'
+import { useIsMobile } from './hooks/useResponsive'
+
+const Menu = lazy(() => import('./components/Menu'))
+const HowItWorks = lazy(() => import('./components/HowItWorks'))
+const Gallery = lazy(() => import('./components/Gallery'))
+const Testimonials = lazy(() => import('./components/Testimonials'))
+const About = lazy(() => import('./components/About'))
+const Contact = lazy(() => import('./components/Contact'))
+const Footer = lazy(() => import('./components/Footer'))
+const CartDrawer = lazy(() => import('./components/CartDrawer'))
 
 const MotionBox = motion(Box)
 
 function App() {
+    const isMobile = useIsMobile()
     const { scrollYProgress } = useScroll()
     const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1])
 
     return (
         <Box>
-            {/* Scroll Progress Bar */}
-            <MotionBox
-                position="fixed"
-                top={0}
-                left={0}
-                right={0}
-                h="3px"
-                bg="brand.accent"
-                style={{ scaleX }}
-                transformOrigin="0%"
-                zIndex={1100}
-            />
+            {/* Scroll Progress Bar — desktop only */}
+            {!isMobile && (
+                <MotionBox
+                    position="fixed"
+                    top={0}
+                    left={0}
+                    right={0}
+                    h="3px"
+                    bg="brand.accent"
+                    style={{ scaleX }}
+                    transformOrigin="0%"
+                    zIndex={1100}
+                />
+            )}
 
             <Header />
             <Hero />
-            <Menu />
-            <HowItWorks />
-            <Gallery />
-            <Testimonials />
-            <About />
-            <Contact />
-            <Footer />
-            <CartDrawer />
+            <Suspense fallback={null}>
+                <Menu />
+                <HowItWorks />
+                <Gallery />
+                <Testimonials />
+                <About />
+                <Contact />
+                <Footer />
+                <CartDrawer />
+            </Suspense>
 
             {/* Mobile Floating WhatsApp CTA */}
             <IconButton
