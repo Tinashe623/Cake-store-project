@@ -45,9 +45,13 @@ export default function Footer() {
                                 borderRadius="12px"
                                 w="44px"
                                 h="44px"
-                                as="a"
-                                href="https://instagram.com"
-                                target="_blank"
+                                onClick={() => toast({
+                                    title: 'Coming Soon!',
+                                    description: 'Our Instagram page is currently under construction. Stay tuned for updates!',
+                                    status: 'info',
+                                    duration: 4000,
+                                    isClosable: true,
+                                })}
                             />
                             <IconButton
                                 aria-label="Facebook"
@@ -59,9 +63,13 @@ export default function Footer() {
                                 borderRadius="12px"
                                 w="44px"
                                 h="44px"
-                                as="a"
-                                href="https://facebook.com"
-                                target="_blank"
+                                onClick={() => toast({
+                                    title: 'Coming Soon!',
+                                    description: 'Our Facebook page is currently under construction. Stay tuned for updates!',
+                                    status: 'info',
+                                    duration: 4000,
+                                    isClosable: true,
+                                })}
                             />
                             <IconButton
                                 aria-label="WhatsApp"
