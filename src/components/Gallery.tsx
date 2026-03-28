@@ -227,7 +227,7 @@ export default function Gallery() {
                         <HStack spacing={{ base: 8, md: 12 }} justify="center" flexWrap="wrap">
                             {[
                                 { value: `${cakesData.length}`, label: 'Creations' },
-                                { value: '500+', label: 'Cakes Made' },
+                                { value: '100+', label: 'Cakes Made' },
                                 { value: `${categories.length - 1}`, label: 'Categories' },
                                 { value: '4.9', label: 'Rating' },
                             ].map((stat, i) => (

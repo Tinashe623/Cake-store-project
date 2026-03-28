@@ -506,7 +506,7 @@ export default function Contact() {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        placeholder="+263 77 123 4567"
+                                        placeholder="+263 78 348 4276"
                                         bg="brand.surface"
                                         border="1px solid"
                                         borderColor={errors.phone && touched.phone ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
