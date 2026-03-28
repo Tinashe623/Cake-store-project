@@ -21,6 +21,7 @@ import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { motion } from 'framer-motion'
+import { memo } from 'react'
 import { getWhatsAppUrl } from '../config/constants'
 import Logo from './Logo'
 
@@ -34,7 +35,7 @@ const navLinks = [
     { name: 'Contact', path: '/contact' },
 ]
 
-export default function Header() {
+const Header = memo(function Header() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { totalItems, onOpen: openCart } = useCart()
 
@@ -79,6 +80,7 @@ export default function Header() {
                             <Logo
                                 height={38}
                                 colorScheme="dark"
+                                isLink={false}
                             />
                         </Box>
                     </Box>
@@ -267,4 +269,8 @@ export default function Header() {
             </Drawer>
         </MotionBox>
     )
-}
+})
+
+Header.displayName = 'Header'
+
+export default Header

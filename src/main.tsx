@@ -6,6 +6,10 @@ import App from './App'
 import { theme } from './theme'
 import { CartProvider } from './context/CartContext'
 
+// Preload critical resources
+import('./components/Header')
+import('./components/Footer')
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>

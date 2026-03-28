@@ -675,6 +675,7 @@ function GalleryCard({ cake, index, isLiked, isLoaded, onLike, onExpand, onImage
                     w="full"
                     h="full"
                     objectFit="cover"
+                    loading="lazy"
                     onLoad={() => onImageLoad(cake.id)}
                     transform="scale(1)"
                     _groupHover={{ transform: 'scale(1.08)' }}
