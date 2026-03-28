@@ -131,7 +131,7 @@ export default function Hero() {
                 ))}
             </Box>
 
-            <Container maxW="1400px" position="relative" zIndex={2} mt={{ base: '60px', md: 0 }} px={{ base: 4, sm: 6, md: 8 }}>
+            <Container maxW="1400px" position="relative" zIndex={2} mt={{ base: '76px', md: 0 }} px={{ base: 4, sm: 6, md: 8 }}>
                 <Flex
                     direction={{ base: 'column', lg: 'row' }}
                     align="center"
