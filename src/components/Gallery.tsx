@@ -136,17 +136,6 @@ export default function Gallery() {
             position="relative"
             overflow="hidden"
         >
-            {/* Transition gradient */}
-            <Box
-                position="absolute"
-                top="-80px"
-                left={0}
-                w="full"
-                h="120px"
-                bgGradient="linear(to-b, brand.background, brand.primary)"
-                zIndex={1}
-            />
-
             {/* Ambient glow */}
             <Box
                 position="absolute"

@@ -60,17 +60,6 @@ export default function Menu() {
             overflow="hidden"
             bg="brand.primary"
         >
-            {/* Smooth gradient transition from HowItWorks */}
-            <Box
-                position="absolute"
-                top="-80px"
-                left={0}
-                w="full"
-                h="120px"
-                bgGradient="linear(to-b, brand.background, brand.primary)"
-                zIndex={1}
-            />
-
             {/* Background elements */}
             <Box
                 position="absolute"

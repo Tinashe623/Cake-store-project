@@ -364,7 +364,7 @@ export const testimonials: Testimonial[] = [
     {
         id: 1,
         name: "Sarah M.",
-        photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+        photo: "",
         rating: 5,
         date: "December 2024",
         text: "The most beautiful wedding cake ever! Tarie exceeded all my expectations. Everyone at the wedding couldn't stop raving about it!"
@@ -372,7 +372,7 @@ export const testimonials: Testimonial[] = [
     {
         id: 2,
         name: "Mrs Mundieta.",
-        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+        photo: "",
         rating: 5,
         date: "November 2025",
         text: "Ordered Birthday cake for my Grand Child's birthday. They were not only delicious but looked absolutely stunning. Will definitely order again!"
@@ -380,7 +380,7 @@ export const testimonials: Testimonial[] = [
     {
         id: 3,
         name: "Emily R.",
-        photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+        photo: "",
         rating: 5,
         date: "October 2024",
         text: "The custom cake for my mom's 50th was perfect! Tarie really understood what I wanted and delivered beyond my expectations."
@@ -388,7 +388,7 @@ export const testimonials: Testimonial[] = [
     {
         id: 4,
         name: "Michael T.",
-        photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+        photo: "",
         rating: 5,
         date: "September 2024",
         text: "Best cakes in Mutare! I've ordered multiple times and every single time the quality is outstanding. Highly recommend!"

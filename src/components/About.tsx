@@ -25,16 +25,6 @@ export default function About() {
 
     return (
         <Box id="about" py={{ base: 16, md: 32 }} bg="brand.primary" position="relative" overflow="hidden" ref={sectionRef}>
-            {/* Smooth gradient transition from Testimonials */}
-            <Box
-                position="absolute"
-                top="-80px"
-                left={0}
-                w="full"
-                h="120px"
-                bgGradient="linear(to-b, brand.background, brand.primary)"
-                zIndex={1}
-            />
             <Container maxW="1400px" position="relative" zIndex={2}>
                 <Flex direction={{ base: 'column', lg: 'row' }} gap={{ base: 16, lg: 20 }} alignItems="center">
                     {/* Premium Image Gallery - Decorated Display */}

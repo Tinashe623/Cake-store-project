@@ -43,16 +43,6 @@ export default function HowItWorks() {
 
     return (
         <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
-            {/* Smooth gradient transition from previous section */}
-            <Box
-                position="absolute"
-                top="-80px"
-                left={0}
-                w="full"
-                h="120px"
-                bgGradient="linear(to-b, brand.background, brand.background)"
-                zIndex={1}
-            />
             {/* Background elements */}
             <Box position="absolute" top={0} left={0} right={0} bottom={0} overflow="hidden">
                 <Box

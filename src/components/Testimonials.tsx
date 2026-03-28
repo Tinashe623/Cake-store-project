@@ -20,17 +20,6 @@ export default function Testimonials() {
 
     return (
         <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
-            {/* Smooth gradient transition from Menu */}
-            <Box
-                position="absolute"
-                top="-80px"
-                left={0}
-                w="full"
-                h="120px"
-                bgGradient="linear(to-b, brand.primary, brand.background)"
-                zIndex={1}
-            />
-
             {/* Background Orbs */}
             <Box
                 position="absolute"

@@ -121,17 +121,6 @@ export default function Contact() {
 
     return (
         <Box id="contact" py={{ base: 16, md: 32 }} bg="white" position="relative" overflow="hidden">
-            {/* Gradient transition from About */}
-            <Box
-                position="absolute"
-                top="-80px"
-                left={0}
-                w="full"
-                h="120px"
-                bgGradient="linear(to-b, brand.primary, white)"
-                zIndex={1}
-            />
-
             {/* Ambient glow orbs */}
             <Box
                 position="absolute"
