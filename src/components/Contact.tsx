@@ -109,7 +109,7 @@ export default function Contact() {
     }
 
     const contactCards = [
-        { icon: FaPhone, bg: 'brand.primaryLight', label: 'Phone', value: '+263 78 348 4276' },
+        { icon: FaPhone, bg: 'brand.primaryLight', label: 'Phone', value: '+263 78 582 6233' },
         { icon: FaEnvelope, bg: 'brand.accent', label: 'Email', value: 'hello@tariecakes.co.zw' },
         { icon: FaMapMarkerAlt, bg: 'brand.primary', label: 'Location', value: 'Mutare, Zimbabwe' },
     ]
@@ -506,7 +506,7 @@ export default function Contact() {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        placeholder="+263 78 348 4276"
+                                        placeholder="+263 78 582 6233"
                                         bg="brand.surface"
                                         border="1px solid"
                                         borderColor={errors.phone && touched.phone ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
