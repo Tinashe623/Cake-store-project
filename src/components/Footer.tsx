@@ -108,7 +108,7 @@ export default function Footer() {
                         </Heading>
                         <VStack align="start" spacing={4} color="whiteAlpha.800" fontWeight="500">
                             <Text color="whiteAlpha.800">Mutare, Zimbabwe</Text>
-                            <Text color="whiteAlpha.800">+263 77 123 4567</Text>
+                            <Text color="whiteAlpha.800">+263 78 348 4276</Text>
                             <Text color="whiteAlpha.800">hello@tariecakes.co.zw</Text>
                             <Text pt={2} color="brand.accent" fontWeight="700">Open Mon-Sat: 8am - 6pm</Text>
                         </VStack>

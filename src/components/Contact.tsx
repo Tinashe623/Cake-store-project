@@ -114,7 +114,7 @@ export default function Contact() {
     }
 
     const contactCards = [
-        { icon: FaPhone, bg: 'brand.primaryLight', label: 'Phone', value: '+263 77 123 4567' },
+        { icon: FaPhone, bg: 'brand.primaryLight', label: 'Phone', value: '+263 78 348 4276' },
         { icon: FaEnvelope, bg: 'brand.accent', label: 'Email', value: 'hello@tariecakes.co.zw' },
         { icon: FaMapMarkerAlt, bg: 'brand.primary', label: 'Location', value: 'Mutare, Zimbabwe' },
     ]

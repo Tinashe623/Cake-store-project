@@ -17,6 +17,19 @@ interface CakeTemplate {
 
 const CAKE_TEMPLATES: CakeTemplate[] = [
     {
+        id: 21,
+        name: "Tiramisu Cake",
+        category: "specialty",
+        description: "Espresso-soaked sponge layers with mascarpone cream, cocoa dusting, and coffee liqueur.",
+        price: 62,
+        flavors: ["Classic Tiramisu", "Chocolate Tiramisu"],
+        sizes: ["6 inch (serves 10)", "8 inch (serves 20)"],
+        flavorProfile: "Bold espresso and mascarpone with cocoa bitterness and a hint of coffee liqueur",
+        ingredients: ["espresso", "mascarpone", "cocoa powder", "coffee liqueur", "ladyfinger crumbs", "egg yolks"],
+        occasion: "Italian-themed dinners, after-dinner dessert, adult celebrations",
+        servings: "10–20 guests"
+    },
+    {
         id: 1,
         name: "Chocolate Dream",
         category: "birthday",
@@ -171,22 +184,156 @@ const CAKE_TEMPLATES: CakeTemplate[] = [
         ingredients: ["custom-selected premium ingredients", "your choice of fillings", "personalized decorations"],
         occasion: "Any occasion — from intimate dinners to grand celebrations",
         servings: "Custom sizing"
-    }
+    },
+    {
+        id: 13,
+        name: "Birthday Cake",
+        category: "birthday",
+        description: "Classic birthday cake with colorful buttercream and festive sprinkles. The perfect centerpiece for any celebration.",
+        price: 42,
+        flavors: ["Vanilla", "Funfetti", "Chocolate"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"],
+        flavorProfile: "Buttery vanilla sponge with sweet buttercream and a playful sprinkle crunch",
+        ingredients: ["cake flour", "butter", "vanilla extract", "buttercream frosting", "rainbow sprinkles"],
+        occasion: "Birthday parties, kids' celebrations, office parties",
+        servings: "8–24 guests"
+    },
+    {
+        id: 14,
+        name: "Lemon Drizzle",
+        category: "birthday",
+        description: "Zesty lemon sponge soaked in lemon syrup with a tangy glaze. Bright and refreshing.",
+        price: 38,
+        flavors: ["Classic Lemon", "Lemon Poppy Seed"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)"],
+        flavorProfile: "Tangy, citrus-forward lemon with a moist crumb and sweet-tart glaze",
+        ingredients: ["fresh lemons", "lemon zest", "caster sugar", "eggs", "butter", "lemon syrup"],
+        occasion: "Spring gatherings, afternoon tea, summer birthdays",
+        servings: "8–16 guests"
+    },
+    {
+        id: 15,
+        name: "Opera Cake",
+        category: "specialty",
+        description: "Layered French opera cake with almond sponge, coffee buttercream, and dark chocolate ganache.",
+        price: 65,
+        flavors: ["Coffee & Chocolate", "Classic Opera"],
+        sizes: ["6 inch (serves 10)", "8 inch (serves 20)"],
+        flavorProfile: "Sophisticated layers of espresso, dark chocolate, and almond with a mirror glaze",
+        ingredients: ["almond flour", "espresso", "dark chocolate", "French butter", "coffee extract"],
+        occasion: "Formal dinners, anniversaries, French-themed events",
+        servings: "10–20 guests"
+    },
+    {
+        id: 16,
+        name: "Matcha Delight",
+        category: "specialty",
+        description: "Japanese-inspired matcha cake with white chocolate cream and delicate green tea flavor.",
+        price: 58,
+        flavors: ["Pure Matcha", "Matcha & White Chocolate"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)"],
+        flavorProfile: "Earthy, umami-rich matcha balanced with creamy white chocolate sweetness",
+        ingredients: ["ceremonial grade matcha", "white chocolate", "Japanese flour", "heavy cream", "vanilla"],
+        occasion: "Tea ceremonies, zen-themed parties, Japanese celebrations",
+        servings: "8–16 guests"
+    },
+    {
+        id: 17,
+        name: "Ferrero Rocher Tower",
+        category: "birthday",
+        description: "Chocolate hazelnut cake layered with praline cream and topped with Ferrero Rocher chocolates.",
+        price: 52,
+        flavors: ["Hazelnut Chocolate", "Praline"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"],
+        flavorProfile: "Rich hazelnut praline with crunchy wafer bits and smooth chocolate ganache",
+        ingredients: ["hazelnut praline", "dark chocolate", "wafer crumbs", "Ferrero Rocher", "hazelnut cream"],
+        occasion: "Birthday celebrations, chocolate lovers' parties, milestone events",
+        servings: "8–24 guests"
+    },
+    {
+        id: 18,
+        name: "Ombre Rose Cake",
+        category: "wedding",
+        description: "Stunning ombre buttercream rose cake graduating from deep to light pink. A visual masterpiece.",
+        price: 275,
+        flavors: ["Vanilla", "Strawberry", "Rose"],
+        sizes: ["2 Tier", "3 Tier"],
+        flavorProfile: "Delicate rose and vanilla with a light, airy buttercream finish",
+        ingredients: ["rose water", "vanilla bean", "Swiss meringue buttercream", "natural food coloring"],
+        occasion: "Weddings, bridal showers, garden parties, Valentine's Day",
+        servings: "40–100 guests"
+    },
+    {
+        id: 19,
+        name: "Salted Caramel Indulgence",
+        category: "birthday",
+        description: "Moist caramel sponge layered with salted caramel sauce and toffee buttercream.",
+        price: 46,
+        flavors: ["Salted Caramel", "Toffee Caramel"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"],
+        flavorProfile: "Buttery caramel with sea salt crystals and a luscious toffee finish",
+        ingredients: ["brown sugar", "salted caramel sauce", "toffee bits", "sea salt", "butter", "cream"],
+        occasion: "Birthday celebrations, dessert tables, autumn parties",
+        servings: "8–24 guests"
+    },
+    {
+        id: 20,
+        name: "Mango Passion Cake",
+        category: "seasonal",
+        description: "Tropical mango sponge with passion fruit curd filling and coconut cream frosting.",
+        price: 56,
+        flavors: ["Mango & Passion Fruit", "Coconut Mango"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)"],
+        flavorProfile: "Sweet tropical mango with tangy passion fruit and creamy coconut undertones",
+        ingredients: ["fresh mango purée", "passion fruit curd", "coconut cream", "vanilla", "lime zest"],
+        occasion: "Summer parties, tropical themed events, destination weddings",
+        servings: "8–16 guests"
+    },
+    {
+        id: 22,
+        name: "Arsenal Themed Cake",
+        category: "custom",
+        description: "Custom-designed cake featuring the Arsenal Football Club crest and colors. Perfect for dedicated fans.",
+        price: 95,
+        flavors: ["Vanilla", "Chocolate", "Red Velvet"],
+        sizes: ["8 inch (serves 16)", "10 inch (serves 24)"],
+        flavorProfile: "Your choice of flavor with themed decorations in red and white",
+        ingredients: ["your choice of base", "fondant", "edible printing", "buttercream", "food coloring"],
+        occasion: "Match day celebrations, birthdays, football viewing parties",
+        servings: "16–24 guests"
+    },
+    {
+        id: 23,
+        name: "Honey Lavender Cake",
+        category: "specialty",
+        description: "Fragrant lavender sponge sweetened with local honey and topped with cream cheese frosting.",
+        price: 54,
+        flavors: ["Honey Lavender", "Earl Grey Lavender"],
+        sizes: ["6 inch (serves 8)", "8 inch (serves 16)"],
+        flavorProfile: "Floral lavender with warm honey sweetness and a hint of herbal complexity",
+        ingredients: ["culinary lavender", "local honey", "cream cheese", "vanilla", "lemon zest"],
+        occasion: "Garden parties, bridal showers, spring celebrations, tea parties",
+        servings: "8–16 guests"
+    },
 ]
 
 // Dynamically maps available local images to cakes — no repetition, auto-adapts
 const buildCakesData = (): Cake[] => {
     const images = getAvailableImages()
 
+    // Filter out non-cake images (about, hero, feature photos, nav images)
+    const cakeImages = images.filter(img =>
+        img.filename.startsWith('cake') || img.filename === 'birthdayCake.jpg'
+    )
+
     return CAKE_TEMPLATES.map((cake, index) => {
-        const imageIndex = index % Math.max(images.length, 1)
-        const image = images[imageIndex]
+        const image = cakeImages[index]
 
         return {
             ...cake,
-            image: image?.url || (images[0]?.url ?? ''),
+            image: image?.url || (cakeImages[0]?.url ?? ''),
         }
-    }).slice(0, Math.max(images.length, CAKE_TEMPLATES.length))
+    }).slice(0, cakeImages.length)
 }
 
 export const cakesData: Cake[] = buildCakesData()
@@ -210,6 +357,7 @@ export const categories: { id: Category; label: string }[] = [
     { id: 'cupcakes', label: 'Cupcakes' },
     { id: 'custom', label: 'Custom' },
     { id: 'seasonal', label: 'Seasonal' },
+    { id: 'specialty', label: 'Specialty' },
 ]
 
 export const testimonials: Testimonial[] = [
@@ -223,11 +371,11 @@ export const testimonials: Testimonial[] = [
     },
     {
         id: 2,
-        name: "John D.",
+        name: "Mrs Mundieta.",
         photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
         rating: 5,
-        date: "November 2024",
-        text: "Ordered cupcakes for my daughter's birthday. They were not only delicious but looked absolutely stunning. Will definitely order again!"
+        date: "November 2025",
+        text: "Ordered Birthday cake for my Grand Child's birthday. They were not only delicious but looked absolutely stunning. Will definitely order again!"
     },
     {
         id: 3,

@@ -29,6 +29,7 @@ export default function CakeCard({ cake }: CakeCardProps) {
         cupcakes: 'brand.accentHover',
         custom: 'brand.primaryLight',
         seasonal: 'brand.primaryLight',
+        specialty: 'brand.accent',
     }
 
     const accentColor = categoryColors[cake.category] || categoryColors.birthday

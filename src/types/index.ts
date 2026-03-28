@@ -13,7 +13,7 @@ export interface Cake {
     servings?: string
 }
 
-export type Category = 'all' | 'birthday' | 'wedding' | 'cupcakes' | 'custom' | 'seasonal'
+export type Category = 'all' | 'birthday' | 'wedding' | 'cupcakes' | 'custom' | 'seasonal' | 'specialty'
 
 export interface CartItem {
     cake: Cake

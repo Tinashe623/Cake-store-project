@@ -28,7 +28,7 @@ export default function Menu() {
     const [searchQuery, setSearchQuery] = useState('')
     const [visibleCount, setVisibleCount] = useState(DEFAULT_VISIBLE)
 
-    const { cakes: cakesData } = useCakesByCategory(selectedCategory)
+    const { filteredCakes: cakesData } = useCakesByCategory(selectedCategory)
 
     useEffect(() => {
         setVisibleCount(DEFAULT_VISIBLE)

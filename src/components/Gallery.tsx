@@ -33,6 +33,7 @@ const CATEGORY_CONFIG: Record<string, { label: string; color: string }> = {
     cupcakes: { label: 'Cupcakes', color: '#D4A0A0' },
     seasonal: { label: 'Seasonal', color: '#A0C4B8' },
     custom: { label: 'Custom', color: '#B8A0C4' },
+    specialty: { label: 'Specialty', color: '#8BA0C4' },
 }
 
 // Stagger delay for cards
