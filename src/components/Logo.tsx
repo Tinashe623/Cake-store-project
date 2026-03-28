@@ -3,15 +3,19 @@ import { Box } from '@chakra-ui/react'
 interface LogoProps {
     height?: number | string
     colorScheme?: 'dark' | 'light'
+    as?: React.ElementType
+    to?: string
 }
 
-export default function Logo({ height = 50, colorScheme = 'dark' }: LogoProps) {
+export default function Logo({ height = 50, colorScheme = 'dark', as, to }: LogoProps) {
     const primary = colorScheme === 'dark' ? '#2D0A0A' : '#FAF0E6'
     const accent = '#C9A96E'
     const secondary = colorScheme === 'dark' ? '#4A1A1A' : '#F5E6D3'
 
+    const linkProps = as ? (to ? { to } : {}) : { href: '#home' }
+
     return (
-        <Box as="a" href="#home" display="inline-flex" alignItems="center" _hover={{ opacity: 0.85 }} transition="opacity 0.3s ease">
+        <Box as={as || 'a'} {...linkProps} display="inline-flex" alignItems="center" _hover={{ opacity: 0.85 }} transition="opacity 0.3s ease">
             <svg
                 viewBox="0 0 280 70"
                 xmlns="http://www.w3.org/2000/svg"

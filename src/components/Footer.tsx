@@ -1,5 +1,6 @@
 import { Box, Container, SimpleGrid, VStack, HStack, Heading, Text, IconButton, Link, Input, Button, InputGroup, InputRightElement, useToast } from '@chakra-ui/react'
 import { FaInstagram, FaFacebook, FaWhatsapp, FaPaperPlane } from 'react-icons/fa'
+import { Link as RouterLink } from 'react-router-dom'
 import { useState } from 'react'
 import { getWhatsAppUrl } from '../config/constants'
 import Logo from './Logo'
@@ -29,7 +30,7 @@ export default function Footer() {
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={{ base: 12, md: 10 }}>
                     {/* Brand & Social */}
                     <VStack align="start" spacing={6}>
-                        <Logo height={50} colorScheme="light" />
+                        <Logo height={50} colorScheme="light" as={RouterLink} to="/" />
                         <Text color="whiteAlpha.800" fontSize="md" lineHeight="1.8" maxW="300px">
                             Handcrafted luxury cakes for your most extraordinary moments. Mutare, Zimbabwe
                         </Text>
@@ -85,17 +86,24 @@ export default function Footer() {
                             Explore
                         </Heading>
                         <VStack align="start" spacing={4}>
-                            {['Home', 'Menu', 'Gallery', 'About', 'Contact'].map((link) => (
+                            {[
+                                { name: 'Home', path: '/' },
+                                { name: 'Menu', path: '/menu' },
+                                { name: 'Gallery', path: '/gallery' },
+                                { name: 'About', path: '/about' },
+                                { name: 'Contact', path: '/contact' },
+                            ].map((link) => (
                                 <Link
-                                    key={link}
-                                    href={`#${link.toLowerCase()}`}
+                                    key={link.name}
+                                    as={RouterLink}
+                                    to={link.path}
                                     color="rgba(245, 230, 211, 0.7)"
                                     _hover={{ color: 'brand.accent', pl: 1 }}
                                     transition="all 0.3s ease"
                                     fontSize="md"
                                     fontWeight="500"
                                 >
-                                    {link}
+                                    {link.name}
                                 </Link>
                             ))}
                         </VStack>
@@ -106,10 +114,10 @@ export default function Footer() {
                         <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
                             Get in Touch
                         </Heading>
-                        <VStack align="start" spacing={4} color="whiteAlpha.800" fontWeight="500">
-                            <Text color="whiteAlpha.800">Mutare, Zimbabwe</Text>
-                            <Text color="whiteAlpha.800">+263 78 582 6233</Text>
-                            <Text color="whiteAlpha.800">hello@tariecakes.co.zw</Text>
+                        <VStack align="start" spacing={4} fontWeight="500">
+                            <Text color="rgba(245, 230, 211, 0.7)">Mutare, Zimbabwe</Text>
+                            <Text color="rgba(245, 230, 211, 0.7)">+263 78 582 6233</Text>
+                            <Text color="rgba(245, 230, 211, 0.7)">hello@tariecakes.co.zw</Text>
                             <Text pt={2} color="brand.accent" fontWeight="700">Open Mon-Sat: 8am - 6pm</Text>
                         </VStack>
                     </VStack>
@@ -181,8 +189,6 @@ export default function Footer() {
                 <Box
                     mt={8}
                     pt={6}
-                    borderTop="1px solid"
-                    borderColor="whiteAlpha.100"
                     textAlign="center"
                 >
                     <Text color="whiteAlpha.400" fontSize="xs" fontWeight="500" letterSpacing="0.5px">

@@ -255,7 +255,7 @@ const CAKE_TEMPLATES: CakeTemplate[] = [
         name: "Orange Cake",
         category: "birthday",
         description: "Moist orange sponge layered with orange curd and orange buttercream.",
-        price: 46,
+        price: 20,
         flavors: ["Orange", "Orange & White Chocolate"],
         sizes: ["6 inch (serves 8)", "8 inch (serves 16)", "10 inch (serves 24)"],
         flavorProfile: "Buttery orange with sea salt crystals and a luscious toffee finish",

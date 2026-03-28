@@ -215,7 +215,6 @@ export default function Hero() {
                                 objectFit="cover"
                                 w="100%"
                                 h="100%"
-                                fallbackSrc="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                             />
                         </Box>
 

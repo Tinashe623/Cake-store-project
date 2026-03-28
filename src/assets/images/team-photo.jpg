@@ -1,0 +1,247 @@
+# 🍰 Tarie Cakes - Handcrafted Luxury Cakes
+
+[![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-blue.svg)](https://www.typescriptlang.org/)
+[![Chakra UI](https://img.shields.io/badge/Chakra_UI-2.8.2-teal.svg)](https://chakra-ui.com/)
+[![Vite](https://img.shields.io/badge/Vite-6.0.5-purple.svg)](https://vitejs.dev/)
+
+> *Where passion meets perfection in every decadent bite*
+
+Welcome to **Tarie Cakes**, a stunning e-commerce platform for Mutare, Zimbabwe's premier luxury cake boutique. This beautifully crafted React application showcases handcrafted cakes that transform ordinary moments into extraordinary celebrations.
+
+![Tarie Cakes Hero](src/assets/images/tarie-cakes-hero.jpg)
+
+## ✨ Features
+
+### 🎨 **Elegant Design System**
+- **Velvet Noir Theme**: Deep burgundy, warm cream, and antique gold color palette
+- **Responsive Design**: Flawless experience across all devices
+- **Smooth Animations**: Powered by Framer Motion for delightful interactions
+- **Glass Morphism**: Modern UI with backdrop blur effects
+
+### 🛒 **E-Commerce Functionality**
+- **Interactive Menu**: Browse our extensive cake collection with detailed descriptions
+- **Smart Cart System**: Add, remove, and manage items with persistent state
+- **Real-time Pricing**: Dynamic calculations with Zimbabwe dollar pricing
+- **WhatsApp Integration**: Direct ordering through WhatsApp for instant communication
+
+### 📱 **User Experience**
+- **Client-side Routing**: Fast navigation with React Router v6
+- **Image Gallery**: Stunning cake photography with lightbox functionality
+- **Contact Integration**: Embedded Google Maps and contact forms
+- **Newsletter Signup**: Stay connected with sweet updates
+
+### 🎯 **Performance Optimized**
+- **Lazy Loading**: Components load on demand for faster initial page loads
+- **Image Optimization**: Efficient asset handling with Vite
+- **TypeScript**: Type-safe development for reliability
+- **Modern Build Tools**: Lightning-fast development and production builds
+
+## 🛠️ Tech Stack
+
+### Frontend Framework
+- **React 18** - Modern React with concurrent features
+- **TypeScript** - Type-safe JavaScript for robust development
+- **Vite** - Next-generation frontend tooling
+
+### UI & Styling
+- **Chakra UI** - Component library with accessibility first
+- **Framer Motion** - Production-ready motion library
+- **Emotion** - CSS-in-JS styling solution
+
+### Routing & State
+- **React Router v6** - Declarative routing for React
+- **React Context** - State management for cart functionality
+
+### Development Tools
+- **ESLint** - Code linting and formatting
+- **Prettier** - Code formatting (via ESLint)
+- **Vite Plugin React** - Fast React development
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ and npm
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/tarie-cakes.git
+   cd tarie-cakes
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:5174`
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## 📁 Project Structure
+
+```
+tarie-cakes/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── assets/
+│   │   └── images/          # Cake photos and branding
+│   ├── components/          # Reusable UI components
+│   │   ├── Header.tsx       # Navigation header
+│   │   ├── Footer.tsx       # Site footer
+│   │   ├── Layout.tsx       # Main layout wrapper
+│   │   ├── ScrollToTop.tsx  # Auto-scroll on navigation
+│   │   └── ...
+│   ├── pages/               # Route components
+│   │   ├── HomePage.tsx
+│   │   ├── MenuPage.tsx
+│   │   ├── GalleryPage.tsx
+│   │   ├── AboutPage.tsx
+│   │   └── ContactPage.tsx
+│   ├── context/             # React Context providers
+│   │   └── CartContext.tsx
+│   ├── hooks/               # Custom React hooks
+│   │   ├── useResponsive.ts
+│   │   └── useCakes.ts
+│   ├── theme/               # Chakra UI theme configuration
+│   │   └── index.ts
+│   ├── config/              # App configuration
+│   │   └── constants.ts
+│   ├── types/               # TypeScript type definitions
+│   │   └── index.ts
+│   ├── data/                # Static data
+│   │   └── cakes.ts
+│   ├── App.tsx              # Main app component
+│   └── main.tsx             # App entry point
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+```
+
+## 🎨 Design Philosophy
+
+### Color Palette
+- **Primary**: Deep Burgundy (#2D0A0A) - Represents sophistication
+- **Secondary**: Warm Cream (#F5E6D3) - Conveys approachability
+- **Accent**: Antique Gold (#C9A96E) - Highlights premium quality
+
+### Typography
+- **Heading**: Playfair Display - Elegant serif for headings
+- **Body**: Outfit/Poppins - Clean sans-serif for readability
+
+### Interaction Design
+- **Micro-animations**: Subtle hover effects and transitions
+- **Progressive Enhancement**: Core functionality works without JavaScript
+- **Accessibility**: WCAG compliant color contrasts and keyboard navigation
+
+## 🌟 Key Components
+
+### Header (`src/components/Header.tsx`)
+- Sticky navigation with smooth scroll effects
+- Responsive mobile menu with slide-out drawer
+- Cart indicator with item count
+- WhatsApp integration for quick orders
+
+### Menu (`src/components/Menu.tsx`)
+- Grid layout showcasing cake categories
+- Interactive cake cards with hover effects
+- Category filtering and search functionality
+- Direct add-to-cart integration
+
+### Gallery (`src/components/Gallery.tsx`)
+- Masonry-style image grid
+- Lightbox modal for detailed viewing
+- Infinite scroll for large collections
+- Social sharing capabilities
+
+### Cart System (`src/context/CartContext.tsx`)
+- Persistent cart state across sessions
+- Real-time total calculations
+- WhatsApp order generation
+- Mobile-optimized checkout flow
+
+## 📱 Mobile Responsiveness
+
+The application is fully responsive with:
+- **Mobile-first approach** using Chakra UI breakpoints
+- **Touch-optimized interactions** for mobile devices
+- **Progressive Web App** capabilities
+- **Offline functionality** for core features
+
+## 🔧 Customization
+
+### Adding New Cake Categories
+1. Update `src/data/cakes.ts` with new cake data
+2. Add corresponding images to `src/assets/images/`
+3. Update category filtering logic if needed
+
+### Modifying Theme
+1. Edit `src/theme/index.ts` for color and typography changes
+2. Update component styles as needed
+3. Test across all breakpoints
+
+### Extending Functionality
+1. Add new routes in `src/App.tsx`
+2. Create corresponding page components in `src/pages/`
+3. Update navigation in `src/components/Header.tsx`
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+- Follow TypeScript best practices
+- Maintain consistent code formatting with ESLint
+- Test components across different screen sizes
+- Ensure accessibility compliance
+- Write meaningful commit messages
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Contact
+
+**Tarie Cakes**
+- 📍 Mutare, Zimbabwe
+- 📞 +263 78 582 6233
+- ✉️ hello@tariecakes.co.zw
+- 🌐 [Website](https://tariecakes.com)
+- 📱 [Instagram](https://instagram.com/tariecakes)
+- 💬 [WhatsApp](https://wa.me/263785826233)
+
+---
+
+*Made with ❤️ in Mutare, Zimbabwe*
+
+**Built by**: Tinashe Mundieta
+**Design Inspiration**: Luxury baking meets modern web design
+**Special Thanks**: To every customer who believes in the power of celebration</content>
+<parameter name="filePath">README.md

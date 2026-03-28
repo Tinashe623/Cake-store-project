@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaAward, FaHeart, FaStar } from 'react-icons/fa'
 import { useRef } from 'react'
 import aboutImg from '../assets/images/about1.jpg'
+import teamImg from '../assets/images/team-photo.jpg'
 import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
@@ -291,6 +292,57 @@ export default function About() {
                             >
                                 At Tarie Cakes, baking isn't just an occupation—it's an obsession. We source the finest Belgian chocolate, Madagascar vanilla, and farm-fresh ingredients to ensure our cakes taste even better than they look. Our mission is to anchor your life's most precious memories with extraordinary, handcrafted centerpieces.
                             </Text>
+                        </MotionBox>
+
+                        {/* Team Photo Section */}
+                        <MotionBox
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            mt={8}
+                        >
+                            <Box
+                                position="relative"
+                                borderRadius="24px"
+                                overflow="hidden"
+                                boxShadow="0 20px 40px rgba(45, 10, 10, 0.15)"
+                                _hover={{ transform: 'translateY(-4px)', boxShadow: '0 25px 50px rgba(45, 10, 10, 0.2)' }}
+                                transition="all 0.4s ease"
+                            >
+                                <Image
+                                    src={teamImg}
+                                    alt="Tarie and team in the course room"
+                                    w="full"
+                                    h={{ base: '250px', md: '350px' }}
+                                    objectFit="cover"
+                                />
+                                <Box
+                                    position="absolute"
+                                    bottom={0}
+                                    left={0}
+                                    right={0}
+                                    bg="linear-gradient(transparent, rgba(45, 10, 10, 0.8))"
+                                    p={6}
+                                >
+                                    <Text
+                                        color="brand.lightText"
+                                        fontSize={{ base: 'lg', md: 'xl' }}
+                                        fontWeight="700"
+                                        textAlign="center"
+                                    >
+                                        Meet Our Passionate Team
+                                    </Text>
+                                    <Text
+                                        color="rgba(245, 230, 211, 0.8)"
+                                        fontSize={{ base: 'sm', md: 'md' }}
+                                        textAlign="center"
+                                        mt={2}
+                                    >
+                                        Crafting extraordinary cakes with love and expertise
+                                    </Text>
+                                </Box>
+                            </Box>
                         </MotionBox>
 
                         {/* Modern Stats Row */}

@@ -18,81 +18,48 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
 import { getWhatsAppUrl } from '../config/constants'
 import Logo from './Logo'
 
 const MotionBox = motion(Box)
 
 const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Menu', href: '#menu' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', path: '/' },
+    { name: 'Menu', path: '/menu' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
 ]
 
 export default function Header() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { totalItems, onOpen: openCart } = useCart()
-    const [scrolled, setScrolled] = useState(false)
-    const [activeSection, setActiveSection] = useState('home')
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50)
-        }
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-
-    // Intersection Observer for active nav tracking
-    useEffect(() => {
-        const sectionIds = navLinks.map(l => l.href.replace('#', ''))
-        const observers: IntersectionObserver[] = []
-
-        sectionIds.forEach((id) => {
-            const el = document.getElementById(id)
-            if (!el) return
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(id)
-                    }
-                },
-                { rootMargin: '-40% 0px -60% 0px' }
-            )
-            observer.observe(el)
-            observers.push(observer)
-        })
-
-        return () => observers.forEach(o => o.disconnect())
-    }, [])
 
     return (
         <MotionBox
             as="header"
-            position="fixed"
+            position="sticky"
             top={0}
             left={0}
             right={0}
             zIndex={1000}
             style={{ transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
-            bg={scrolled ? 'rgba(253, 248, 243, 0.85)' : 'transparent'}
-            backdropFilter={scrolled ? 'blur(20px)' : 'none'}
-            boxShadow={scrolled ? '0 10px 30px -10px rgba(45, 10, 10, 0.1)' : 'none'}
-            borderBottom={scrolled ? '1px solid rgba(253, 248, 243, 0.9)' : 'none'}
-            py={scrolled ? 2 : 4}
+            bg="rgba(253, 248, 243, 0.85)"
+            backdropFilter="blur(20px)"
+            boxShadow="0 10px 30px -10px rgba(45, 10, 10, 0.1)"
+            borderBottom="1px solid rgba(253, 248, 243, 0.9)"
+            py={2}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
         >
             <Container maxW="1400px">
                 <Flex align="center" justify="space-between">
                     <Box
-                        as="a"
-                        href="#home"
+                        as={NavLink}
+                        to="/"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -100,19 +67,17 @@ export default function Header() {
                         _hover={{ opacity: 0.8 }}
                         transition="all 0.3s ease"
                     >
-                        {scrolled && (
-                            <Box
-                                position="absolute"
-                                inset="-10px"
-                                bg="rgba(245, 230, 211, 0.5)"
-                                filter="blur(15px)"
-                                borderRadius="full"
-                                zIndex={0}
-                            />
-                        )}
+                        <Box
+                            position="absolute"
+                            inset="-10px"
+                            bg="rgba(245, 230, 211, 0.5)"
+                            filter="blur(15px)"
+                            borderRadius="full"
+                            zIndex={0}
+                        />
                         <Box position="relative" zIndex={1}>
                             <Logo
-                                height={scrolled ? 38 : 52}
+                                height={38}
                                 colorScheme="dark"
                             />
                         </Box>
@@ -120,24 +85,23 @@ export default function Header() {
 
                     {/* Desktop Navigation */}
                     <Box
-                        bg={scrolled ? 'transparent' : 'rgba(253,248,243,0.1)'}
-                        backdropFilter={scrolled ? 'none' : 'blur(10px)'}
+                        bg="transparent"
+                        backdropFilter="none"
                         borderRadius="full"
-                        px={scrolled ? 0 : 6}
-                        py={scrolled ? 0 : 2}
-                        border={scrolled ? 'none' : '1px solid rgba(245,230,211,0.2)'}
+                        px={0}
+                        py={0}
+                        border="none"
                         transition="all 0.4s ease"
                         display={{ base: 'none', lg: 'flex' }}
                     >
                         <HStack as="nav" spacing={8}>
-                            {navLinks.map((link) => {
-                                const isActive = activeSection === link.href.replace('#', '')
-                                return (
-                                    <a
-                                        key={link.name}
-                                        href={link.href}
-                                        style={{ textDecoration: 'none' }}
-                                    >
+                            {navLinks.map((link) => (
+                                <NavLink
+                                    key={link.name}
+                                    to={link.path}
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    {({ isActive }) => (
                                         <Text
                                             fontSize="sm"
                                             fontWeight="700"
@@ -162,9 +126,9 @@ export default function Header() {
                                         >
                                             {link.name}
                                         </Text>
-                                    </a>
-                                )
-                            })}
+                                    )}
+                                </NavLink>
+                            ))}
                         </HStack>
                     </Box>
 
@@ -253,29 +217,32 @@ export default function Header() {
                     <DrawerBody px={{ base: 4, md: 6 }}>
                         <VStack spacing={{ base: 2, md: 6 }} align="stretch" mt={8}>
                             {navLinks.map((link) => (
-                                <a
+                                <NavLink
                                     key={link.name}
-                                    href={link.href}
+                                    to={link.path}
                                     onClick={onClose}
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <Box
-                                        py={{ base: 3, md: 2 }}
-                                        px={3}
-                                        borderRadius="12px"
-                                        _hover={{ bg: 'brand.surface' }}
-                                        transition="all 0.2s ease"
-                                    >
-                                        <Text
-                                            fontSize={{ base: 'lg', md: 'xl' }}
-                                            fontWeight="700"
-                                            color="brand.darkText"
-                                            transition="all 0.3s ease"
+                                    {({ isActive }) => (
+                                        <Box
+                                            py={{ base: 3, md: 2 }}
+                                            px={3}
+                                            borderRadius="12px"
+                                            bg={isActive ? 'brand.surface' : 'transparent'}
+                                            _hover={{ bg: 'brand.surface' }}
+                                            transition="all 0.2s ease"
                                         >
-                                            {link.name}
-                                        </Text>
-                                    </Box>
-                                </a>
+                                            <Text
+                                                fontSize={{ base: 'lg', md: 'xl' }}
+                                                fontWeight="700"
+                                                color="brand.darkText"
+                                                transition="all 0.3s ease"
+                                            >
+                                                {link.name}
+                                            </Text>
+                                        </Box>
+                                    )}
+                                </NavLink>
                             ))}
                             <Box pt={6}>
                                 <Button
