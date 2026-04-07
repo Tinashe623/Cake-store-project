@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaBolt } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import { getWhatsAppUrl } from '../config/constants'
 import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
@@ -28,6 +29,7 @@ export default function Contact() {
     const toast = useToast()
     const isMobile = useIsMobile()
     const prefersReducedMotion = usePrefersReducedMotion()
+    const { t } = useTranslation()
     const disableHeavy = isMobile || prefersReducedMotion
     const [formData, setFormData] = useState({
         name: '',
@@ -48,11 +50,11 @@ export default function Contact() {
         if (touched[name]) {
             const newErrors = { ...errors }
             if (name === 'email' && !validateEmail(value)) {
-                newErrors.email = 'Please enter a valid email address'
+                newErrors.email = t('contact.emailInvalid')
             } else if (name === 'phone' && !validatePhone(value)) {
                 newErrors.phone = 'Please enter a valid phone number'
             } else if (name === 'name' && value.trim().length < 2) {
-                newErrors.name = 'Name must be at least 2 characters'
+                newErrors.name = t('contact.nameRequired')
             } else {
                 delete newErrors[name]
             }
@@ -70,7 +72,7 @@ export default function Contact() {
         } else if (name === 'phone' && value && !validatePhone(value)) {
             newErrors.phone = 'Please enter a valid phone number'
         } else if (name === 'name' && value.trim().length < 2) {
-            newErrors.name = 'Name must be at least 2 characters'
+            newErrors.name = t('contact.nameRequired')
         } else {
             delete newErrors[name]
         }
@@ -82,16 +84,16 @@ export default function Contact() {
 
         const newErrors: Record<string, string> = {}
         if (!formData.name.trim() || formData.name.trim().length < 2) {
-            newErrors.name = 'Name must be at least 2 characters'
+            newErrors.name = t('contact.nameRequired')
         }
         if (!validateEmail(formData.email)) {
-            newErrors.email = 'Please enter a valid email address'
+            newErrors.email = t('contact.emailInvalid')
         }
         if (formData.phone && !validatePhone(formData.phone)) {
             newErrors.phone = 'Please enter a valid phone number'
         }
         if (!formData.message.trim()) {
-            newErrors.message = 'Please enter a message'
+            newErrors.message = t('contact.messageRequired')
         }
 
         if (Object.keys(newErrors).length > 0) {
@@ -103,17 +105,17 @@ export default function Contact() {
         const message = `Hello Tarie Cakes!\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage: ${formData.message}`
         window.open(getWhatsAppUrl(message), '_blank')
         toast({
-            title: 'Message ready to send!',
-            description: 'Opening WhatsApp...',
+            title: t('contact.successTitle'),
+            description: t('contact.successDesc'),
             status: 'success',
             duration: 3000,
         })
     }
 
     const contactCards = [
-        { icon: FaPhone, bg: 'brand.primaryLight', label: 'Phone', value: '+263 78 582 6233' },
-        { icon: FaEnvelope, bg: 'brand.accent', label: 'Email', value: 'hello@tariecakes.co.zw' },
-        { icon: FaMapMarkerAlt, bg: 'brand.primary', label: 'Location', value: 'Mutare, Zimbabwe' },
+        { icon: FaPhone, bg: 'brand.primaryLight', label: t('contact.phone'), value: '+263 78 582 6233' },
+        { icon: FaEnvelope, bg: 'brand.accent', label: t('contact.email'), value: 'hello@tariecakes.co.zw' },
+        { icon: FaMapMarkerAlt, bg: 'brand.primary', label: 'Location', value: t('footer.location') },
     ]
 
     return (
@@ -195,7 +197,7 @@ export default function Contact() {
                                 textTransform="uppercase"
                                 letterSpacing="3px"
                             >
-                                Get In Touch
+                                {t('contact.getInTouch')}
                             </Text>
                         </Box>
                     </MotionBox>
@@ -215,8 +217,8 @@ export default function Contact() {
                             letterSpacing="-0.02em"
                             lineHeight="1.1"
                         >
-                            Let's Talk About{' '}
-                            <Text as="span" color="brand.accent">Your Cake</Text>
+                            {t('contact.title')}{' '}
+                            <Text as="span" color="brand.accent">{t('contact.yourCake')}</Text>
                         </Heading>
                     </MotionBox>
 
@@ -233,7 +235,7 @@ export default function Contact() {
                             mx="auto"
                             lineHeight="1.8"
                         >
-                            Whether it's a birthday, wedding, or just a sweet craving — we'd love to hear from you.
+                            {t('contact.subheadline')}
                         </Text>
                     </MotionBox>
                 </VStack>
@@ -398,7 +400,7 @@ export default function Contact() {
                                         animation={disableHeavy ? undefined : `pulseGlow 3s ease-in-out infinite`}
                                         border="none"
                                     >
-                                        Chat on WhatsApp
+                                        {t('contact.chatOnWhatsApp')}
                                     </Button>
                                 </VStack>
                             </Box>
@@ -442,22 +444,22 @@ export default function Contact() {
                             <VStack spacing={6} position="relative" zIndex={1}>
                                 <Box w="full" mb={2}>
                                     <Heading size="lg" color="brand.darkText" fontWeight="800" letterSpacing="-0.01em">
-                                        Send us an Inquiry
+                                        {t('contact.sendInquiry')}
                                     </Heading>
                                     <Text color="brand.muted" fontSize="sm" mt={2}>
-                                        Fill out the form and we'll get back to you shortly.
+                                        {t('contact.formSubheadline')}
                                     </Text>
                                 </Box>
 
                                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
                                     <FormControl isRequired isInvalid={!!errors.name && touched.name}>
-                                        <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>Your Name</FormLabel>
+                                        <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>{t('contact.name')}</FormLabel>
                                         <Input
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            placeholder="Enter Your Name"
+                                            placeholder={t('contact.namePlaceholder')}
                                             bg="brand.surface"
                                             border="1px solid"
                                             borderColor={errors.name && touched.name ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
@@ -471,14 +473,14 @@ export default function Contact() {
                                     </FormControl>
 
                                     <FormControl isRequired isInvalid={!!errors.email && touched.email}>
-                                        <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>Email Address</FormLabel>
+                                        <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>{t('contact.email')}</FormLabel>
                                         <Input
                                             name="email"
                                             type="email"
                                             value={formData.email}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            placeholder="Enter Your Email"
+                                            placeholder={t('contact.emailPlaceholder')}
                                             bg="brand.surface"
                                             border="1px solid"
                                             borderColor={errors.email && touched.email ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
@@ -493,14 +495,14 @@ export default function Contact() {
                                 </SimpleGrid>
 
                                 <FormControl isInvalid={!!errors.phone && touched.phone}>
-                                    <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>Phone Number</FormLabel>
+                                    <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>{t('contact.phone')}</FormLabel>
                                     <Input
                                         name="phone"
                                         type="tel"
                                         value={formData.phone}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        placeholder="Enter Your Phone Number"
+                                        placeholder={t('contact.phonePlaceholder')}
                                         bg="brand.surface"
                                         border="1px solid"
                                         borderColor={errors.phone && touched.phone ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
@@ -514,13 +516,13 @@ export default function Contact() {
                                 </FormControl>
 
                                 <FormControl isRequired isInvalid={!!errors.message && touched.message}>
-                                    <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>Your Message / Order Details</FormLabel>
+                                    <FormLabel color="brand.muted" fontWeight="600" fontSize="sm" mb={2}>{t('contact.yourMessage')}</FormLabel>
                                     <Textarea
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        placeholder="Enter your Message Here...."
+                                        placeholder={t('contact.messagePlaceholder')}
                                         rows={5}
                                         bg="brand.surface"
                                         border="1px solid"
@@ -557,7 +559,7 @@ export default function Contact() {
                                     transition={disableHeavy ? 'none' : "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"}
                                     mt={2}
                                 >
-                                    Send Inquiry via WhatsApp
+                                    {t('contact.sendInquiryButton')}
                                 </Button>
                             </VStack>
                         </Box>

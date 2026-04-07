@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import App from './App'
 import { theme } from './theme'
 import { CartProvider } from './context/CartContext'
+import './i18n'
 
 // Preload critical resources
 import('./components/Header')

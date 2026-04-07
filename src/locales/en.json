@@ -1,0 +1,109 @@
+{
+    "nav": {
+        "home": "Home",
+        "menu": "Menu",
+        "gallery": "Gallery",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "header": {
+        "orderNow": "Order Now",
+        "orderViaWhatsApp": "Order via WhatsApp"
+    },
+    "hero": {
+        "badge": "Premium Handcrafted Cakes",
+        "title": "Baking Dreams",
+        "titleConnector": "Into",
+        "titleEnd": "Reality",
+        "subtitle": "Elevate your celebrations with our bespoke, luxury cakes. Every tier is crafted with the finest ingredients and an artisan's touch.",
+        "exploreMenus": "Explore Menus",
+        "bookTasting": "Book a Tasting",
+        "bespokeDesign": "Bespoke Design"
+    },
+    "footer": {
+        "brand": "Handcrafted luxury cakes for your most extraordinary moments. Mutare, Zimbabwe",
+        "explore": "Explore",
+        "getInTouch": "Get in Touch",
+        "newsletter": "Join Our Newsletter",
+        "newsletterDesc": "Subscribe to receive sweet updates, exclusive offers, and baking tips directly in your inbox.",
+        "emailPlaceholder": "Enter your email",
+        "copyright": "Tarie Cakes. All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "designedBy": "Designed & Developed by",
+        "location": "Mutare, Zimbabwe",
+        "hours": "Open Mon-Sat: 8am - 6pm",
+        "subscribed": "Subscribed!",
+        "thankYou": "Thank you for joining our newsletter."
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Have a question or want to place a custom order? We'd love to hear from you.",
+        "name": "Your Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "occasion": "Occasion",
+        "message": "Your Message",
+        "send": "Send Message",
+        "sending": "Sending...",
+        "namePlaceholder": "Enter your name",
+        "emailPlaceholder": "Enter your email",
+        "phonePlaceholder": "Enter your phone number",
+        "messagePlaceholder": "Tell us about your cake requirements...",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email",
+        "messageRequired": "Message is required",
+        "successTitle": "Message Sent!",
+        "successDesc": "Thank you for your message. We'll get back to you soon.",
+        "locationLabel": "Location",
+        "getInTouch": "Get In Touch",
+        "yourCake": "Your Cake",
+        "subheadline": "Whether it's a birthday, wedding, or just a sweet craving — we'd love to hear from you.",
+        "chatOnWhatsApp": "Chat on WhatsApp",
+        "sendInquiry": "Send us an Inquiry",
+        "formSubheadline": "Fill out the form and we'll get back to you shortly.",
+        "yourMessage": "Your Message / Order Details",
+        "sendInquiryButton": "Send Inquiry via WhatsApp"
+    },
+    "howItWorks": {
+        "title": "How It Works",
+        "subtitle": "Creating your perfect cake is easier than you think",
+        "simpleProcess": "Simple Process",
+        "seamlessTitle": "Seamless from",
+        "seamlessTitleEnd": "Oven to Table",
+        "seamlessDesc": "We've redefined the custom cake experience. Enjoy a stress-free process designed to let you focus on what truly matters—celebrating your special day.",
+        "step1": {
+            "title": "Choose Your Design",
+            "desc": "Browse our artisan collection or request a bespoke design."
+        },
+        "step2": {
+            "title": "Place Order",
+            "desc": "Secure your date with a quick WhatsApp message or direct checkout."
+        },
+        "step3": {
+            "title": "White Glove Delivery",
+            "desc": "We handle the transport and setup so you can simply enjoy."
+        }
+    },
+    "about": {
+        "title": "Our Story",
+        "subtitle": "Crafting sweet memories since 2018",
+        "content1": "Welcome to Tarie Cakes, where every creation tells a story of passion, precision, and unparalleled craftsmanship. Founded in Mutare, Zimbabwe, we specialize in luxury bespoke cakes that transform your celebrations into extraordinary moments.",
+        "content2": "Our master baker combines traditional techniques with contemporary flair, using only the finest ingredients sourced globally to create cakes that are as visually stunning as they are delicious."
+    },
+    "gallery": {
+        "title": "Our Gallery",
+        "subtitle": "A showcase of our recent creations"
+    },
+    "testimonials": {
+        "title": "What Our Clients Say",
+        "subtitle": "Hear from our satisfied customers"
+    },
+    "common": {
+        "comingSoon": "Coming Soon!",
+        "instagramDesc": "Our Instagram page is currently under construction. Stay tuned for updates!",
+        "facebookDesc": "Our Facebook page is currently under construction. Stay tuned for updates!",
+        "verified": "Verified"
+    }
+}

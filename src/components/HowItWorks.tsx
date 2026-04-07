@@ -1,6 +1,7 @@
 import { Box, Container, Heading, Text, SimpleGrid, VStack, Icon, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiShoppingBag, FiTruck, FiHeart } from 'react-icons/fi'
+import { useTranslation } from 'react-i18next'
 import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
@@ -8,22 +9,22 @@ const MotionBox = motion(Box)
 const steps = [
     {
         icon: FiHeart,
-        title: 'Choose Your Design',
-        description: "Browse our artisan collection or request a bespoke design.",
+        titleKey: 'howItWorks.step1.title',
+        descKey: 'howItWorks.step1.desc',
         color: '#F5E6D3', // brand.secondary
         delay: 0.1,
     },
     {
         icon: FiShoppingBag,
-        title: 'Place Order',
-        description: "Secure your date with a quick WhatsApp message or direct checkout.",
+        titleKey: 'howItWorks.step2.title',
+        descKey: 'howItWorks.step2.desc',
         color: '#C9A96E', // brand.accent
         delay: 0.3,
     },
     {
         icon: FiTruck,
-        title: 'White Glove Delivery',
-        description: "We handle the transport and setup so you can simply enjoy.",
+        titleKey: 'howItWorks.step3.title',
+        descKey: 'howItWorks.step3.desc',
         color: '#4A1A1A', // brand.primaryLight
         delay: 0.5,
     },
@@ -42,6 +43,7 @@ export default function HowItWorks() {
     const isMobile = useIsMobile()
     const prefersReducedMotion = usePrefersReducedMotion()
     const disableHeavy = isMobile || prefersReducedMotion
+    const { t } = useTranslation()
 
     return (
         <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">
@@ -139,7 +141,7 @@ export default function HowItWorks() {
                                     textTransform="uppercase"
                                     letterSpacing="2px"
                                 >
-                                    Simple Process
+                                    {t('howItWorks.simpleProcess')}
                                 </Text>
                             </Box>
                         </MotionBox>
@@ -159,8 +161,8 @@ export default function HowItWorks() {
                                 lineHeight="1.1"
                                 letterSpacing="-0.02em"
                             >
-                                Seamless from <br />
-                                <Text as="span" className="text-gradient">Oven to Table</Text>
+                                {t('howItWorks.seamlessTitle')}{' '}
+                                <Text as="span" className="text-gradient">{t('howItWorks.seamlessTitleEnd')}</Text>
                             </Heading>
                         </MotionBox>
 
@@ -176,7 +178,7 @@ export default function HowItWorks() {
                                 maxW="480px"
                                 lineHeight="1.8"
                             >
-                                We've redefined the custom cake experience. Enjoy a stress-free process designed to let you focus on what truly matters—celebrating your special day.
+                                {t('howItWorks.seamlessDesc')}
                             </Text>
                         </MotionBox>
                     </VStack>
@@ -240,23 +242,23 @@ export default function HowItWorks() {
                                                  </Text>
                                              </Flex>
 
-                                             <Heading
-                                                 as="h3"
-                                                 size="md"
-                                                 color="brand.primary"
-                                                 fontWeight="800"
-                                                 mb={3}
-                                             >
-                                                 {step.title}
-                                             </Heading>
+                                              <Heading
+                                                  as="h3"
+                                                  size="md"
+                                                  color="brand.primary"
+                                                  fontWeight="800"
+                                                  mb={3}
+                                              >
+                                                  {t(step.titleKey)}
+                                              </Heading>
 
-                                             <Text
-                                                 fontSize="sm"
-                                                 color="brand.muted"
-                                                 lineHeight="1.7"
-                                             >
-                                                 {step.description}
-                                             </Text>
+                                              <Text
+                                                  fontSize="sm"
+                                                  color="brand.muted"
+                                                  lineHeight="1.7"
+                                              >
+                                                  {t(step.descKey)}
+                                              </Text>
                                          </Box>
                                      </VStack>
                                  </MotionBox>)}

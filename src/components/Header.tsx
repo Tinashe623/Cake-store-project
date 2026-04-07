@@ -24,20 +24,23 @@ import { motion } from 'framer-motion'
 import { memo } from 'react'
 import { getWhatsAppUrl } from '../config/constants'
 import Logo from './Logo'
+import LanguageSwitcher from './LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 const MotionBox = motion(Box)
 
 const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Menu', path: '/menu' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'nav.home', path: '/' },
+    { name: 'nav.menu', path: '/menu' },
+    { name: 'nav.gallery', path: '/gallery' },
+    { name: 'nav.about', path: '/about' },
+    { name: 'nav.contact', path: '/contact' },
 ]
 
 const Header = memo(function Header() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { totalItems, onOpen: openCart } = useCart()
+    const { t } = useTranslation()
 
     return (
         <MotionBox
@@ -126,7 +129,7 @@ const Header = memo(function Header() {
                                                 transition: 'transform 0.3s ease',
                                             }}
                                         >
-                                            {link.name}
+                                            {t(link.name)}
                                         </Text>
                                     )}
                                 </NavLink>
@@ -155,8 +158,9 @@ const Header = memo(function Header() {
                             href={getWhatsAppUrl('Hello Tarie Cakes!')}
                             target="_blank"
                         >
-                            Order Now
+                            {t('header.orderNow')}
                         </Button>
+                        <LanguageSwitcher />
                         <Box position="relative">
                             <IconButton
                                 aria-label="Cart"
@@ -240,7 +244,7 @@ const Header = memo(function Header() {
                                                 color="brand.darkText"
                                                 transition="all 0.3s ease"
                                             >
-                                                {link.name}
+                                                {t(link.name)}
                                             </Text>
                                         </Box>
                                     )}
@@ -260,8 +264,11 @@ const Header = memo(function Header() {
                                     target="_blank"
                                     w="full"
                                 >
-                                    Order via WhatsApp
+                                    {t('header.orderViaWhatsApp')}
                                 </Button>
+                            </Box>
+                            <Box pt={4} pb={8}>
+                                <LanguageSwitcher />
                             </Box>
                         </VStack>
                     </DrawerBody>

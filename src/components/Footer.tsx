@@ -2,19 +2,21 @@ import { Box, Container, SimpleGrid, VStack, HStack, Heading, Text, IconButton, 
 import { FaInstagram, FaFacebook, FaWhatsapp, FaPaperPlane } from 'react-icons/fa'
 import { Link as RouterLink } from 'react-router-dom'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { getWhatsAppUrl } from '../config/constants'
 import Logo from './Logo'
 
 export default function Footer() {
     const [email, setEmail] = useState('')
     const toast = useToast()
+    const { t } = useTranslation()
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault()
         setEmail('')
         toast({
-            title: 'Subscribed!',
-            description: 'Thank you for joining our newsletter.',
+            title: t('footer.subscribed'),
+            description: t('footer.thankYou'),
             status: 'success',
             duration: 3000,
             isClosable: true,
@@ -32,7 +34,7 @@ export default function Footer() {
                     <VStack align="start" spacing={6}>
                         <Logo height={50} colorScheme="light" as={RouterLink} to="/" />
                         <Text color="whiteAlpha.800" fontSize="md" lineHeight="1.8" maxW="300px">
-                            Handcrafted luxury cakes for your most extraordinary moments. Mutare, Zimbabwe
+                            {t('footer.brand')}
                         </Text>
                         <HStack spacing={4} pt={2}>
                             <IconButton
@@ -46,8 +48,8 @@ export default function Footer() {
                                 w="44px"
                                 h="44px"
                                 onClick={() => toast({
-                                    title: 'Coming Soon!',
-                                    description: 'Our Instagram page is currently under construction. Stay tuned for updates!',
+                                    title: t('common.comingSoon'),
+                                    description: t('common.instagramDesc'),
                                     status: 'info',
                                     duration: 4000,
                                     isClosable: true,
@@ -64,8 +66,8 @@ export default function Footer() {
                                 w="44px"
                                 h="44px"
                                 onClick={() => toast({
-                                    title: 'Coming Soon!',
-                                    description: 'Our Facebook page is currently under construction. Stay tuned for updates!',
+                                    title: t('common.comingSoon'),
+                                    description: t('common.facebookDesc'),
                                     status: 'info',
                                     duration: 4000,
                                     isClosable: true,
@@ -91,15 +93,15 @@ export default function Footer() {
                     {/* Quick Links */}
                     <VStack align="start" spacing={6}>
                         <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
-                            Explore
+                            {t('footer.explore')}
                         </Heading>
                         <VStack align="start" spacing={4}>
                             {[
-                                { name: 'Home', path: '/' },
-                                { name: 'Menu', path: '/menu' },
-                                { name: 'Gallery', path: '/gallery' },
-                                { name: 'About', path: '/about' },
-                                { name: 'Contact', path: '/contact' },
+                                { name: 'nav.home', path: '/' },
+                                { name: 'nav.menu', path: '/menu' },
+                                { name: 'nav.gallery', path: '/gallery' },
+                                { name: 'nav.about', path: '/about' },
+                                { name: 'nav.contact', path: '/contact' },
                             ].map((link) => (
                                 <Link
                                     key={link.name}
@@ -111,7 +113,7 @@ export default function Footer() {
                                     fontSize="md"
                                     fontWeight="500"
                                 >
-                                    {link.name}
+                                    {t(link.name)}
                                 </Link>
                             ))}
                         </VStack>
@@ -120,29 +122,29 @@ export default function Footer() {
                     {/* Contact Info */}
                     <VStack align="start" spacing={6}>
                         <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
-                            Get in Touch
+                            {t('footer.getInTouch')}
                         </Heading>
                         <VStack align="start" spacing={4} fontWeight="500">
-                            <Text color="rgba(245, 230, 211, 0.7)">Mutare, Zimbabwe</Text>
+                            <Text color="rgba(245, 230, 211, 0.7)">{t('footer.location')}</Text>
                             <Text color="rgba(245, 230, 211, 0.7)">+263 78 582 6233</Text>
                             <Text color="rgba(245, 230, 211, 0.7)">hello@tariecakes.co.zw</Text>
-                            <Text pt={2} color="brand.accent" fontWeight="700">Open Mon-Sat: 8am - 6pm</Text>
+                            <Text pt={2} color="brand.accent" fontWeight="700">{t('footer.hours')}</Text>
                         </VStack>
                     </VStack>
 
                     {/* Newsletter Signup */}
                     <VStack align="start" spacing={6}>
                         <Heading size="md" fontFamily="heading" fontWeight="700" color="brand.accent">
-                            Join Our Newsletter
+                            {t('footer.newsletter')}
                         </Heading>
                         <Text color="whiteAlpha.700" fontSize="sm" lineHeight="1.6">
-                            Subscribe to receive sweet updates, exclusive offers, and baking tips directly in your inbox.
+                            {t('footer.newsletterDesc')}
                         </Text>
                         <Box as="form" onSubmit={handleSubscribe} w="full" pt={2}>
                             <InputGroup size="lg">
                                 <Input
                                     type="email"
-                                    placeholder="Enter your email"
+                                    placeholder={t('footer.emailPlaceholder')}
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     bg="whiteAlpha.100"
@@ -185,11 +187,11 @@ export default function Footer() {
                     gap={4}
                 >
                     <Text color="whiteAlpha.600" fontSize="sm" fontWeight="500">
-                        © {new Date().getFullYear()} Tarie Cakes. All rights reserved.
+                        © {new Date().getFullYear()} {t('footer.copyright')}
                     </Text>
                     <HStack spacing={6}>
-                        <Link fontSize="sm" color="whiteAlpha.600" _hover={{ color: 'brand.accent' }}>Privacy Policy</Link>
-                        <Link fontSize="sm" color="whiteAlpha.600" _hover={{ color: 'brand.accent' }}>Terms of Service</Link>
+                        <Link fontSize="sm" color="whiteAlpha.600" _hover={{ color: 'brand.accent' }}>{t('footer.privacy')}</Link>
+                        <Link fontSize="sm" color="whiteAlpha.600" _hover={{ color: 'brand.accent' }}>{t('footer.terms')}</Link>
                     </HStack>
                 </Box>
 
@@ -200,7 +202,7 @@ export default function Footer() {
                     textAlign="center"
                 >
                     <Text color="whiteAlpha.400" fontSize="xs" fontWeight="500" letterSpacing="0.5px">
-                        Designed & Developed by{' '}
+                        {t('footer.designedBy')}{' '}
                         <Link
                             href="https://tinashe-mundieta.vercel.app"
                             target="_blank"

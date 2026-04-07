@@ -1,0 +1,109 @@
+{
+    "nav": {
+        "home": "Peji Rekutanga",
+        "menu": "Menyu",
+        "gallery": "Mifananidzo",
+        "about": "Nezvedu",
+        "contact": "Taura Nesu"
+    },
+    "header": {
+        "orderNow": "Oda Nhasi",
+        "orderViaWhatsApp": "Taura neWhatsApp"
+    },
+    "hero": {
+        "badge": " Makeke Akagadzirwa Neunyanzvi",
+        "title": "Kubika Zviroto",
+        "titleConnector": "",
+        "titleEnd": "Zvichiita Chokwadi",
+        "subtitle": "Simudzai mhemberero dzenyu nemakeke emhando yepamusoro akagadzirwa neunyanzvi.",
+        "exploreMenus": "Tarisira Menyu",
+        "bookTasting": "Buka Kuongorora",
+        "bespokeDesign": "KugadzirwaKwazvo"
+    },
+    "footer": {
+        "brand": "Mikaka yekushongedza yemahara yeshanduko dzako. Mutare, Zimbabwe",
+        "explore": "Dodove",
+        "getInTouch": "Tienda muTouch",
+        "newsletter": "Join Our Newsletter",
+        "newsletterDesc": "Subscribe to receive sweet updates, exclusive offers, and baking tips directly in your inbox.",
+        "emailPlaceholder": "Enter your email",
+        "copyright": "Tarie Cakes. All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "designedBy": "Designed & Developed by",
+        "location": "Mutare, Zimbabwe",
+        "hours": "Open Mon-Sat: 8am - 6pm",
+        "subscribed": "Subscribed!",
+        "thankYou": "Thank you for joining our newsletter."
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Have a question or want to place a custom order? We'd love to hear from you.",
+        "name": "Your Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "occasion": "Occasion",
+        "message": "Your Message",
+        "send": "Send Message",
+        "sending": "Sending...",
+        "namePlaceholder": "Enter your name",
+        "emailPlaceholder": "Enter your email",
+        "phonePlaceholder": "Enter your phone number",
+        "messagePlaceholder": "Tell us about your cake requirements...",
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email",
+        "messageRequired": "Message is required",
+        "successTitle": "Message Sent!",
+        "successDesc": "Thank you for your message. We'll get back to you soon.",
+        "locationLabel": "Location",
+        "getInTouch": "Get In Touch",
+        "yourCake": "Your Cake",
+        "subheadline": "Whether it's a birthday, wedding, or just a sweet craving — we'd love to hear from you.",
+        "chatOnWhatsApp": "Chat on WhatsApp",
+        "sendInquiry": "Send us an Inquiry",
+        "formSubheadline": "Fill out the form and we'll get back to you shortly.",
+        "yourMessage": "Your Message / Order Details",
+        "sendInquiryButton": "Send Inquiry via WhatsApp"
+    },
+    "howItWorks": {
+        "title": "Zvinei",
+        "subtitle": "Kugadzira makeke ako akakodzera kana nori nyore",
+        "simpleProcess": "Tsika dzakarerera",
+        "seamlessTitle": "Kuyenda kwakanaka kubva",
+        "seamlessTitleEnd": "Kugadzira kusvika pakudya",
+        "seamlessDesc": "Takatsiva nzira yekugadzira makeke. Fambisa ndirikugadzira mune nyore.",
+        "step1": {
+            "title": "Sarudza Dhizaini",
+            "desc": "Tarisira mas amps ale aripo kana kuti require bespoke."
+        },
+        "step2": {
+            "title": "Isa Order",
+            "desc": "Botora nguva yako neWhatsApp kana kugadzira."
+        },
+        "step3": {
+            "title": "Delivery",
+            "desc": "Takugadzira uye tinokutumira."
+        }
+    },
+    "about": {
+        "title": "Our Story",
+        "subtitle": "Crafting sweet memories since 2018",
+        "content1": "Welcome to Tarie Cakes, where every creation tells a story of passion, precision, and unparalleled craftsmanship. Founded in Mutare, Zimbabwe, we specialize in luxury bespoke cakes that transform your celebrations into extraordinary moments.",
+        "content2": "Our master baker combines traditional techniques with contemporary flair, using only the finest ingredients sourced globally to create cakes that are as visually stunning as they are delicious."
+    },
+    "gallery": {
+        "title": "Our Gallery",
+        "subtitle": "A showcase of our recent creations"
+    },
+    "testimonials": {
+        "title": "What Our Clients Say",
+        "subtitle": "Hear from our satisfied customers"
+    },
+    "common": {
+        "comingSoon": "Coming Soon!",
+        "instagramDesc": "Our Instagram page is currently under construction. Stay tuned for updates!",
+        "facebookDesc": "Our Facebook page is currently under construction. Stay tuned for updates!",
+        "verified": "Verified"
+    }
+}

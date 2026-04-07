@@ -1,8 +1,10 @@
 import { Box, Container, Heading, Text, Button, VStack, HStack, Image, Flex, Icon } from '@chakra-ui/react'
 import { FaArrowRight, FaGem } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import heroImg from '../assets/images/tarie-cakes-hero.jpg'
 
 export default function Hero() {
+    const { t } = useTranslation()
     return (
         <Box
             id="home"
@@ -71,7 +73,7 @@ export default function Hero() {
                             textTransform="uppercase"
                             boxShadow="0 10px 20px -5px rgba(45, 10, 10, 0.2)"
                         >
-                            ✨ Premium Handcrafted Cakes
+                            ✨ {t('hero.badge')}
                         </Box>
 
                         {/* Heading */}
@@ -85,11 +87,11 @@ export default function Hero() {
                             letterSpacing="-0.04em"
                             mb={{ base: 2, md: 3, lg: 4 }}
                         >
-                            Baking Dreams{' '}
+                            {t('hero.title')}{' '}
                             <Box as="br" display={{ base: 'none', lg: 'inline' }} />
-                            Into{' '}
+                            {t('hero.titleConnector') && <>{t('hero.titleConnector')}{' '}</>}
                             <Text as="span" color="brand.accent" fontStyle="italic">
-                                Reality
+                                {t('hero.titleEnd')}
                             </Text>
                         </Heading>
 
@@ -102,7 +104,7 @@ export default function Hero() {
                             lineHeight="1.6"
                             px={{ base: 1, sm: 0 }}
                         >
-                            Elevate your celebrations with our bespoke, luxury cakes. Every tier is crafted with the finest ingredients and an artisan's touch.
+                            {t('hero.subtitle')}
                         </Text>
 
                         {/* CTA Buttons */}
@@ -125,7 +127,7 @@ export default function Hero() {
                                     boxShadow: '0 20px 40px -5px rgba(45, 10, 10, 0.35)',
                                 }}
                             >
-                                Explore Menus
+                                {t('hero.exploreMenus')}
                             </Button>
                             <Button
                                 variant="outline"
@@ -145,7 +147,7 @@ export default function Hero() {
                                 w={{ base: 'full', sm: 'auto' }}
                                 h={{ base: '50px', md: 'auto' }}
                             >
-                                Book a Tasting
+                                {t('hero.bookTasting')}
                             </Button>
                         </HStack>
 
@@ -229,7 +231,7 @@ export default function Hero() {
                                         100%
                                     </Text>
                                     <Text fontSize={{ base: '3xs', md: '2xs' }} color="rgba(245, 230, 211, 0.7)" fontWeight="600" textTransform="uppercase" letterSpacing="1px">
-                                        Bespoke Design
+                                        {t('hero.bespokeDesign')}
                                     </Text>
                                 </VStack>
                             </Box>
