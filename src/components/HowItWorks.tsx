@@ -39,7 +39,9 @@ const SPARKLE_DATA = [
 ]
 
 export default function HowItWorks() {
-    const disableHeavy = useIsMobile() || usePrefersReducedMotion()
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
 
     return (
         <Box py={{ base: 14, md: 32 }} bg="brand.background" position="relative" overflow="hidden">

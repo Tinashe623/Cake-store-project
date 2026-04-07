@@ -16,7 +16,9 @@ const stats = [
 
 export default function About() {
     const sectionRef = useRef(null)
-    const disableHeavy = useIsMobile() || usePrefersReducedMotion()
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ['start end', 'end start']
