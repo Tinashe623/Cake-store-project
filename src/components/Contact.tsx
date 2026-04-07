@@ -463,7 +463,7 @@ export default function Contact() {
                                             value={formData.name}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            placeholder="Jane Doe"
+                                            placeholder="Enter Your Name"
                                             bg="brand.surface"
                                             border="1px solid"
                                             borderColor={errors.name && touched.name ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
@@ -484,7 +484,7 @@ export default function Contact() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            placeholder="jane@example.com"
+                                            placeholder="Enter Your Email"
                                             bg="brand.surface"
                                             border="1px solid"
                                             borderColor={errors.email && touched.email ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
@@ -506,7 +506,7 @@ export default function Contact() {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        placeholder="+263 78 582 6233"
+                                        placeholder="Enter Your Phone Number"
                                         bg="brand.surface"
                                         border="1px solid"
                                         borderColor={errors.phone && touched.phone ? 'rgba(229, 115, 115, 0.5)' : 'brand.border'}
@@ -526,7 +526,7 @@ export default function Contact() {
                                         value={formData.message}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        placeholder="I'd like to order a 2-tier wedding cake..."
+                                        placeholder="Enter your Message Here...."
                                         rows={5}
                                         bg="brand.surface"
                                         border="1px solid"
