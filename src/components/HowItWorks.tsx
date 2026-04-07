@@ -55,7 +55,7 @@ export default function HowItWorks() {
                     bg="brand.secondaryLight"
                     opacity={{ base: 0.08, md: 0.15 }}
                     filter={{ base: 'blur(60px)', md: 'blur(120px)' }}
-                    animation={disableHeavy ? undefined : "pulseFade 8s infinite alternate"}
+                    animation={disableHeavy ? "none" : "pulseFade 8s infinite alternate"}
                 />
                 <Box
                     position="absolute"
@@ -67,11 +67,11 @@ export default function HowItWorks() {
                     bg="brand.accent"
                     opacity={{ base: 0.05, md: 0.1 }}
                     filter={{ base: 'blur(80px)', md: 'blur(150px)' }}
-                    animation={disableHeavy ? undefined : "pulseFade 6s infinite alternate-reverse"}
+                    animation={disableHeavy ? "none" : "pulseFade 6s infinite alternate-reverse"}
                 />
 
                 {/* Floating Sparkles — desktop only */}
-                {!disableHeavy && SPARKLE_DATA.map((s, i) => (
+                {SPARKLE_DATA.map((s, i) => (
                     <MotionBox
                         key={`sparkle-${i}`}
                         position="absolute"
@@ -79,7 +79,7 @@ export default function HowItWorks() {
                         left={s.left}
                         fontSize={s.fontSize}
                         color={i % 2 === 0 ? 'brand.accent' : 'brand.secondary'}
-                        opacity={0.4}
+                        opacity={disableHeavy ? 0 : 0.4}
                         animate={{
                             y: [0, -20, 0],
                             x: [0, s.dx, 0],
@@ -87,10 +87,10 @@ export default function HowItWorks() {
                             scale: [1, 1.2, 1],
                         }}
                         transition={{
-                            duration: s.duration,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: s.delay,
+                            duration: disableHeavy ? 0 : s.duration,
+                            repeat: disableHeavy ? 0 : Infinity,
+                            ease: disableHeavy ? "linear" : "easeInOut",
+                            delay: disableHeavy ? 0 : s.delay,
                         }}
                         zIndex={1}
                     >
@@ -182,84 +182,82 @@ export default function HowItWorks() {
                     {/* Cards Column */}
                     <Box w={{ base: 'full', lg: '60%' }} position="relative">
                         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} pt={{ base: 0, lg: 12 }}>
-                            {steps.map((step, index) => (
-                                <MotionBox
-                                    key={index}
-                                    initial={{ opacity: 0, y: 50 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.7, delay: step.delay, ease: [0.16, 1, 0.3, 1] }}
-                                >
-                                    <VStack
-                                        spacing={6}
-                                        p={{ base: 6, md: 8 }}
-                                        bg="rgba(255, 255, 255, 0.7)"
-                                        backdropFilter="blur(20px)"
-                                        border="1px solid rgba(255, 255, 255, 0.9)"
-                                        borderRadius="30px"
-                                        boxShadow="0 30px 60px -15px rgba(45, 10, 10, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5)"
-                                        position="relative"
-                                        align="flex-start"
-                                        _hover={{
-                                            transform: 'translateY(-10px)',
-                                            boxShadow: `0 40px 80px -15px ${step.color}30`,
-                                        }}
-                                        transition="all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
-                                        h="full"
-                                        role="group"
-                                        overflow="hidden"
-                                    >
-                                        <Box position="relative" zIndex={1}>
-                                            <Flex justify="space-between" align="center" w="full" mb={4}>
-                                                <Box
-                                                    w={{ base: '52px', md: '64px' }}
-                                                    h={{ base: '52px', md: '64px' }}
-                                                    borderRadius="20px"
-                                                    bg={`${step.color}15`}
-                                                    display="flex"
-                                                    alignItems="center"
-                                                    justifyContent="center"
-                                                    color={step.color}
-                                                    _groupHover={{ bg: step.color, color: 'white', transform: 'scale(1.1) rotate(5deg)' }}
-                                                    transition="all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
-                                                >
-                                                    <Icon as={step.icon} boxSize={6} />
-                                                </Box>
-                                                <Text
-                                                    fontSize={{ base: '4xl', md: '6xl' }}
-                                                    fontWeight="800"
-                                                    color="brand.accent"
-                                                    opacity={0.7}
-                                                    fontFamily="heading"
-                                                    lineHeight="1"
-                                                    transition="all 0.4s"
-                                                    _groupHover={{ opacity: 1, transform: 'scale(1.1) translateY(-5px)', textShadow: '0 10px 20px rgba(201, 169, 110, 0.4)' }}
-                                                >
-                                                    0{index + 1}
-                                                </Text>
-                                            </Flex>
+                              {steps.map((step, index) => <MotionBox
+                                     key={index}
+                                     initial={{ opacity: 0, y: 50 }}
+                                     whileInView={{ opacity: 1, y: 0 }}
+                                     viewport={{ once: true }}
+                                     transition={{ duration: 0.7, delay: step.delay, ease: [0.16, 1, 0.3, 1] }}
+                                 >
+                                     <VStack
+                                         spacing={6}
+                                         p={{ base: 6, md: 8 }}
+                                         bg="rgba(255, 255, 255, 0.7)"
+                                         backdropFilter="blur(20px)"
+                                         border="1px solid rgba(255, 255, 255, 0.9)"
+                                         borderRadius="30px"
+                                         boxShadow="0 30px 60px -15px rgba(45, 10, 10, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5)"
+                                         position="relative"
+                                         align="flex-start"
+                                         _hover={{
+                                             transform: 'translateY(-10px)',
+                                             boxShadow: `0 40px 80px -15px ${step.color}30`,
+                                         }}
+                                         transition="all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                                         h="full"
+                                         role="group"
+                                         overflow="hidden"
+                                     >
+                                         <Box position="relative" zIndex={1}>
+                                             <Flex justify="space-between" align="center" w="full" mb={4}>
+                                                 <Box
+                                                     w={{ base: '52px', md: '64px' }}
+                                                     h={{ base: '52px', md: '64px' }}
+                                                     borderRadius="20px"
+                                                     bg={`${step.color}15`}
+                                                     display="flex"
+                                                     alignItems="center"
+                                                     justifyContent="center"
+                                                     color={step.color}
+                                                     _groupHover={{ bg: step.color, color: 'white', transform: 'scale(1.1) rotate(5deg)' }}
+                                                     transition="all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+                                                 >
+                                                     <Icon as={step.icon} boxSize={6} />
+                                                 </Box>
+                                                 <Text
+                                                     fontSize={{ base: '4xl', md: '6xl' }}
+                                                     fontWeight="800"
+                                                     color="brand.accent"
+                                                     opacity={0.7}
+                                                     fontFamily="heading"
+                                                     lineHeight="1"
+                                                     transition="all 0.4s"
+                                                     _groupHover={{ opacity: 1, transform: 'scale(1.1) translateY(-5px)', textShadow: '0 10px 20px rgba(201, 169, 110, 0.4)' }}
+                                                 >
+                                                     0{index + 1}
+                                                 </Text>
+                                             </Flex>
 
-                                            <Heading
-                                                as="h3"
-                                                size="md"
-                                                color="brand.primary"
-                                                fontWeight="800"
-                                                mb={3}
-                                            >
-                                                {step.title}
-                                            </Heading>
+                                             <Heading
+                                                 as="h3"
+                                                 size="md"
+                                                 color="brand.primary"
+                                                 fontWeight="800"
+                                                 mb={3}
+                                             >
+                                                 {step.title}
+                                             </Heading>
 
-                                            <Text
-                                                fontSize="sm"
-                                                color="brand.muted"
-                                                lineHeight="1.7"
-                                            >
-                                                {step.description}
-                                            </Text>
-                                        </Box>
-                                    </VStack>
-                                </MotionBox>
-                            ))}
+                                             <Text
+                                                 fontSize="sm"
+                                                 color="brand.muted"
+                                                 lineHeight="1.7"
+                                             >
+                                                 {step.description}
+                                             </Text>
+                                         </Box>
+                                     </VStack>
+                                 </MotionBox>)}
                         </SimpleGrid>
                     </Box>
                 </Flex>

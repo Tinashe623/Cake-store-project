@@ -26,7 +26,9 @@ const MotionBox = motion(Box)
 
 export default function Contact() {
     const toast = useToast()
-    const disableHeavy = useIsMobile() || usePrefersReducedMotion()
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -117,58 +119,54 @@ export default function Contact() {
     return (
         <Box id="contact" py={{ base: 16, md: 32 }} bg="white" position="relative" overflow="hidden">
             {/* Ambient glow orbs — desktop only */}
-            {!disableHeavy && (
-                <>
-                    <Box
-                        position="absolute"
-                        bottom="-10%"
-                        left="-5%"
-                        w="500px"
-                        h="500px"
-                        borderRadius="full"
-                        bg="brand.accent"
-                        opacity={0.08}
-                        filter="blur(120px)"
-                    />
-                    <Box
-                        position="absolute"
-                        top="-10%"
-                        right="-10%"
-                        w="600px"
-                        h="600px"
-                        borderRadius="full"
-                        bg="brand.accent"
-                        opacity={0.06}
-                        filter="blur(140px)"
-                    />
-                    <Box
-                        position="absolute"
-                        top="30%"
-                        left="50%"
-                        w="300px"
-                        h="300px"
-                        borderRadius="full"
-                        bg="brand.primaryLight"
-                        opacity={0.04}
-                        filter="blur(100px)"
-                    />
-                </>
-            )}
-
-            {/* Subtle grid pattern overlay — desktop only */}
-            {!disableHeavy && (
+            <>
                 <Box
                     position="absolute"
-                    top={0}
-                    left={0}
-                    w="full"
-                    h="full"
-                    opacity={0.03}
-                    backgroundImage="radial-gradient(rgba(45,10,10,0.15) 1px, transparent 1px)"
-                    backgroundSize="30px 30px"
-                    zIndex={0}
+                    bottom="-10%"
+                    left="-5%"
+                    w="500px"
+                    h="500px"
+                    borderRadius="full"
+                    bg="brand.accent"
+                    opacity={disableHeavy ? 0 : 0.08}
+                    filter={disableHeavy ? 'none' : 'blur(120px)'}
                 />
-            )}
+                <Box
+                    position="absolute"
+                    top="-10%"
+                    right="-10%"
+                    w="600px"
+                    h="600px"
+                    borderRadius="full"
+                    bg="brand.accent"
+                    opacity={disableHeavy ? 0 : 0.06}
+                    filter={disableHeavy ? 'none' : 'blur(140px)'}
+                />
+                <Box
+                    position="absolute"
+                    top="30%"
+                    left="50%"
+                    w="300px"
+                    h="300px"
+                    borderRadius="full"
+                    bg="brand.primaryLight"
+                    opacity={disableHeavy ? 0 : 0.04}
+                    filter={disableHeavy ? 'none' : 'blur(100px)'}
+                />
+            </>
+
+            {/* Subtle grid pattern overlay — desktop only */}
+            <Box
+                position="absolute"
+                top={0}
+                left={0}
+                w="full"
+                h="full"
+                opacity={disableHeavy ? 0 : 0.03}
+                backgroundImage="radial-gradient(rgba(45,10,10,0.15) 1px, transparent 1px)"
+                backgroundSize="30px 30px"
+                zIndex={0}
+            />
 
             <Container maxW="1200px" position="relative" zIndex={2}>
                 {/* Section Header */}
@@ -177,7 +175,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: disableHeavy ? 0 : 0.6 }}
                     >
                         <Box
                             display="inline-flex"
@@ -206,7 +204,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
+                        transition={{ duration: disableHeavy ? 0 : 0.6, delay: 0.1 }}
                     >
                         <Heading
                             as="h2"
@@ -226,7 +224,7 @@ export default function Contact() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        transition={{ duration: disableHeavy ? 0 : 0.6, delay: 0.2 }}
                     >
                         <Text
                             fontSize={{ base: 'md', md: 'lg' }}
@@ -248,7 +246,7 @@ export default function Contact() {
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: disableHeavy ? 0 : 0.6 }}
                             w="full"
                         >
                             <VStack align="start" spacing={4} w="full">
@@ -259,7 +257,7 @@ export default function Contact() {
                                         initial={{ opacity: 0, x: -20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                        transition={{ duration: disableHeavy ? 0 : 0.5, delay: idx * 0.1 }}
                                     >
                                         <HStack
                                             spacing={4}
@@ -306,7 +304,7 @@ export default function Contact() {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
+                            transition={{ duration: disableHeavy ? 0 : 0.6, delay: 0.3 }}
                             w="full"
                         >
                             <Box
@@ -318,33 +316,31 @@ export default function Contact() {
                                 position="relative"
                                 overflow="hidden"
                             >
-                                {/* Glow accent — desktop only */}
-                                {!disableHeavy && (
-                                    <>
-                                        <Box
-                                            position="absolute"
-                                            top="-30px"
-                                            right="-30px"
-                                            w="120px"
-                                            h="120px"
-                                            bg="#25D366"
-                                            borderRadius="full"
-                                            opacity={0.12}
-                                            filter="blur(40px)"
-                                        />
-                                        <Box
-                                            position="absolute"
-                                            bottom="-20px"
-                                            left="-20px"
-                                            w="80px"
-                                            h="80px"
-                                            bg="#25D366"
-                                            borderRadius="full"
-                                            opacity={0.08}
-                                            filter="blur(30px)"
-                                        />
-                                    </>
-                                )}
+                                {/* Glow accent — always render, hide on mobile */}
+                                <>
+                                    <Box
+                                        position="absolute"
+                                        top="-30px"
+                                        right="-30px"
+                                        w="120px"
+                                        h="120px"
+                                        bg="#25D366"
+                                        borderRadius="full"
+                                        opacity={disableHeavy ? 0 : 0.12}
+                                        filter={disableHeavy ? 'none' : 'blur(40px)'}
+                                    />
+                                    <Box
+                                        position="absolute"
+                                        bottom="-20px"
+                                        left="-20px"
+                                        w="80px"
+                                        h="80px"
+                                        bg="#25D366"
+                                        borderRadius="full"
+                                        opacity={disableHeavy ? 0 : 0.08}
+                                        filter={disableHeavy ? 'none' : 'blur(30px)'}
+                                    />
+                                </>
 
                                 <VStack align="start" spacing={5} position="relative" zIndex={1}>
                                     <HStack spacing={3}>
@@ -414,7 +410,7 @@ export default function Contact() {
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        transition={{ duration: disableHeavy ? 0 : 0.6, delay: 0.2 }}
                         w={{ base: 'full', lg: '62%' }}
                     >
                         <Box
@@ -430,20 +426,18 @@ export default function Contact() {
                             position="relative"
                             overflow="hidden"
                         >
-                            {/* Form glow accent — desktop only */}
-                            {!disableHeavy && (
-                                <Box
-                                    position="absolute"
-                                    top="-50px"
-                                    right="-50px"
-                                    w="200px"
-                                    h="200px"
-                                    bg="brand.accent"
-                                    borderRadius="full"
-                                    opacity={0.04}
-                                    filter="blur(60px)"
-                                />
-                            )}
+                            {/* Form glow accent — always render, hide on mobile */}
+                            <Box
+                                position="absolute"
+                                top="-50px"
+                                right="-50px"
+                                w="200px"
+                                h="200px"
+                                bg="brand.accent"
+                                borderRadius="full"
+                                opacity={disableHeavy ? 0 : 0.04}
+                                filter={disableHeavy ? 'none' : 'blur(60px)'}
+                            />
 
                             <VStack spacing={6} position="relative" zIndex={1}>
                                 <Box w="full" mb={2}>

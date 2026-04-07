@@ -1,6 +1,4 @@
-import { lazy } from 'react'
-
-const Gallery = lazy(() => import('../components/Gallery'))
+import Gallery from '../components/Gallery'
 
 export default function GalleryPage() {
     return <Gallery />

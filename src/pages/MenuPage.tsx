@@ -1,6 +1,4 @@
-import { lazy } from 'react'
-
-const Menu = lazy(() => import('../components/Menu'))
+import Menu from '../components/Menu'
 
 export default function MenuPage() {
     return <Menu />

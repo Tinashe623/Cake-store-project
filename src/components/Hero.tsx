@@ -116,7 +116,7 @@ export default function Hero() {
                                 fontSize={{ base: 'sm', md: 'lg' }}
                                 leftIcon={<FaArrowRight />}
                                 as="a"
-                                href="#menu"
+                                href="/menu"
                                 w={{ base: 'full', sm: 'auto' }}
                                 h={{ base: '50px', md: 'auto' }}
                                 boxShadow="0 15px 30px -5px rgba(45, 10, 10, 0.25)"
@@ -141,7 +141,7 @@ export default function Hero() {
                                     borderColor: 'brand.primary',
                                 }}
                                 as="a"
-                                href="#contact"
+                                href="/contact"
                                 w={{ base: 'full', sm: 'auto' }}
                                 h={{ base: '50px', md: 'auto' }}
                             >

@@ -22,7 +22,7 @@ export default function About() {
         offset: ['start end', 'end start']
     })
 
-    const yImg1 = disableHeavy ? 0 : useTransform(scrollYProgress, [0, 1], [0, 0])
+    const yImg1 = useTransform(scrollYProgress, [0, 1], disableHeavy ? [0, 0] : [0, 0])
 
     return (
         <Box id="about" py={{ base: 16, md: 32 }} bg="brand.primary" position="relative" overflow="hidden" ref={sectionRef}>
