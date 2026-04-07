@@ -149,31 +149,7 @@ export default function Hero() {
                             </Button>
                         </HStack>
 
-                        {/* Social Proof — hidden on mobile */}
-                        <Box pt={{ base: 2, md: 4, lg: 8 }} display={{ base: 'none', lg: 'block' }}>
-                            <HStack spacing={4} align="center">
-                                <HStack spacing={-3}>
-                                    {[1, 2, 3].map((i) => (
-                                        <Image
-                                            key={i}
-                                            src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                                            boxSize="40px"
-                                            borderRadius="full"
-                                            border="2px solid white"
-                                            boxShadow="sm"
-                                        />
-                                    ))}
-                                </HStack>
-                                <VStack align="start" spacing={0}>
-                                    <Text fontWeight="700" color="brand.primary" fontSize="sm">500+ Happy Clients</Text>
-                                    <HStack spacing={1}>
-                                        {[1, 2, 3, 4, 5].map((i) => (
-                                            <Box key={i} color="brand.accent" fontSize="xs">★</Box>
-                                        ))}
-                                    </HStack>
-                                </VStack>
-                            </HStack>
-                        </Box>
+
                     </VStack>
 
                     {/* Image Area */}
