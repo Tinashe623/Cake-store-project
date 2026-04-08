@@ -3,11 +3,16 @@ import { Box, Container, Heading, Text, VStack, HStack, Avatar, Icon, Flex } fro
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaStar, FaQuoteLeft } from 'react-icons/fa'
 import { testimonials } from '../data/cakes'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 
 export default function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0)
+
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -47,10 +52,10 @@ export default function Testimonials() {
             <Container maxW="1200px" position="relative" zIndex={2}>
                 <VStack spacing={6} mb={{ base: 12, md: 16 }} textAlign="center">
                     <MotionBox
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: disableHeavy ? 10 : 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: disableHeavy ? 0.4 : 0.6 }}
                     >
                         <Text
                             color="brand.accent"
@@ -82,10 +87,10 @@ export default function Testimonials() {
                     <AnimatePresence mode="wait">
                         <MotionBox
                             key={currentIndex}
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            initial={{ opacity: 0, scale: disableHeavy ? 0.98 : 0.95, y: disableHeavy ? 10 : 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            exit={{ opacity: 0, scale: disableHeavy ? 0.98 : 0.95, y: disableHeavy ? -10 : -20 }}
+                            transition={{ duration: disableHeavy ? 0.3 : 0.5, ease: [0.16, 1, 0.3, 1] }}
                             h="full"
                         >
                             <VStack

@@ -19,6 +19,7 @@ import Categories from './Categories'
 import CakeCard from './CakeCard'
 import { useCakesByCategory } from '../hooks/useCakes'
 import { Category } from '../types'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 const DEFAULT_VISIBLE = 8
@@ -27,6 +28,10 @@ export default function Menu() {
     const [selectedCategory, setSelectedCategory] = useState<Category>('all')
     const [searchQuery, setSearchQuery] = useState('')
     const [visibleCount, setVisibleCount] = useState(DEFAULT_VISIBLE)
+
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
 
     const { filteredCakes: cakesData } = useCakesByCategory(selectedCategory)
 
@@ -208,13 +213,13 @@ export default function Menu() {
                         {filteredCakes.slice(0, visibleCount).map((cake, index) => (
                             <MotionBox
                                 key={cake.id}
-                                layout
-                                initial={{ opacity: 0, scale: 0.9 }}
+                                layout={!disableHeavy}
+                                initial={{ opacity: 0, scale: disableHeavy ? 0.95 : 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
+                                exit={{ opacity: 0, scale: disableHeavy ? 0.95 : 0.9 }}
                                 transition={{
-                                    duration: 0.5,
-                                    delay: index * 0.05,
+                                    duration: disableHeavy ? 0.3 : 0.5,
+                                    delay: disableHeavy ? 0 : index * 0.05,
                                     ease: [0.25, 0.46, 0.45, 0.94]
                                 }}
                             >

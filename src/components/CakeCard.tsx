@@ -13,6 +13,7 @@ import { motion } from 'framer-motion'
 import { FaStar } from 'react-icons/fa'
 import { Cake } from '../types'
 import { useCart } from '../context/CartContext'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 
@@ -22,6 +23,9 @@ interface CakeCardProps {
 
 export default function CakeCard({ cake }: CakeCardProps) {
     const { addToCart } = useCart()
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
 
     const categoryColors: Record<string, string> = {
         birthday: 'brand.primary',
@@ -47,9 +51,10 @@ export default function CakeCard({ cake }: CakeCardProps) {
                 boxShadow: '0 30px 60px -15px rgba(0,0,0,0.4)',
                 borderColor: 'rgba(201, 169, 110, 0.3)',
             }}
-            style={{ transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
-            initial={{ opacity: 0, y: 30 }}
+            style={{ transition: disableHeavy ? 'none' : 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+            initial={{ opacity: 0, y: disableHeavy ? 10 : 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: disableHeavy ? 0.3 : 0.5 }}
             viewport={{ once: true }}
             position="relative"
             role="group"

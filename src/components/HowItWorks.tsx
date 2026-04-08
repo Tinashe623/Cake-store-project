@@ -118,10 +118,10 @@ export default function HowItWorks() {
                         w={{ base: 'full', lg: '40%' }}
                     >
                         <MotionBox
-                            initial={{ opacity: 0, x: -30 }}
+                            initial={{ opacity: 0, x: disableHeavy ? -15 : -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.8 }}
                         >
                             <Box
                                 display="inline-flex"
@@ -147,10 +147,10 @@ export default function HowItWorks() {
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: -30 }}
+                            initial={{ opacity: 0, x: disableHeavy ? -15 : -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.1 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.8, delay: disableHeavy ? 0 : 0.1 }}
                         >
                             <Heading
                                 as="h2"
@@ -167,10 +167,10 @@ export default function HowItWorks() {
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: -30 }}
+                            initial={{ opacity: 0, x: disableHeavy ? -15 : -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.8, delay: disableHeavy ? 0 : 0.2 }}
                         >
                             <Text
                                 fontSize={{ base: 'md', md: 'lg' }}
@@ -186,12 +186,12 @@ export default function HowItWorks() {
                     {/* Cards Column */}
                     <Box w={{ base: 'full', lg: '60%' }} position="relative">
                         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} pt={{ base: 0, lg: 12 }}>
-                              {steps.map((step, index) => <MotionBox
+                           {steps.map((step, index) => <MotionBox
                                      key={index}
-                                     initial={{ opacity: 0, y: 50 }}
+                                     initial={{ opacity: 0, y: disableHeavy ? 20 : 50 }}
                                      whileInView={{ opacity: 1, y: 0 }}
                                      viewport={{ once: true }}
-                                     transition={{ duration: 0.7, delay: step.delay, ease: [0.16, 1, 0.3, 1] }}
+                                     transition={{ duration: disableHeavy ? 0.4 : 0.7, delay: disableHeavy ? 0 : step.delay, ease: [0.16, 1, 0.3, 1] }}
                                  >
                                      <VStack
                                          spacing={6}

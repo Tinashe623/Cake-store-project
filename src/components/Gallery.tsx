@@ -23,6 +23,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaSearch, FaTimes, FaHeart, FaRegHeart, FaExpand, FaChevronLeft, FaChevronRight, FaUtensils, FaSeedling, FaCalendarAlt, FaUsers, FaStar } from 'react-icons/fa'
 import { cakesData, categories } from '../data/cakes'
 import { Cake, Category } from '../types'
+import { useIsMobile, usePrefersReducedMotion } from '../hooks/useResponsive'
 
 const MotionBox = motion(Box)
 
@@ -45,6 +46,10 @@ export default function Gallery() {
     const [likedIds, setLikedIds] = useState<Set<number>>(new Set())
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
+
+    const isMobile = useIsMobile()
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const disableHeavy = isMobile || prefersReducedMotion
 
     // Filter cakes
     const filtered = useMemo(() => {
@@ -360,6 +365,7 @@ export default function Gallery() {
                                 onLike={toggleLike}
                                 onExpand={openLightbox}
                                 onImageLoad={handleImageLoad}
+                                disableHeavy={disableHeavy}
                             />
                         ))}
                     </SimpleGrid>
@@ -625,19 +631,20 @@ interface GalleryCardProps {
     onLike: (id: number, e: React.MouseEvent) => void
     onExpand: (id: number) => void
     onImageLoad: (id: number) => void
+    disableHeavy?: boolean
 }
 
-function GalleryCard({ cake, index, isLiked, isLoaded, onLike, onExpand, onImageLoad }: GalleryCardProps) {
+function GalleryCard({ cake, index, isLiked, isLoaded, onLike, onExpand, onImageLoad, disableHeavy }: GalleryCardProps) {
     const catConfig = CATEGORY_CONFIG[cake.category] || { label: cake.category, color: '#C9A96E' }
 
     return (
         <MotionBox
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: disableHeavy ? 10 : 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '40px' }}
             transition={{
-                duration: 0.6,
-                delay: (index % 8) * CARD_STAGGER,
+                duration: disableHeavy ? 0.3 : 0.6,
+                delay: disableHeavy ? 0 : (index % 8) * CARD_STAGGER,
                 ease: [0.25, 0.46, 0.45, 0.94],
             }}
             position="relative"

@@ -233,10 +233,10 @@ export default function About() {
                     {/* Content Column */}
                     <VStack align="start" spacing={8} w={{ base: 'full', lg: '50%' }}>
                         <MotionBox
-                            initial={{ opacity: 0, x: 30 }}
+                            initial={{ opacity: 0, x: disableHeavy ? 10 : 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.6 }}
                         >
                             <Box
                                 display="inline-flex"
@@ -261,10 +261,10 @@ export default function About() {
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: 30 }}
+                            initial={{ opacity: 0, x: disableHeavy ? 10 : 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.6, delay: disableHeavy ? 0 : 0.1 }}
                         >
                             <Heading
                                 as="h2"
@@ -281,10 +281,10 @@ export default function About() {
                         </MotionBox>
 
                         <MotionBox
-                            initial={{ opacity: 0, x: 30 }}
+                            initial={{ opacity: 0, x: disableHeavy ? 10 : 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.6, delay: disableHeavy ? 0 : 0.2 }}
                         >
                             <Text
                                 fontSize={{ base: 'md', sm: 'lg', md: 'xl' }}
@@ -298,10 +298,10 @@ export default function About() {
 
                         {/* Team Photo Section */}
                         <MotionBox
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: disableHeavy ? 10 : 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.6, delay: disableHeavy ? 0 : 0.3 }}
                             mt={8}
                         >
                             <Box
@@ -349,10 +349,10 @@ export default function About() {
 
                         {/* Modern Stats Row */}
                         <MotionBox
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: disableHeavy ? 10 : 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
+                            transition={{ duration: disableHeavy ? 0.4 : 0.6, delay: disableHeavy ? 0 : 0.3 }}
                             w="full"
                             pt={4}
                         >
